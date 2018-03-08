@@ -64,3 +64,38 @@ Route::get('blade', function () {
 
 Route::get('insert','StudInsertController@insertform');
 Route::post('create','StudInsertController@insert');
+
+Route::get('view-records','StudViewController@index');
+
+
+Route::get('edit-records','StudUpdateController@index');
+Route::get('edit/{id}','StudUpdateController@show');
+Route::post('edit/{id}','StudUpdateController@edit');
+
+Route::get('delete-records','StudDeleteController@index');
+Route::get('delete/{id}','StudDeleteController@destroy');
+
+Route::get('/form',function(){
+    return view('form');
+});
+
+Route::get('localization/{locale}','LocalizationController@index');
+
+
+Route::get('session/get','SessionController@accessSessionData');
+Route::get('session/set','SessionController@storeSessionData');
+Route::get('session/remove','SessionController@deleteSessionData');
+
+Route::get('/validation','ValidationController@showform');
+Route::post('/validation','ValidationController@validateform');
+
+Route::get('/uploadfile','UploadFileController@index');
+Route::post('/uploadfile','UploadFileController@showUploadFile');
+
+Route::get('ajax',function(){
+    return view('message');
+});
+Route::post('/getmsg','AjaxController@index');
+
+Route::get('event','CreateStudentController@insertform');
+Route::post('addstudent','CreateStudentController@insert');
