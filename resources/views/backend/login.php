@@ -173,7 +173,7 @@
 <?php include 'proui/inc/template_scripts.php'; ?>
 
 <!-- Load and execute javascript code used only in this page -->
-<script src="js/pages/login.js"></script>
+<script src="proui/js/pages/login.js"></script>
 <script>$(function(){ Login.init(); });</script>
 
 <?php include 'proui/inc/template_end.php'; ?>

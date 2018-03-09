@@ -11,8 +11,10 @@ window.Popper = require('popper.js').default;
 try {
     window.$ = window.jQuery = require('jquery');
 
-    require('bootstrap');
+    require('bootstrap-sass');
 } catch (e) {}
+
+require('admin-lte');
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
