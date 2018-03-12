@@ -17,14 +17,23 @@
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">{{ __('lang.login.subtitle2') }}</p>
-
-    <form action="../../index2.html" method="post">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    <form method="post" action="/login/auth">
+      <input type="hidden" name="_token" value="{{ csrf_token() }}" >
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="{{ __('lang.login.label.email') }}">
+        <input type="email" name="email" class="form-control" placeholder="{{ __('lang.login.label.email') }}">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="{{ __('lang.login.label.password') }}">
+        <input type="password" name="password" class="form-control" placeholder="{{ __('lang.login.label.password') }}">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
