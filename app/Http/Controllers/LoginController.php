@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use DB;
+use Illuminate\Support\Facades\Crypt;
 use Validator;
 class LoginController extends Controller
 {
@@ -32,15 +33,19 @@ class LoginController extends Controller
       return redirect('/')->withErrors($validator)->withInput();
     }
     $passwordDB = $listUsers[0]->password;
-    if(bcrypt($password) != $passwordDB){
-      // User not found
+    if($password != Crypt::decryptString($passwordDB)){
+      // Password Salah
       $validator->errors()->add('rc.2', __('lang.rc.2'));
       Log::error('Error with '.__('lang.rc.2').' -rc.2');
       return redirect('/')->withErrors($validator)->withInput();
     }
     // Query ke DB berhasil
-    echo 'Count : '.$listUsers->count();
-    echo ' Password DB : '.$listUsers[0]->password;
+    session(['SESSION_LOGIN' => $email]);
+    return redirect('/login/success');
 
+  }
+
+  public function success(){
+      return view('home');
   }
 }

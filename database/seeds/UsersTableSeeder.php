@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 class UsersTableSeeder extends Seeder
 {
     /**
@@ -20,7 +21,7 @@ class UsersTableSeeder extends Seeder
          'gender' => 'male',
          'username' => 'admin',
          'status' => 'active',
-         'password' => bcrypt('embadmin'),
+         'password' => Crypt::encryptString('embadmin'),
        ]);
        DB::table('users')->insert([
         'first_name' => 'kasir',
@@ -31,7 +32,7 @@ class UsersTableSeeder extends Seeder
         'gender' => 'femaile',
         'username' => 'kasir',
         'status' => 'active',
-        'password' => bcrypt('embadmin'),
+        'password' => Crypt::encryptString('embadmin'),
       ]);
     }
 }
