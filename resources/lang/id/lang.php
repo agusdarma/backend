@@ -1,5 +1,11 @@
 <?php
    return [
-      'msg' => 'Laravel Indonesia example.'
+      'login.title' => 'Masuk | Simple POS',
+      'login.subtitle' => 'Masuk Simple POS',
+      'login.subtitle2' => 'Masuk untuk memulai sesi anda',
+      'login.label.email' => 'Email',
+      'login.label.password' => 'Password',
+      'login.label.rememberMe' => 'Ingat Saya',
+      'login.label.signIn' => 'Masuk'
    ];
 ?>
