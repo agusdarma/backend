@@ -7,6 +7,7 @@
       'login.label.password' => 'Password',
       'login.label.rememberMe' => 'Ingat Saya',
       'login.label.signIn' => 'Masuk',
-      'rc.1' => 'Login Gagal Salah Email Atau Password'
+      'rc.1' => 'Login Failed Wrong Email or Password',
+      'rc.2' => 'Login Failed Wrong Email or Password'
    ];
 ?>

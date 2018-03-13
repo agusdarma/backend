@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Constants;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use DB;
@@ -21,6 +21,7 @@ class LoginController extends Controller
            Log::warn('Error validasi input ');
            return redirect('/')->withErrors($validator)->withInput();
     }
+    $app = app();
 
     $email = $request->email;
     $password = $request->password;
@@ -28,24 +29,28 @@ class LoginController extends Controller
     $listUsers = collect($results);
     if($listUsers->count() == 0){
       // User not found
-      $validator->errors()->add('rc.1', __('lang.rc.1'));
-      Log::error('Error with '.__('lang.rc.1').' -rc.1');
+      $validator->errors()->add(Constants::SYS_RC_EMAIL_NOT_FOUND(), Constants::SYS_MSG_EMAIL_NOT_FOUND());
+      Log::error('Error with '.Constants::SYS_MSG_EMAIL_NOT_FOUND().' -'.Constants::SYS_RC_EMAIL_NOT_FOUND());
       return redirect('/')->withErrors($validator)->withInput();
     }
     $passwordDB = $listUsers[0]->password;
     if($password != Crypt::decryptString($passwordDB)){
       // Password Salah
-      $validator->errors()->add('rc.2', __('lang.rc.2'));
-      Log::error('Error with '.__('lang.rc.2').' -rc.2');
+      $validator->errors()->add(Constants::SYS_RC_PASSWORD_NOT_MATCH(), Constants::SYS_MSG_PASSWORD_NOT_MATCH());
+      Log::error('Error with '.Constants::SYS_MSG_PASSWORD_NOT_MATCH().' -'.Constants::SYS_RC_PASSWORD_NOT_MATCH());
       return redirect('/')->withErrors($validator)->withInput();
     }
     // Query ke DB berhasil
-    session(['SESSION_LOGIN' => $email]);
-    return redirect('/login/success');
+    $loginData = $app->make('LoginData');
+    $loginData->email = $email;
+    $loginData->password = $password;
+    $loginDataJson = json_encode($loginData);
+    // Log::info('Session '.$loginDataJson);
+    // $loginData2 = $app->make('LoginData');
+    // $loginData2 = json_decode($loginDataJson);
+    // Log::info('Session2 '.$loginData2->email);
+    session(['SESSION_LOGIN' => $loginDataJson]);
+    return redirect('/MainMenu');
 
-  }
-
-  public function success(){
-      return view('home');
   }
 }

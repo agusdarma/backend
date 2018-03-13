@@ -20,4 +20,4 @@ Route::get('/', function () {
 });
 
 Route::post('/login/auth', 'LoginController@auth');
-Route::get('/login/success', 'LoginController@success');
+Route::get('/MainMenu', 'MainMenuController@MainMenu');
