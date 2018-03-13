@@ -78,6 +78,7 @@
             <li><a href="#">Link in level 2</a></li>
           </ul>
         </li>
+        <li><a href="/Logout"><i class="fa fa-link"></i> <span>Logout</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

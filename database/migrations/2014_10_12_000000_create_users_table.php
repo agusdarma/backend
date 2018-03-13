@@ -20,15 +20,16 @@ class CreateUsersTable extends Migration
             $table->string('email','128')->unique();
             $table->string('phone_no','32')->unique();
             $table->integer('group_id')->nullable();
+            $table->integer('invalid_count')->default('0');
             $table->string('gender','16')->nullable();
             $table->string('username','64')->nullable();
             $table->string('password','256');
             $table->string('status','32');
             $table->string('store','32')->nullable();
             $table->string('remember_token','100')->nullable();
-            $table->timestamp('created_at')->nullable();
+            $table->timestamp('created_at')->useCurrent();
             $table->integer('created_by')->nullable();
-            $table->timestamp('updated_at')->nullable();
+            $table->timestamp('updated_at')->useCurrent();
             $table->integer('updated_by')->nullable();
             $table->engine = 'InnoDB';
         });

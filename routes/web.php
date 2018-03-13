@@ -20,4 +20,8 @@ Route::get('/', function () {
 });
 
 Route::post('/login/auth', 'LoginController@auth');
-Route::get('/MainMenu', 'MainMenuController@MainMenu');
+Route::get('/MainMenu',[
+   'middleware' => 'session',
+   'uses' => 'MainMenuController@MainMenu',
+]);
+Route::get('/Logout', 'LoginController@logout');

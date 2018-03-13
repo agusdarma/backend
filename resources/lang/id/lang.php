@@ -7,7 +7,10 @@
       'login.label.password' => 'Password',
       'login.label.rememberMe' => 'Ingat Saya',
       'login.label.signIn' => 'Masuk',
-      'rc.1' => 'Login Failed Wrong Email or Password',
-      'rc.2' => 'Login Failed Wrong Email or Password'
+      'rc.1' => 'Login Failed Wrong Email or Password.',
+      'rc.2' => 'Login Failed Wrong Email or Password.',
+      'rc.3' => 'Session Expired, Please Relogin.',
+      'rc.4' => 'User tidak aktif.',
+      'rc.5' => 'User terblokir.'
    ];
 ?>
