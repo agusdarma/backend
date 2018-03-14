@@ -75,11 +75,8 @@ class LoginController extends Controller
     $loginData = $app->make('LoginData');
     $loginData->email = $email;
     $loginData->password = $password;
-    $loginDataJson = json_encode($loginData);
-    // Log::info('Session '.$loginDataJson);
-    // $loginData2 = $app->make('LoginData');
-    // $loginData2 = json_decode($loginDataJson);
-    // Log::info('Session2 '.$loginData2->email);
+    $loginData->groupId = $listUsers[0]->group_id;
+    $loginDataJson = json_encode($loginData);    
     session([Constants::CONSTANTS_SESSION_LOGIN() => $loginDataJson]);
     return redirect('/MainMenu');
 

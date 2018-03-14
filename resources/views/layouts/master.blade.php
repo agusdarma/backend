@@ -8,6 +8,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="{{asset('css/app.css')}}">
 </head>
+<?php use App\Http\Controllers\MainMenuController; ?>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper" id="app">
 
@@ -60,27 +61,37 @@
         </div>
       </form>
       <!-- /.search form -->
-
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">HEADER</li>
-        <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+        <li class="header">Main Navigation</li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
-          </ul>
+        @foreach ($results as $main)
+            <?php $listSubMenu = MainMenuController::querySubMenu($main->menu_id); ?>
+                @if (count($listSubMenu) > 0)
+                    <a href="{{$main->menu_url}}"><i class="fa fa-link"></i> <span>{{$main->menu_description}}</span>
+                      <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        @foreach ($listSubMenu as $sub)
+                            <li><a href="{{$sub->menu_url}}">{{$sub->menu_description}}</a></li>
+                        @endforeach
+                    </ul>
+        </li>
+                @else
+                <a href="{{$main->menu_url}}"><i class="fa fa-link"></i> <span>{{$main->menu_description}}</span>
+                  <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                @endif
+        @endforeach
         </li>
         <li><a href="/Logout"><i class="fa fa-link"></i> <span>Logout</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
+
     </section>
     <!-- /.sidebar -->
   </aside>
