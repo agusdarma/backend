@@ -12,6 +12,15 @@
       'home.logo.mini' => 'POS',
       'home.logo' => 'SIMPLE POS',
 
+      'user.title' => 'User Data Form',
+      'user.subtitle' => 'Simple POS',
+      'user.breadcrumb.home' => 'Home',
+      'user.breadcrumb.security' => 'Security',
+      'user.breadcrumb.user' => 'User Data',
+      'user.label.firstName' => 'Nama Depan',
+      'user.label.lastName' => 'Nama Belakang',
+      'user.label.email' => 'Alamat Email',
+
       'footer.copyright' => 'Copyright',
       'footer.copyright.year' => '2018',
       'footer.copyright.company' => 'Company',

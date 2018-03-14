@@ -10006,7 +10006,7 @@ pre code {
   }
 
   .col-md-6 {
-    width: 50%;
+    width: 100%;
   }
 
   .col-md-7 {
@@ -18811,4 +18811,3 @@ button.close {
   overflow: visible;
   clip: auto;
 }
-

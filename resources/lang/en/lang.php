@@ -12,6 +12,17 @@
       'home.logo.mini' => 'POS',
       'home.logo' => 'SIMPLE POS',
 
+      'user.title' => 'User Data Form',
+      'user.subtitle' => 'Simple POS',
+      'user.breadcrumb.home' => 'Home',
+      'user.breadcrumb.security' => 'Security',
+      'user.breadcrumb.user' => 'User Data',
+      'user.label.firstName' => 'First Name',
+      'user.label.lastName' => 'Last Name',
+      'user.label.email' => 'Email Address',
+      'user.label.phoneNo' => 'Phone No',
+
+
       'footer.copyright' => 'Copyright',
       'footer.copyright.year' => '2018',
       'footer.copyright.company' => 'Company',

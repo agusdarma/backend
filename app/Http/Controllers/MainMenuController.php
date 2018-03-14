@@ -17,13 +17,7 @@ class MainMenuController extends Controller
     // Log::info('Session '.$loginDataJson);
     $loginData2 = $app->make('LoginData');
     $loginData2 = json_decode($loginDataJson);
-    // Log::info('Session2 '.$loginData2->email);
-    // Log::debug('Group ID '.$loginData2->groupId);
-    // query menu main first
-    // $results = DB::select('select um.* from user_menu um
-    // inner join user_level_menu ulm on um.menu_id = ulm.menu_id
-    // where ulm.level_id = :groupId and um.menu_leaf = 0 order by show_order asc', ['groupId' => $loginData2->groupId]);
-
+    // query main menu di fungsi
     return view('home',array('results' => $this->queryMainMenu($loginData2->groupId)));
   }
 
