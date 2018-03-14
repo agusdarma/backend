@@ -22,6 +22,7 @@ class CreateUserMenu extends Migration
           $table->integer('menu_leaf');
           $table->string('menu_description','500');
           $table->string('menu_url','100');
+          $table->string('menu_icon','100');
           $table->string('menu_group','40');
           $table->integer('always_include');
           $table->engine = 'InnoDB';

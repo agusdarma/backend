@@ -21,6 +21,7 @@ class UserMenuTableSeeder extends Seeder
          'menu_leaf' => '0',
          'menu_description' => 'Security',
          'menu_url' => '',
+         'menu_icon' => 'fa fa-key',
          'menu_group' => 'Security',
          'always_include' => '0',
        ]);
@@ -33,6 +34,7 @@ class UserMenuTableSeeder extends Seeder
         'menu_leaf' => '1',
         'menu_description' => 'User Level',
         'menu_url' => 'UserLevel',
+        'menu_icon' => 'fa fa-level-up',
         'menu_group' => 'Security',
         'always_include' => '0',
       ]);
@@ -45,6 +47,7 @@ class UserMenuTableSeeder extends Seeder
        'menu_leaf' => '1',
        'menu_description' => 'User Data',
        'menu_url' => 'UserData',
+       'menu_icon' => 'fa fa-user',
        'menu_group' => 'Security',
        'always_include' => '0',
      ]);
@@ -57,6 +60,7 @@ class UserMenuTableSeeder extends Seeder
       'menu_leaf' => '1',
       'menu_description' => 'Change Password',
       'menu_url' => 'ChangePassword',
+      'menu_icon' => 'fa fa-lock',
       'menu_group' => 'Security',
       'always_include' => '1',
     ]);
@@ -69,9 +73,36 @@ class UserMenuTableSeeder extends Seeder
      'menu_leaf' => '1',
      'menu_description' => 'Reset Password',
      'menu_url' => 'ResetPassword',
+     'menu_icon' => 'fa fa-unlock',
      'menu_group' => 'Security',
      'always_include' => '0',
    ]);
+     DB::table('user_menu')->insert([
+      'menu_id' => '2',
+      'parent_id' => '2',
+      'menu_root_id' => '2',
+      'menu_level' => '1',
+      'show_order' => '2',
+      'menu_leaf' => '0',
+      'menu_description' => 'Settings',
+      'menu_url' => '',
+      'menu_icon' => 'fa fa-cog',
+      'menu_group' => 'Settings',
+      'always_include' => '0',
+    ]);
+      DB::table('user_menu')->insert([
+       'menu_id' => '201',
+       'parent_id' => '2',
+       'menu_root_id' => '2',
+       'menu_level' => '2',
+       'show_order' => '1',
+       'menu_leaf' => '1',
+       'menu_description' => 'System Setting',
+       'menu_url' => 'SysSetting',
+       'menu_icon' => 'fa fa-cogs',
+       'menu_group' => 'Settings',
+       'always_include' => '0',
+     ]);
 
     }
 }

@@ -7,6 +7,11 @@
       'login.label.password' => 'Password',
       'login.label.rememberMe' => 'Remember Me',
       'login.label.signIn' => 'Sign In',
+
+      'home.title' => 'Home | Simple POS',
+      'home.logo.mini' => 'POS',
+      'home.logo' => 'SIMPLE POS',
+
       'rc.1' => 'Login Failed Wrong Email or Password.',
       'rc.2' => 'Login Failed Wrong Email or Password.',
       'rc.3' => 'Session Expired, Please Relogin.',

@@ -14,15 +14,15 @@ class MainMenuController extends Controller
     Log::debug('MainMenu');
     $app = app();
     $loginDataJson = session(Constants::CONSTANTS_SESSION_LOGIN());
-    Log::info('Session '.$loginDataJson);
+    // Log::info('Session '.$loginDataJson);
     $loginData2 = $app->make('LoginData');
     $loginData2 = json_decode($loginDataJson);
-    Log::info('Session2 '.$loginData2->email);
-    Log::debug('Group ID '.$loginData2->groupId);
+    // Log::info('Session2 '.$loginData2->email);
+    // Log::debug('Group ID '.$loginData2->groupId);
     // query menu main first
     $results = DB::select('select um.* from user_menu um
     inner join user_level_menu ulm on um.menu_id = ulm.menu_id
-    where ulm.level_id = :groupId and um.menu_leaf = 0', ['groupId' => $loginData2->groupId]);
+    where ulm.level_id = :groupId and um.menu_leaf = 0 order by show_order asc', ['groupId' => $loginData2->groupId]);
 
     return view('home',array('results' => $results));
   }
@@ -30,7 +30,15 @@ class MainMenuController extends Controller
   public static function querySubMenu($mainId){
     $listSubMenu = DB::select('select um.* from user_menu um
     inner join user_level_menu ulm on um.menu_id = ulm.menu_id
-    where um.parent_id = :parentId and um.menu_leaf = 1', ['parentId' => $mainId]);
+    where um.parent_id = :parentId and um.menu_leaf = 1 order by show_order asc', ['parentId' => $mainId]);
     return $listSubMenu;
+  }
+
+  public static function userLogged(){
+    $app = app();
+    $loginDataJson = session(Constants::CONSTANTS_SESSION_LOGIN());
+    $loginData2 = $app->make('LoginData');
+    $loginData2 = json_decode($loginDataJson);
+    return $loginData2->firstName;
   }
 }
