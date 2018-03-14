@@ -25,3 +25,7 @@ Route::get('/MainMenu',[
    'uses' => 'MainMenuController@MainMenu',
 ]);
 Route::get('/Logout', 'LoginController@logout');
+Route::get('/UserData',[
+   'middleware' => 'session',
+   'uses' => 'UserDataController@init',
+]);

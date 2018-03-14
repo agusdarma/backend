@@ -12,6 +12,11 @@
       'home.logo.mini' => 'POS',
       'home.logo' => 'SIMPLE POS',
 
+      'footer.copyright' => 'Copyright',
+      'footer.copyright.year' => '2018',
+      'footer.copyright.company' => 'Company',
+      'footer.copyright.company.link' => '#',
+
       'rc.1' => 'Login Failed Wrong Email or Password.',
       'rc.2' => 'Login Failed Wrong Email or Password.',
       'rc.3' => 'Session Expired, Please Relogin.',

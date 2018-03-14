@@ -5,7 +5,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Page Header
+      Page User Data
       <small>Optional description</small>
     </h1>
     <ol class="breadcrumb">
