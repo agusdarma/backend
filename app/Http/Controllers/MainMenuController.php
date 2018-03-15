@@ -39,6 +39,7 @@ class MainMenuController extends Controller
     $app = app();
     $loginDataJson = session(Constants::CONSTANTS_SESSION_LOGIN());
     $loginData2 = $app->make('LoginData');
+    Log::debug('$loginDataJson'.$loginDataJson);
     $loginData2 = json_decode($loginDataJson);
     return $loginData2->firstName;
   }
