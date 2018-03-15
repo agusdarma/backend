@@ -43,4 +43,10 @@ class Constants
     public static function SYS_MSG_USER_BLOCKED(){
         return __('lang.'.Constants::SYS_RC_USER_BLOCKED());
     }
+    public static function SYS_MSG_LEVEL_SUCCESS(){
+        return 'success';
+    }
+    public static function SYS_MSG_USER_SUCCESS_ADDED(){
+        return __('lang.user.msg.success');
+    }
 }

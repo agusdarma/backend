@@ -34,6 +34,10 @@ class UserLevelMenuTableSeeder extends Seeder
          ]);
          DB::table('user_level_menu')->insert([
           'level_id' => '1',
+          'menu_id' => '105',
+         ]);
+         DB::table('user_level_menu')->insert([
+          'level_id' => '1',
           'menu_id' => '2',
          ]);
          DB::table('user_level_menu')->insert([

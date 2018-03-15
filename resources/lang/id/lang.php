@@ -26,6 +26,9 @@
       'user.label.male' => 'Laki-Laki',
       'user.label.female' => 'Perempuan',
       'user.label.userName' => 'User Name',
+      'user.label.password' => 'Password',
+      'user.label.store' => 'Toko',
+      'user.msg.success' => 'User berhasil ditambah!',
 
 
       'footer.copyright' => 'Copyright',

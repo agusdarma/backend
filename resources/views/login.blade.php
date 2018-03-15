@@ -12,7 +12,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>{{ __('lang.login.subtitle') }}</b></a>
+    <a href="/"><b>{{ __('lang.login.subtitle') }}</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">

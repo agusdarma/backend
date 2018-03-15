@@ -78,6 +78,7 @@ class LoginController extends Controller
     $loginData->groupId = $listUsers[0]->group_id;
     $loginData->firstName = $listUsers[0]->first_name;
     $loginData->lastName = $listUsers[0]->last_name;
+    $loginData->id = $listUsers[0]->id;
     $loginDataJson = json_encode($loginData);
     session([Constants::CONSTANTS_SESSION_LOGIN() => $loginDataJson]);
     return redirect('/MainMenu');

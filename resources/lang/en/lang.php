@@ -26,7 +26,9 @@
       'user.label.male' => 'Male',
       'user.label.female' => 'Female',
       'user.label.userName' => 'User Name',
-
+      'user.label.password' => 'Password',
+      'user.label.store' => 'Store',
+      'user.msg.success' => 'User was successfully added!',
 
 
 
@@ -34,6 +36,7 @@
       'footer.copyright.year' => '2018',
       'footer.copyright.company' => 'Company',
       'footer.copyright.company.link' => '#',
+
 
       'rc.1' => 'Login Failed Wrong Email or Password.',
       'rc.2' => 'Login Failed Wrong Email or Password.',

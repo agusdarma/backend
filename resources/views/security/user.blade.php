@@ -29,28 +29,43 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
+            <form method="post" action="/UserData/Add">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}" >
               <div class="box-body">
+                @if(session()->has('message.level'))
+                    <div class="alert alert-{{ session('message.level') }}">
+                    {!! session('message.content') !!}
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="form-group">
                   <label for="firstName">{{ __('lang.user.label.firstName') }} *</label>
-                  <input type="text" class="form-control" id="firstName" placeholder="{{ __('lang.user.label.firstName') }}">
+                  <input type="text" name="firstName" class="form-control" id="firstName" placeholder="{{ __('lang.user.label.firstName') }}">
                 </div>
                 <div class="form-group">
                   <label for="lastName">{{ __('lang.user.label.lastName') }}</label>
-                  <input type="text" class="form-control" id="lastName" placeholder="{{ __('lang.user.label.lastName') }}">
+                  <input type="text" name="lastName" class="form-control" id="lastName" placeholder="{{ __('lang.user.label.lastName') }}">
                 </div>
                 <div class="form-group">
                   <label for="email">{{ __('lang.user.label.email') }} *</label>
-                  <input type="email" class="form-control" id="email" placeholder="{{ __('lang.user.label.email') }}">
+                  <input type="email" name="email" class="form-control" id="email" placeholder="{{ __('lang.user.label.email') }}">
                 </div>
                 <div class="form-group">
                   <label for="phoneNo">{{ __('lang.user.label.phoneNo') }} *</label>
-                  <input type="text" class="form-control" id="phoneNo" placeholder="{{ __('lang.user.label.phoneNo') }}">
+                  <input type="text" name="phoneNo" class="form-control" id="phoneNo" placeholder="{{ __('lang.user.label.phoneNo') }}">
                 </div>
                 <div class="form-group">
                   <?php $levels = UserDataController::listUserLevel(MainMenuController::userLevelId()); ?>
                   <label for="userLevel">{{ __('lang.user.label.userLevel') }} *</label>
-                  <select id="levels" class="form-control select2" style="width: 100%;">
+                  <select id="levels" name="userLevel" class="form-control select2" style="width: 100%;">
                     @foreach($levels as $level)
                       <option value="{{ $level->id }}">{{ $level->level_name }}</option>
                     @endforeach
@@ -58,35 +73,24 @@
                 </div>
                 <div class="form-group">
                   <label for="gender">{{ __('lang.user.label.gender') }} *</label>
-                  </br>
-                  <input type="radio" name="rdBtnMale" id="rdBtnMale" value="male">
-                  <label for="gender">{{ __('lang.user.label.male') }}</label>
-                  <input type="radio" name="rdBtnFemale" id="rdBtnFemale" value="female">
-                  <label for="gender">{{ __('lang.user.label.female') }}</label>
+                  <select id="gender" name="gender" class="form-control select2" style="width: 100%;">
+                    <option value="male">Male</option>
+                    <option value="female">Femaile</option>
+                  </select>
                 </div>
                 <div class="form-group">
-                  <label for="userName">{{ __('lang.user.label.userName') }} *</label>
-                  <input type="text" class="form-control" id="userName" placeholder="{{ __('lang.user.label.userName') }}">
+                  <label for="userName">{{ __('lang.user.label.userName') }}</label>
+                  <input type="text" name="userName" class="form-control" id="userName" placeholder="{{ __('lang.user.label.userName') }}">
                 </div>
-
+                <div class="form-group">
+                  <label for="password">{{ __('lang.user.label.password') }} *</label>
+                  <input type="password" name="password" class="form-control" id="password" placeholder="{{ __('lang.user.label.password') }}">
+                </div>
+                <div class="form-group">
+                  <label for="store">{{ __('lang.user.label.store') }}</label>
+                  <input type="text" name="store" class="form-control" id="store" placeholder="{{ __('lang.user.label.store') }}">
+                </div>
                 <p class="help-block">* Required</p>
-
-
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputFile">File input</label>
-                  <input type="file" id="exampleInputFile">
-
-                  <p class="help-block">Example block-level help text here.</p>
-                </div>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox"> Check me out
-                  </label>
-                </div>
               </div>
               <!-- /.box-body -->
 
@@ -111,6 +115,7 @@
 <script>
     $(document).ready(function(){
         $('#levels').select2();
+        $('#gender').select2();
      });
 </script>
 @endsection

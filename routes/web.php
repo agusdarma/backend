@@ -29,3 +29,7 @@ Route::get('/UserData',[
    'middleware' => 'session',
    'uses' => 'UserDataController@init',
 ]);
+Route::post('/UserData/Add',[
+   'middleware' => 'session',
+   'uses' => 'UserDataController@add',
+]);
