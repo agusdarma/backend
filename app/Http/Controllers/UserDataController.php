@@ -14,4 +14,10 @@ class UserDataController extends Controller
     Log::debug('UserDataController => init()');
     return view('security/user');
   }
+
+  public static function listUserLevel($levelId){
+    $listUserLevel = DB::select('select * from user_level l where l.id = :levelId
+    ', ['levelId' => $levelId]);
+    return $listUserLevel;
+  }
 }

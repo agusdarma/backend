@@ -7,6 +7,7 @@
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="{{asset('css/app.css')}}">
+  @yield('cssSelect2')
 </head>
 <?php use App\Http\Controllers\MainMenuController; ?>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -115,5 +116,6 @@
 </div>
 
 <script src="{{asset('js/app.js')}}"></script>
+@yield('jsSelect2')
 </body>
 </html>

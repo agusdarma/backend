@@ -21,6 +21,13 @@
       'user.label.lastName' => 'Last Name',
       'user.label.email' => 'Email Address',
       'user.label.phoneNo' => 'Phone No',
+      'user.label.userLevel' => 'User Level',
+      'user.label.gender' => 'Gender',
+      'user.label.male' => 'Male',
+      'user.label.female' => 'Female',
+      'user.label.userName' => 'User Name',
+
+
 
 
       'footer.copyright' => 'Copyright',

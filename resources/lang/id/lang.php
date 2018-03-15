@@ -20,6 +20,13 @@
       'user.label.firstName' => 'Nama Depan',
       'user.label.lastName' => 'Nama Belakang',
       'user.label.email' => 'Alamat Email',
+      'user.label.phoneNo' => 'No Telepon',
+      'user.label.userLevel' => 'Level Pengguna',
+      'user.label.gender' => 'Jenis Kelamin',
+      'user.label.male' => 'Laki-Laki',
+      'user.label.female' => 'Perempuan',
+      'user.label.userName' => 'User Name',
+
 
       'footer.copyright' => 'Copyright',
       'footer.copyright.year' => '2018',

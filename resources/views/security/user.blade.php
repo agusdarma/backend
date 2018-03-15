@@ -1,5 +1,6 @@
 @extends('layouts.master')
-
+<?php use App\Http\Controllers\UserDataController; ?>
+<?php use App\Http\Controllers\MainMenuController; ?>
 @section('content')
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -47,18 +48,30 @@
                   <input type="text" class="form-control" id="phoneNo" placeholder="{{ __('lang.user.label.phoneNo') }}">
                 </div>
                 <div class="form-group">
-                  <label>Minimal</label>
-                  <select class="form-control select2" style="width: 100%;">
-                    <option selected="selected">Alabama</option>
-                    <option>Alaska</option>
-                    <option>California</option>
-                    <option>Delaware</option>
-                    <option>Tennessee</option>
-                    <option>Texas</option>
-                    <option>Washington</option>
+                  <?php $levels = UserDataController::listUserLevel(MainMenuController::userLevelId()); ?>
+                  <label for="userLevel">{{ __('lang.user.label.userLevel') }} *</label>
+                  <select id="levels" class="form-control select2" style="width: 100%;">
+                    @foreach($levels as $level)
+                      <option value="{{ $level->id }}">{{ $level->level_name }}</option>
+                    @endforeach
                   </select>
                 </div>
+                <div class="form-group">
+                  <label for="gender">{{ __('lang.user.label.gender') }} *</label>
+                  </br>
+                  <input type="radio" name="rdBtnMale" id="rdBtnMale" value="male">
+                  <label for="gender">{{ __('lang.user.label.male') }}</label>
+                  <input type="radio" name="rdBtnFemale" id="rdBtnFemale" value="female">
+                  <label for="gender">{{ __('lang.user.label.female') }}</label>
+                </div>
+                <div class="form-group">
+                  <label for="userName">{{ __('lang.user.label.userName') }} *</label>
+                  <input type="text" class="form-control" id="userName" placeholder="{{ __('lang.user.label.userName') }}">
+                </div>
+
                 <p class="help-block">* Required</p>
+
+
                 <div class="form-group">
                   <label for="exampleInputPassword1">Password</label>
                   <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
@@ -92,4 +105,15 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+@endsection
+@section('jsSelect2')
+<script src="{{asset('select2-4.0.5/dist/js/select2.full.min.js')}}"></script>
+<script>
+    $(document).ready(function(){
+        $('#levels').select2();
+     });
+</script>
+@endsection
+@section('cssSelect2')
+<link rel="stylesheet" href="{{asset('select2-4.0.5/dist/css/select2.min.css')}}">
 @endsection
