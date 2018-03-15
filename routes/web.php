@@ -33,3 +33,11 @@ Route::post('/UserData/Add',[
    'middleware' => 'session',
    'uses' => 'UserDataController@add',
 ]);
+Route::get('/UserData/view',[
+   'middleware' => 'session',
+   'uses' => 'UserDataViewController@init',
+]);
+Route::get('/UserData/view/data',[
+   'middleware' => 'session',
+   'uses' => 'UserDataViewController@anyData',
+]);
