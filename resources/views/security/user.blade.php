@@ -2,9 +2,7 @@
 <?php use App\Http\Controllers\UserDataController; ?>
 <?php use App\Http\Controllers\MainMenuController; ?>
 @section('content')
-<!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
         {{ __('lang.user.title') }}
@@ -17,18 +15,13 @@
       </ol>
     </section>
 
-    <!-- Main content -->
     <section class="content">
       <div class="row">
-        <!-- left column -->
         <div class="col-md-6">
-          <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">{{ __('lang.user.title') }}</h3>
             </div>
-            <!-- /.box-header -->
-            <!-- form start -->
             <form method="post" action="/UserData/Add">
               <input type="hidden" name="_token" value="{{ csrf_token() }}" >
               <div class="box-body">
@@ -92,23 +85,17 @@
                 </div>
                 <p class="help-block">* Required</p>
               </div>
-              <!-- /.box-body -->
 
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Submit</button>
               </div>
             </form>
           </div>
-          <!-- /.box -->
 
         </div>
-        <!--/.col (left) -->
       </div>
-      <!-- /.row -->
     </section>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
 @endsection
 @section('jsSelect2')
 <script src="{{asset('select2-4.0.5/dist/js/select2.full.min.js')}}"></script>

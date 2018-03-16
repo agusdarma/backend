@@ -5,6 +5,7 @@ use Constants;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use DB;
+use DataTable;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\MessageBag;
 use Validator;
@@ -68,4 +69,16 @@ class UserDataController extends Controller
     // $request->session()->flash('message.content', 'Error!');
     return redirect('/UserData');
   }
+
+  public function view(Request $request){
+    Log::debug('UserDataController => view()');
+    return view('security/userView');
+  }
+
+  public static function getListUserData(){
+    $listUserLevel = DB::select('select u.id,u.first_name,u.email,u.phone_no,l.level_name
+    from users u inner join user_level l on u.group_id = l.id');
+    return datatables()->collection($listUserLevel)->toJson();
+  }
+
 }

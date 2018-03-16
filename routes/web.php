@@ -35,9 +35,9 @@ Route::post('/UserData/Add',[
 ]);
 Route::get('/UserData/view',[
    'middleware' => 'session',
-   'uses' => 'UserDataViewController@init',
+   'uses' => 'UserDataController@view',
 ]);
 Route::get('/UserData/view/data',[
    'middleware' => 'session',
-   'uses' => 'UserDataViewController@anyData',
-]);
+   'uses' => 'UserDataController@getListUserData',
+])->name('getListUserData');

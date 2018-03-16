@@ -4,9 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>{{ __('lang.login.title') }}</title>
-  <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <!-- Styles -->
   <link rel="stylesheet" href="{{asset('css/app.css')}}">
   </head>
 <body class="hold-transition login-page">
@@ -14,7 +12,6 @@
   <div class="login-logo">
     <a href="/"><b>{{ __('lang.login.subtitle') }}</b></a>
   </div>
-  <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">{{ __('lang.login.subtitle2') }}</p>
     @if ($errors->any())
@@ -44,18 +41,14 @@
             </label>
           </div>
         </div>
-        <!-- /.col -->
         <div class="col-xs-4">
           <button type="submit" class="btn btn-primary btn-block btn-flat">{{ __('lang.login.label.signIn') }}</button>
         </div>
-        <!-- /.col -->
       </div>
     </form>
 
   </div>
-  <!-- /.login-box-body -->
 </div>
-<!-- /.login-box -->
 <script src="{{asset('js/app.js')}}"></script>
 </body>
 </html>

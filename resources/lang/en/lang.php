@@ -30,6 +30,15 @@
       'user.label.store' => 'Store',
       'user.msg.success' => 'User was successfully added!',
 
+      'user.view.title' => 'User Data View Form',
+      'user.view.subtitle' => 'Simple POS',
+      'user.breadcrumb.user.view' => 'User Data View',
+      'user.view.table.id' => 'Id',
+      'user.view.table.firstName' => 'First Name',
+      'user.view.table.lastName' => 'Last Name',
+      'user.view.table.email' => 'Email',
+      'user.view.table.phoneNo' => 'Phone No',
+      'user.view.table.levelName' => 'Level Name',
 
 
       'footer.copyright' => 'Copyright',
