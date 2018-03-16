@@ -78,7 +78,13 @@ class UserDataController extends Controller
   public static function getListUserData(){
     $listUsers = DB::select('select u.id,u.first_name,u.email,u.phone_no,l.level_name
     from users u inner join user_level l on u.group_id = l.id');
-    return datatables($listUsers)->toJson();
+    return datatables($listUsers)
+    ->addColumn('action', function ($listUsers) {
+        return '<a href="#edit-'.$listUsers->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+    })
+    ->toJson();
+
+
 
   }
 

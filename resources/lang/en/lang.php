@@ -39,6 +39,8 @@
       'user.view.table.email' => 'Email',
       'user.view.table.phoneNo' => 'Phone No',
       'user.view.table.levelName' => 'Level Name',
+      'user.view.table.action' => 'Action',
+
 
 
       'footer.copyright' => 'Copyright',
