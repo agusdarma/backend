@@ -32,6 +32,15 @@
                             <th>{{ __('lang.user.view.table.levelName') }}</th>
                         </tr>
                     </thead>
+                    <tfoot>
+                        <tr>
+                          <th>{{ __('lang.user.view.table.id') }}</th>
+                          <th>{{ __('lang.user.view.table.firstName') }}</th>
+                          <th>{{ __('lang.user.view.table.email') }}</th>
+                          <th>{{ __('lang.user.view.table.phoneNo') }}</th>
+                          <th>{{ __('lang.user.view.table.levelName') }}</th>
+                        </tr>
+                    </tfoot>
                 </table>
           </div>
 
@@ -43,7 +52,6 @@
 @section('jsSelect2')
     <script src="{{asset('dataTables-1.10.7/js/jquery.dataTables.min.js')}}"></script>
     <script>
-    $(function() {
         $('#users-table').DataTable({
             processing: true,
             serverSide: true,
@@ -54,9 +62,19 @@
                 { data: 'email', name: 'email' },
                 { data: 'phone_no', name: 'phone_no' },
                 { data: 'level_name', name: 'level_name' }
-            ]
+            ],
+              initComplete: function () {
+              this.api().columns().every(function () {
+                  var column = this;
+                  var input = document.createElement('input');
+                  $(input).appendTo($(column.footer()).empty())
+                  .on('change', function () {
+                      var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                      column.search(val ? val : '', true, false).draw();
+                  });
+              });
+          }
         });
-    });
     </script>
 @endsection
 @section('cssSelect2')
