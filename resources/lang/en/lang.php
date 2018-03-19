@@ -1,5 +1,10 @@
 <?php
    return [
+      'form.required' => '* Required',
+      'button.submit' => 'Submit',
+      'button.add.new.user' => 'Add New User',
+
+
       'login.title' => 'Login | Simple POS',
       'login.subtitle' => 'Login Simple POS',
       'login.subtitle2' => 'Sign in to start your session',
@@ -29,6 +34,7 @@
       'user.label.password' => 'Password',
       'user.label.store' => 'Store',
       'user.msg.success' => 'User was successfully added!',
+
 
       'user.view.title' => 'User Data View Form',
       'user.view.subtitle' => 'Simple POS',

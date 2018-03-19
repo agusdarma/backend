@@ -1,5 +1,9 @@
 <?php
    return [
+      'form.required' => '* Wajib Diisi',
+      'button.submit' => 'Submit',
+      'button.add.new.user' => 'Tambah User Baru',
+
       'login.title' => 'Masuk | Simple POS',
       'login.subtitle' => 'Masuk Simple POS',
       'login.subtitle2' => 'Masuk untuk memulai sesi anda',
@@ -29,6 +33,7 @@
       'user.label.password' => 'Password',
       'user.label.store' => 'Toko',
       'user.msg.success' => 'User berhasil ditambah!',
+
 
 
       'footer.copyright' => 'Copyright',

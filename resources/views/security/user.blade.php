@@ -22,7 +22,7 @@
             <div class="box-header with-border">
               <h3 class="box-title">{{ __('lang.user.title') }}</h3>
             </div>
-            <form method="post" action="/UserData/Add">
+            <form method="post" action="{{ url( '/UserData/Add' ) }}">
               <input type="hidden" name="_token" value="{{ csrf_token() }}" >
               <div class="box-body">
                 @if(session()->has('message.level'))
@@ -83,11 +83,11 @@
                   <label for="store">{{ __('lang.user.label.store') }}</label>
                   <input type="text" name="store" class="form-control" id="store" placeholder="{{ __('lang.user.label.store') }}">
                 </div>
-                <p class="help-block">* Required</p>
+                <p class="help-block">{{ __('lang.form.required') }}</p>
               </div>
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">{{ __('lang.button.submit') }}</button>
               </div>
             </form>
           </div>
