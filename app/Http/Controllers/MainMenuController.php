@@ -25,6 +25,7 @@ class MainMenuController extends Controller
     $results = DB::select('select um.* from user_menu um
     inner join user_level_menu ulm on um.menu_id = ulm.menu_id
     where ulm.level_id = :groupId and um.menu_leaf = 0 order by show_order asc', ['groupId' => $levelId]);
+    Log::info('queryMainMenu ');
     return $results;
   }
 
@@ -32,6 +33,7 @@ class MainMenuController extends Controller
     $listSubMenu = DB::select('select um.* from user_menu um
     inner join user_level_menu ulm on um.menu_id = ulm.menu_id
     where um.parent_id = :parentId and um.menu_leaf = 1 order by show_order asc', ['parentId' => $mainId]);
+    Log::info('querySubMenu ');
     return $listSubMenu;
   }
 
