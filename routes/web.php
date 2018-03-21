@@ -41,3 +41,7 @@ Route::get('/UserData/view/data',[
    'middleware' => 'session',
    'uses' => 'UserDataController@getListUserData',
 ])->name('getListUserData');
+Route::post('/UserData/AddAjax',[
+   'middleware' => 'session',
+   'uses' => 'UserDataController@addAjax',
+]);

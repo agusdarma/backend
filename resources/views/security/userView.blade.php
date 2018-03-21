@@ -20,7 +20,7 @@
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">{{ __('lang.user.view.title') }}</h3>
-              <button type="submit" data-toggle="modal" data-target="#modal-add"
+              <button type="button" data-toggle="modal" data-target="#modal-add"
               class="btn btn-primary">{{ __('lang.button.add.new.user') }}</button>
             </div>
                 <table class="table table-bordered" id="users-table">
@@ -56,16 +56,17 @@
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Add User Data</h4>
+                <h4 class="modal-title">{{ __('lang.button.add.new.user') }}</h4>
               </div>
               <div class="modal-body">
                 <div class="box box-primary">
-                  <form method="post" action="{{ url( '/UserData/Add' ) }}">
+                  <form>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" >
                     <div class="box-body">
                       <div class="form-group">
                         <label for="firstName">{{ __('lang.user.label.firstName') }} *</label>
                         <input type="text" name="firstName" class="form-control" id="firstName" placeholder="{{ __('lang.user.label.firstName') }}">
+                        <p class="errorFirstName text-center alert alert-danger hidden">aloha</p>
                       </div>
                       <div class="form-group">
                         <label for="lastName">{{ __('lang.user.label.lastName') }}</label>
@@ -111,7 +112,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-success add">{{ __('lang.button.submit') }}</button>                      
+                      <button type="button" class="btn btn-success add">{{ __('lang.button.submit') }}</button>
                     </div>
                   </form>
                 </div>
@@ -157,6 +158,91 @@
     });
 
     </script>
+    <!-- AJAX CRUD operations -->
+    <script type="text/javascript">
+        // add
+        $('.modal-footer').on('click', '.add', function() {
+          //window.alert( $('#firstName').val());
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ url( '/UserData/AddAjax' ) }}',
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                    'firstName': $('#firstName').val(),
+                    'lastName': $('#lastName').val(),
+                    'email': $('#email').val(),
+                    'phoneNo': $('#phoneNo').val(),
+                    'userLevel': $('#userLevel').val(),
+                    'gender': $('#gender').val(),
+                    'userName': $('#userName').val(),
+                    'password': $('#password').val(),
+                    'store': $('#store').val()
+
+
+
+                },
+                success: function(data) {
+                  // window.alert( data.errors );
+
+
+                    $('.errorFirstName').addClass('hidden');
+                    $('.errorContent').addClass('hidden');
+                    if (Object.keys(data.errors).length>0) {
+                        // setTimeout(function () {
+                        //     $('#addModal').modal('show');
+                        //     toastr.error('Validation error!', 'Error Alert', {timeOut: 5000});
+                        // }, 500);
+                        if (data.errors.firstName) {
+                          console.log("masuk sini");
+                          // console.log(data.errors.firstName[0]);
+
+                          // console.log($('.errorfirstName').text());
+
+                            $('.errorFirstName').removeClass('hidden');
+                            $('.errorFirstName').text(data.errors.firstName[0]);
+                            // $('.modal-title').text(data.errors.firstName[0]);
+
+                        }
+                        if (data.errors.content) {
+                            $('.errorContent').removeClass('hidden');
+                            $('.errorContent').text(data.errors.content);
+                        }
+                    } else {
+                        toastr.success('Successfully added Post!', 'Success Alert', {timeOut: 5000});
+                        $('#postTable').prepend("<tr class='item" + data.id + "'><td class='col1'>" + data.id + "</td><td>" + data.title + "</td><td>" + data.content + "</td><td class='text-center'><input type='checkbox' class='new_published' data-id='" + data.id + " '></td><td>Just now!</td><td><button class='show-modal btn btn-success' data-id='" + data.id + "' data-title='" + data.title + "' data-content='" + data.content + "'><span class='glyphicon glyphicon-eye-open'></span> Show</button> <button class='edit-modal btn btn-info' data-id='" + data.id + "' data-title='" + data.title + "' data-content='" + data.content + "'><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-title='" + data.title + "' data-content='" + data.content + "'><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
+                        $('.new_published').iCheck({
+                            checkboxClass: 'icheckbox_square-yellow',
+                            radioClass: 'iradio_square-yellow',
+                            increaseArea: '20%'
+                        });
+                        $('.new_published').on('ifToggled', function(event){
+                            $(this).closest('tr').toggleClass('warning');
+                        });
+                        $('.new_published').on('ifChanged', function(event){
+                            id = $(this).data('id');
+                            $.ajax({
+                                type: 'POST',
+                                url: "",
+                                data: {
+                                    '_token': $('input[name=_token]').val(),
+                                    'id': id
+                                },
+                                success: function(data) {
+                                    // empty
+                                },
+                            });
+                        });
+                        $('.col1').each(function (index) {
+                            $(this).html(index+1);
+                        });
+                    }
+                },
+            });
+        });
+
+      </script>
+
 @endsection
 @section('cssSelect2')
     <link rel="stylesheet" href="{{asset('dataTables-1.10.7/css/jquery.dataTables.min.css')}}">
