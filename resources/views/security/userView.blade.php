@@ -167,9 +167,13 @@
     </script>
     <script type="text/javascript">
         function clearInput() {
-          $('#modal-add').on('hidden.bs.modal', function () {
-                  $('.modal-body').find('textarea,input').val('');
-          });
+          $('#firstName').val('');
+          $('#lastName').val('');
+          $('#email').val('');
+          $('#phoneNo').val('');          
+          $('#userName').val('');
+          $('#password').val('');
+          $('#store').val('');
         }
         function hiddenError() {
           $('.errorFirstName').addClass('hidden');
@@ -179,7 +183,7 @@
           $('.errorGender').addClass('hidden');
           $('.errorPassword').addClass('hidden');
           $('.errorMessage').addClass('hidden');
-          clearInput();
+
         };
         function RefreshTable(tableId, urlData){
           $.getJSON(urlData, null, function( json )
@@ -249,6 +253,7 @@
                         $('#modal-add').modal('hide');
                         toastr.success(data.message, 'Success Alert', {timeOut: 2000});
                         RefreshTable('#users-table','{!! route('getListUserData') !!}');
+                        clearInput();
                     }
                 },
             });

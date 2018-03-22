@@ -87,7 +87,7 @@ class UserDataController extends Controller
     if ($validator->fails()) {
            Log::warn('Error validasi input ');
            $response = array('errors' => $validator->getMessageBag(),
-           'rc' => Constants::SYS_RC_VALIDATION_INPUT_ERROR);
+           'rc' => Constants::SYS_RC_VALIDATION_INPUT_ERROR());
            return Response::json($response);
     }
     $firstName = $request->firstName;
