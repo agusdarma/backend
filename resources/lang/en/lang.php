@@ -48,7 +48,6 @@
       'user.view.table.action' => 'Action',
 
 
-
       'footer.copyright' => 'Copyright',
       'footer.copyright.year' => '2018',
       'footer.copyright.company' => 'Company',
@@ -59,6 +58,7 @@
       'rc.2' => 'Login Failed Wrong Email or Password.',
       'rc.3' => 'Session Expired, Please Relogin.',
       'rc.4' => 'User inactive.',
-      'rc.5' => 'User blocked.'
+      'rc.5' => 'User blocked.',
+      'rc.98' => 'System Unknown Error'
    ];
 ?>

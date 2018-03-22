@@ -34,7 +34,7 @@
       'user.label.store' => 'Toko',
       'user.msg.success' => 'User berhasil ditambah!',
 
-
+      'msg.unknown.error' => 'System Unknown Error',
 
       'footer.copyright' => 'Copyright',
       'footer.copyright.year' => '2018',
@@ -45,6 +45,7 @@
       'rc.2' => 'Login Failed Wrong Email or Password.',
       'rc.3' => 'Session Expired, Please Relogin.',
       'rc.4' => 'User tidak aktif.',
-      'rc.5' => 'User terblokir.'
+      'rc.5' => 'User terblokir.',
+      'rc.98' => 'Sistem Error'
    ];
 ?>

@@ -20,7 +20,7 @@
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">{{ __('lang.user.view.title') }}</h3>
-              <button type="button" data-toggle="modal" data-target="#modal-add"
+              <button type="button" data-toggle="modal" onclick="hiddenError()" data-target="#modal-add"
               class="btn btn-primary">{{ __('lang.button.add.new.user') }}</button>
             </div>
                 <table class="table table-bordered" id="users-table">
@@ -64,21 +64,25 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" >
                     <div class="box-body">
                       <div class="form-group">
+                        <p class="errorMessage text-center alert alert-danger hidden"></p>
                         <label for="firstName">{{ __('lang.user.label.firstName') }} *</label>
                         <input type="text" name="firstName" class="form-control" id="firstName" placeholder="{{ __('lang.user.label.firstName') }}">
-                        <p class="errorFirstName text-center alert alert-danger hidden">aloha</p>
+                        <p class="errorFirstName text-center alert alert-danger hidden"></p>
                       </div>
                       <div class="form-group">
                         <label for="lastName">{{ __('lang.user.label.lastName') }}</label>
                         <input type="text" name="lastName" class="form-control" id="lastName" placeholder="{{ __('lang.user.label.lastName') }}">
+                        <p class="errorLastName text-center alert alert-danger hidden"></p>
                       </div>
                       <div class="form-group">
                         <label for="email">{{ __('lang.user.label.email') }} *</label>
                         <input type="email" name="email" class="form-control" id="email" placeholder="{{ __('lang.user.label.email') }}">
+                        <p class="errorEmail text-center alert alert-danger hidden"></p>
                       </div>
                       <div class="form-group">
                         <label for="phoneNo">{{ __('lang.user.label.phoneNo') }} *</label>
                         <input type="text" name="phoneNo" class="form-control" id="phoneNo" placeholder="{{ __('lang.user.label.phoneNo') }}">
+                        <p class="errorPhoneNo text-center alert alert-danger hidden"></p>
                       </div>
                       <div class="form-group">
                         <?php $levels = UserDataController::listUserLevel(MainMenuController::userLevelId()); ?>
@@ -88,6 +92,7 @@
                             <option value="{{ $level->id }}">{{ $level->level_name }}</option>
                           @endforeach
                         </select>
+                        <p class="errorUserLevel text-center alert alert-danger hidden"></p>
                       </div>
                       <div class="form-group">
                         <label for="gender">{{ __('lang.user.label.gender') }} *</label>
@@ -95,18 +100,22 @@
                           <option value="male">Male</option>
                           <option value="female">Femaile</option>
                         </select>
+                        <p class="errorGender text-center alert alert-danger hidden"></p>
                       </div>
                       <div class="form-group">
                         <label for="userName">{{ __('lang.user.label.userName') }}</label>
                         <input type="text" name="userName" class="form-control" id="userName" placeholder="{{ __('lang.user.label.userName') }}">
+                        <p class="errorUserName text-center alert alert-danger hidden"></p>
                       </div>
                       <div class="form-group">
                         <label for="password">{{ __('lang.user.label.password') }} *</label>
                         <input type="password" name="password" class="form-control" id="password" placeholder="{{ __('lang.user.label.password') }}">
+                        <p class="errorPassword text-center alert alert-danger hidden"></p>
                       </div>
                       <div class="form-group">
                         <label for="store">{{ __('lang.user.label.store') }}</label>
                         <input type="text" name="store" class="form-control" id="store" placeholder="{{ __('lang.user.label.store') }}">
+                        <p class="errorStore text-center alert alert-danger hidden"></p>
                       </div>
                       <p class="help-block">{{ __('lang.form.required') }}</p>
                     </div>
@@ -117,15 +126,13 @@
                   </form>
                 </div>
               </div>
-
             </div>
-            <!-- /.modal-content -->
           </div>
-          <!-- /.modal-dialog -->
         </div>
 @endsection
 @section('jsSelect2')
     <script src="{{asset('dataTables-1.10.7/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('toastr/js/toastr.min.js')}}"></script>
     <script>
     $(function() {
 
@@ -158,12 +165,37 @@
     });
 
     </script>
-    <!-- AJAX CRUD operations -->
     <script type="text/javascript">
-        // add
+        function clearInput() {
+          $('#modal-add').on('hidden.bs.modal', function () {
+                  $('.modal-body').find('textarea,input').val('');
+          });
+        }
+        function hiddenError() {
+          $('.errorFirstName').addClass('hidden');
+          $('.errorEmail').addClass('hidden');
+          $('.errorPhoneNo').addClass('hidden');
+          $('.errorUserLevel').addClass('hidden');
+          $('.errorGender').addClass('hidden');
+          $('.errorPassword').addClass('hidden');
+          $('.errorMessage').addClass('hidden');
+          clearInput();
+        };
+        function RefreshTable(tableId, urlData){
+          $.getJSON(urlData, null, function( json )
+          {
+            table = $(tableId).dataTable();
+            oSettings = table.fnSettings();
+            table.fnClearTable(this);
+            for (var i=0; i<json.aaData.length; i++)
+            {
+              table.oApi._fnAddData(oSettings, json.aaData[i]);
+            }
+            oSettings.aiDisplay = oSettings.aiDisplayMaster.slice();
+            table.fnDraw();
+          });
+        }
         $('.modal-footer').on('click', '.add', function() {
-          //window.alert( $('#firstName').val());
-
             $.ajax({
                 type: 'POST',
                 url: '{{ url( '/UserData/AddAjax' ) }}',
@@ -183,67 +215,48 @@
 
                 },
                 success: function(data) {
-                  // window.alert( data.errors );
-
-
-                    $('.errorFirstName').addClass('hidden');
-                    $('.errorContent').addClass('hidden');
-                    if (Object.keys(data.errors).length>0) {
-                        // setTimeout(function () {
-                        //     $('#addModal').modal('show');
-                        //     toastr.error('Validation error!', 'Error Alert', {timeOut: 5000});
-                        // }, 500);
+                  hiddenError();
+                    if (data.rc!=0) {
+                        if (data.message) {
+                            $('.errorMessage').removeClass('hidden');
+                            $('.errorMessage').text(data.message);
+                        }
                         if (data.errors.firstName) {
-                          console.log("masuk sini");
-                          // console.log(data.errors.firstName[0]);
-
-                          // console.log($('.errorfirstName').text());
-
                             $('.errorFirstName').removeClass('hidden');
                             $('.errorFirstName').text(data.errors.firstName[0]);
-                            // $('.modal-title').text(data.errors.firstName[0]);
-
                         }
-                        if (data.errors.content) {
-                            $('.errorContent').removeClass('hidden');
-                            $('.errorContent').text(data.errors.content);
+                        if (data.errors.email) {
+                            $('.errorEmail').removeClass('hidden');
+                            $('.errorEmail').text(data.errors.email);
+                        }
+                        if (data.errors.phoneNo) {
+                            $('.errorPhoneNo').removeClass('hidden');
+                            $('.errorPhoneNo').text(data.errors.phoneNo);
+                        }
+                        if (data.errors.userLevel) {
+                            $('.errorUserLevel').removeClass('hidden');
+                            $('.errorUserLevel').text(data.errors.userLevel);
+                        }
+                        if (data.errors.gender) {
+                            $('.errorGender').removeClass('hidden');
+                            $('.errorGender').text(data.errors.gender);
+                        }
+                        if (data.errors.password) {
+                            $('.errorPassword').removeClass('hidden');
+                            $('.errorPassword').text(data.errors.password);
                         }
                     } else {
-                        toastr.success('Successfully added Post!', 'Success Alert', {timeOut: 5000});
-                        $('#postTable').prepend("<tr class='item" + data.id + "'><td class='col1'>" + data.id + "</td><td>" + data.title + "</td><td>" + data.content + "</td><td class='text-center'><input type='checkbox' class='new_published' data-id='" + data.id + " '></td><td>Just now!</td><td><button class='show-modal btn btn-success' data-id='" + data.id + "' data-title='" + data.title + "' data-content='" + data.content + "'><span class='glyphicon glyphicon-eye-open'></span> Show</button> <button class='edit-modal btn btn-info' data-id='" + data.id + "' data-title='" + data.title + "' data-content='" + data.content + "'><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-title='" + data.title + "' data-content='" + data.content + "'><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
-                        $('.new_published').iCheck({
-                            checkboxClass: 'icheckbox_square-yellow',
-                            radioClass: 'iradio_square-yellow',
-                            increaseArea: '20%'
-                        });
-                        $('.new_published').on('ifToggled', function(event){
-                            $(this).closest('tr').toggleClass('warning');
-                        });
-                        $('.new_published').on('ifChanged', function(event){
-                            id = $(this).data('id');
-                            $.ajax({
-                                type: 'POST',
-                                url: "",
-                                data: {
-                                    '_token': $('input[name=_token]').val(),
-                                    'id': id
-                                },
-                                success: function(data) {
-                                    // empty
-                                },
-                            });
-                        });
-                        $('.col1').each(function (index) {
-                            $(this).html(index+1);
-                        });
+                        $('#modal-add').modal('hide');
+                        toastr.success(data.message, 'Success Alert', {timeOut: 2000});
+                        RefreshTable('#users-table','{!! route('getListUserData') !!}');
                     }
                 },
             });
         });
-
       </script>
 
 @endsection
 @section('cssSelect2')
     <link rel="stylesheet" href="{{asset('dataTables-1.10.7/css/jquery.dataTables.min.css')}}">
+    <link rel="stylesheet" href="{{asset('toastr/css/toastr.min.css')}}">
 @endsection

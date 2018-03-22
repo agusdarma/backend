@@ -49,4 +49,13 @@ class Constants
     public static function SYS_MSG_USER_SUCCESS_ADDED(){
         return __('lang.user.msg.success');
     }
+    public static function SYS_RC_UNKNOWN_ERROR(){
+        return 'rc.98';
+    }
+    public static function SYS_MSG_UNKNOWN_ERROR(){
+        return __('lang.'.Constants::SYS_RC_UNKNOWN_ERROR());
+    }
+    public static function SYS_RC_VALIDATION_INPUT_ERROR(){
+        return 'rc.99';
+    }
 }
