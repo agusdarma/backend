@@ -144,25 +144,25 @@
                       <input type="hidden" name="id" id="editId" >
                       <div class="box-body">
                         <div class="form-group">
-                          <p class="errorMessage text-center alert alert-danger hidden"></p>
+                          <p class="errorEditMessage text-center alert alert-danger hidden"></p>
                           <label for="firstName">{{ __('lang.user.label.firstName') }} *</label>
                           <input type="text" name="firstName" class="form-control" id="editFirstName" placeholder="{{ __('lang.user.label.firstName') }}">
-                          <p class="errorFirstName text-center alert alert-danger hidden"></p>
+                          <p class="errorEditFirstName text-center alert alert-danger hidden"></p>
                         </div>
                         <div class="form-group">
                           <label for="lastName">{{ __('lang.user.label.lastName') }}</label>
                           <input type="text" name="lastName" class="form-control" id="editLastName" placeholder="{{ __('lang.user.label.lastName') }}">
-                          <p class="errorLastName text-center alert alert-danger hidden"></p>
+                          <p class="errorEditLastName text-center alert alert-danger hidden"></p>
                         </div>
                         <div class="form-group">
                           <label for="email">{{ __('lang.user.label.email') }} *</label>
                           <input type="email" name="email" class="form-control" id="editEmail" placeholder="{{ __('lang.user.label.email') }}">
-                          <p class="errorEmail text-center alert alert-danger hidden"></p>
+                          <p class="errorEditEmail text-center alert alert-danger hidden"></p>
                         </div>
                         <div class="form-group">
                           <label for="phoneNo">{{ __('lang.user.label.phoneNo') }} *</label>
                           <input type="text" name="phoneNo" class="form-control" id="editPhoneNo" placeholder="{{ __('lang.user.label.phoneNo') }}">
-                          <p class="errorPhoneNo text-center alert alert-danger hidden"></p>
+                          <p class="errorEditPhoneNo text-center alert alert-danger hidden"></p>
                         </div>
                         <div class="form-group">
                           <?php $levels = UserDataController::listUserLevel(MainMenuController::userLevelId()); ?>
@@ -172,7 +172,7 @@
                               <option value="{{ $level->id }}">{{ $level->level_name }}</option>
                             @endforeach
                           </select>
-                          <p class="errorUserLevel text-center alert alert-danger hidden"></p>
+                          <p class="errorEditUserLevel text-center alert alert-danger hidden"></p>
                         </div>
                         <div class="form-group">
                           <label for="gender">{{ __('lang.user.label.gender') }} *</label>
@@ -180,23 +180,23 @@
                             <option value="male">{{ __('lang.user.label.male') }}</option>
                             <option value="female">{{ __('lang.user.label.female') }}</option>
                           </select>
-                          <p class="errorGender text-center alert alert-danger hidden"></p>
+                          <p class="errorEditGender text-center alert alert-danger hidden"></p>
                         </div>
                         <div class="form-group">
                           <label for="userName">{{ __('lang.user.label.userName') }}</label>
                           <input type="text" name="userName" class="form-control" id="editUserName" placeholder="{{ __('lang.user.label.userName') }}">
-                          <p class="errorUserName text-center alert alert-danger hidden"></p>
+                          <p class="errorEditUserName text-center alert alert-danger hidden"></p>
                         </div>
                         <div class="form-group">
                           <label for="store">{{ __('lang.user.label.store') }}</label>
                           <input type="text" name="store" class="form-control" id="editStore" placeholder="{{ __('lang.user.label.store') }}">
-                          <p class="errorStore text-center alert alert-danger hidden"></p>
+                          <p class="errorEditStore text-center alert alert-danger hidden"></p>
                         </div>
                         <p class="help-block">{{ __('lang.form.required') }}</p>
                       </div>
                     </form>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary edit" data-dismiss="modal">
+                        <button type="button" class="btn btn-primary edit" >
                             <span class='glyphicon glyphicon-check'></span> Edit
                         </button>
                         <button type="button" class="btn btn-warning" data-dismiss="modal">
@@ -262,6 +262,16 @@
           $('.errorPassword').addClass('hidden');
           $('.errorMessage').addClass('hidden');
 
+        };
+        function hiddenErrorEdit() {
+          $('.errorEditFirstName').addClass('hidden');
+          $('.errorEditEmail').addClass('hidden');
+          $('.errorEditPhoneNo').addClass('hidden');
+          $('.errorEditUserLevel').addClass('hidden');
+          $('.errorEditGender').addClass('hidden');
+          $('.errorEditPassword').addClass('hidden');
+          $('.errorEditMessage').addClass('hidden');
+          console.log('masuk sini4');
         };
         function RefreshTable(tableId, urlData){
           $.getJSON(urlData, null, function( json )
@@ -346,6 +356,7 @@
               'id': userId
             },
             success: function(data) {
+              hiddenErrorEdit();
               $('#editId').val(data[0].id);
               $('#editFirstName').val(data[0].first_name);
               $('#editLastName').val(data[0].last_name);
@@ -379,41 +390,46 @@
 
               },
               success: function(data) {
-                hiddenError();
+                hiddenErrorEdit();
+
                   if (data.rc!=0) {
+
                       if (data.message) {
-                          $('.errorMessage').removeClass('hidden');
-                          $('.errorMessage').text(data.message);
+                          $('.errorEditMessage').removeClass('hidden');
+                          $('.errorEditMessage').text(data.message);
                       }
                       if (data.errors.firstName) {
-                          $('.errorFirstName').removeClass('hidden');
-                          $('.errorFirstName').text(data.errors.firstName[0]);
+                          $('.errorEditFirstName').removeClass('hidden');
+                          $('.errorEditFirstName').text(data.errors.firstName[0]);
                       }
                       if (data.errors.email) {
-                          $('.errorEmail').removeClass('hidden');
-                          $('.errorEmail').text(data.errors.email);
+                          $('.errorEditEmail').removeClass('hidden');
+                          $('.errorEditEmail').text(data.errors.email);
+                          console.log('masuk sini3');
                       }
                       if (data.errors.phoneNo) {
-                          $('.errorPhoneNo').removeClass('hidden');
-                          $('.errorPhoneNo').text(data.errors.phoneNo);
+                          $('.errorEditPhoneNo').removeClass('hidden');
+                          $('.errorEditPhoneNo').text(data.errors.phoneNo);
                       }
                       if (data.errors.userLevel) {
-                          $('.errorUserLevel').removeClass('hidden');
-                          $('.errorUserLevel').text(data.errors.userLevel);
+                          $('.errorEditUserLevel').removeClass('hidden');
+                          $('.errorEditUserLevel').text(data.errors.userLevel);
                       }
                       if (data.errors.gender) {
-                          $('.errorGender').removeClass('hidden');
-                          $('.errorGender').text(data.errors.gender);
+                          $('.errorEditGender').removeClass('hidden');
+                          $('.errorEditGender').text(data.errors.gender);
                       }
                       if (data.errors.password) {
-                          $('.errorPassword').removeClass('hidden');
-                          $('.errorPassword').text(data.errors.password);
+                          $('.errorEditPassword').removeClass('hidden');
+                          $('.errorEditPassword').text(data.errors.password);
                       }
+                      console.log('masuk sini2');
                   } else {
-                      $('#modal-add').modal('hide');
+                    console.log('masuk sini');
+                      $('#editModal').modal('hide');
                       toastr.success(data.message, 'Success Alert', {timeOut: 2000});
                       RefreshTable('#users-table','{!! route('getListUserData') !!}');
-                      clearInput();
+                      // clearInput();
                   }
               },
           });
