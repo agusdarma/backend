@@ -97,8 +97,8 @@
                       <div class="form-group">
                         <label for="gender">{{ __('lang.user.label.gender') }} *</label>
                         <select id="gender" name="gender" class="form-control select2" style="width: 100%;">
-                          <option value="male">Male</option>
-                          <option value="female">Femaile</option>
+                          <option value="male">{{ __('lang.user.label.male') }}</option>
+                          <option value="female">{{ __('lang.user.label.female') }}</option>
                         </select>
                         <p class="errorGender text-center alert alert-danger hidden"></p>
                       </div>
@@ -141,26 +141,58 @@
                 <div class="modal-body">
                     <form class="form-horizontal" role="form">
                       <input type="hidden" name="_token" value="{{ csrf_token() }}" >
+                      <div class="box-body">
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="id">ID:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="id_edit" disabled>
-                            </div>
+                          <p class="errorMessage text-center alert alert-danger hidden"></p>
+                          <label for="firstName">{{ __('lang.user.label.firstName') }} *</label>
+                          <input type="text" name="firstName" class="form-control" id="editFirstName" placeholder="{{ __('lang.user.label.firstName') }}">
+                          <p class="errorFirstName text-center alert alert-danger hidden"></p>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="title">Title:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="title_edit" autofocus>
-                                <p class="errorTitle text-center alert alert-danger hidden"></p>
-                            </div>
+                          <label for="lastName">{{ __('lang.user.label.lastName') }}</label>
+                          <input type="text" name="lastName" class="form-control" id="editLastName" placeholder="{{ __('lang.user.label.lastName') }}">
+                          <p class="errorLastName text-center alert alert-danger hidden"></p>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="content">Content:</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" id="content_edit" cols="40" rows="5"></textarea>
-                                <p class="errorContent text-center alert alert-danger hidden"></p>
-                            </div>
+                          <label for="email">{{ __('lang.user.label.email') }} *</label>
+                          <input type="email" name="email" class="form-control" id="editEmail" placeholder="{{ __('lang.user.label.email') }}">
+                          <p class="errorEmail text-center alert alert-danger hidden"></p>
                         </div>
+                        <div class="form-group">
+                          <label for="phoneNo">{{ __('lang.user.label.phoneNo') }} *</label>
+                          <input type="text" name="phoneNo" class="form-control" id="editPhoneNo" placeholder="{{ __('lang.user.label.phoneNo') }}">
+                          <p class="errorPhoneNo text-center alert alert-danger hidden"></p>
+                        </div>
+                        <div class="form-group">
+                          <?php $levels = UserDataController::listUserLevel(MainMenuController::userLevelId()); ?>
+                          <label for="userLevel">{{ __('lang.user.label.userLevel') }} *</label>
+                          <select id="editUserLevel" name="userLevel" class="form-control select2" style="width: 100%;">
+                            @foreach($levels as $level)
+                              <option value="{{ $level->id }}">{{ $level->level_name }}</option>
+                            @endforeach
+                          </select>
+                          <p class="errorUserLevel text-center alert alert-danger hidden"></p>
+                        </div>
+                        <div class="form-group">
+                          <label for="gender">{{ __('lang.user.label.gender') }} *</label>
+                          <select id="editGender" name="gender" class="form-control select2" style="width: 100%;">
+                            <option value="male">{{ __('lang.user.label.male') }}</option>
+                            <option value="female">{{ __('lang.user.label.female') }}</option>
+                          </select>
+                          <p class="errorGender text-center alert alert-danger hidden"></p>
+                        </div>
+                        <div class="form-group">
+                          <label for="userName">{{ __('lang.user.label.userName') }}</label>
+                          <input type="text" name="userName" class="form-control" id="editUserName" placeholder="{{ __('lang.user.label.userName') }}">
+                          <p class="errorUserName text-center alert alert-danger hidden"></p>
+                        </div>
+                        <div class="form-group">
+                          <label for="store">{{ __('lang.user.label.store') }}</label>
+                          <input type="text" name="store" class="form-control" id="editStore" placeholder="{{ __('lang.user.label.store') }}">
+                          <p class="errorStore text-center alert alert-danger hidden"></p>
+                        </div>
+                        <p class="help-block">{{ __('lang.form.required') }}</p>
+                      </div>
                     </form>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary edit" data-dismiss="modal">
@@ -320,7 +352,19 @@
             },
             success: function(data) {
               console.log('data id : '+ data[0].id);
-              console.log('data id : '+ data[0].first_name);
+              console.log('data id : '+ data[0].gender);
+
+              $('#editFirstName').val(data[0].first_name);
+              $('#editLastName').val(data[0].last_name);
+              $('#editEmail').val(data[0].email);
+              $('#editPhoneNo').val(data[0].phone_no);
+              $("#editUserLevel").val(data[0].level_id);
+              $("#editGender").val(data[0].gender);
+
+              $('#editUserName').val(data[0].username);
+              $('#editStore').val(data[0].store);
+
+              $('#editModal').modal('show');
                 // if (data.rc!=0) {
                 //     if (data.message) {
                 //         $('.errorMessage').removeClass('hidden');

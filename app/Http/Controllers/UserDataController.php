@@ -152,7 +152,8 @@ class UserDataController extends Controller
     Log::debug('UserDataController => showEdit()');
     $id = $request->id;
     Log::debug('id => '.$id);
-    $listUsers = DB::select('select u.id,u.first_name,u.email,u.phone_no,l.level_name
+    $listUsers = DB::select('select u.id,u.first_name,u.last_name,u.email,u.phone_no,l.level_name,u.gender,u.username
+    ,u.store,l.id as level_id
     from users u inner join user_level l on u.group_id = l.id
     where u.id = :id', ['id' => $id]);
     return Response::json($listUsers);
