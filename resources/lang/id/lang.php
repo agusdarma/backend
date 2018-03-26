@@ -33,6 +33,7 @@
       'user.label.password' => 'Password',
       'user.label.store' => 'Toko',
       'user.msg.success' => 'User berhasil ditambah!',
+      'user.msg.success.edit' => 'User berhasil diubah!',
 
       'msg.unknown.error' => 'System Unknown Error',
 

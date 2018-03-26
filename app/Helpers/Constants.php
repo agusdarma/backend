@@ -4,6 +4,9 @@ namespace App\Helpers;
 
 class Constants
 {
+    public static function ASIA_TIMEZONE(){
+      return 'Asia/Jakarta';
+    }
     public static function MAX_INVALID_LOGIN(){
         return '1';
     }
@@ -48,6 +51,9 @@ class Constants
     }
     public static function SYS_MSG_USER_SUCCESS_ADDED(){
         return __('lang.user.msg.success');
+    }
+    public static function SYS_MSG_USER_SUCCESS_EDITED(){
+        return __('lang.user.msg.success.edit');
     }
     public static function SYS_RC_UNKNOWN_ERROR(){
         return 'rc.98';

@@ -141,6 +141,7 @@
                 <div class="modal-body">
                     <form class="form-horizontal" role="form">
                       <input type="hidden" name="_token" value="{{ csrf_token() }}" >
+                      <input type="hidden" name="id" id="editId" >
                       <div class="box-body">
                         <div class="form-group">
                           <p class="errorMessage text-center alert alert-danger hidden"></p>
@@ -338,51 +339,85 @@
       </script>
       <script type="text/javascript">
       function edit(userId) {
-        console.log('user id : '+ userId);
-        // $('#editModal').modal('show');
-        // $url = '/UserData/'+ userId;
-        // console.log('$url : '+ userId);
         $.ajax({
             type: 'GET',
             url: '{{ url( '/UserData/showEdit' ) }}',
             data: {
               'id': userId
-
-
             },
             success: function(data) {
-              console.log('data id : '+ data[0].id);
-              console.log('data id : '+ data[0].gender);
-
+              $('#editId').val(data[0].id);
               $('#editFirstName').val(data[0].first_name);
               $('#editLastName').val(data[0].last_name);
               $('#editEmail').val(data[0].email);
               $('#editPhoneNo').val(data[0].phone_no);
               $("#editUserLevel").val(data[0].level_id);
               $("#editGender").val(data[0].gender);
-
               $('#editUserName').val(data[0].username);
               $('#editStore').val(data[0].store);
-
               $('#editModal').modal('show');
-                // if (data.rc!=0) {
-                //     if (data.message) {
-                //         $('.errorMessage').removeClass('hidden');
-                //         $('.errorMessage').text(data.message);
-                //     }
-                //     if (data.errors.firstName) {
-                //         $('.errorFirstName').removeClass('hidden');
-                //         $('.errorFirstName').text(data.errors.firstName[0]);
-                //     }
-                // } else {
-                //     $('#modal-add').modal('hide');
-                //     toastr.success(data.message, 'Success Alert', {timeOut: 2000});
-                //     RefreshTable('#users-table','{!! route('getListUserData') !!}');
-                //     clearInput();
-                // }
             },
         });
       }
+      $('.modal-footer').on('click', '.edit', function() {
+          $.ajax({
+              type: 'POST',
+              url: '{{ url( '/UserData/editProcess' ) }}',
+              data: {
+                  '_token': $('input[name=_token]').val(),
+                  'id': $('#editId').val(),
+                  'firstName': $('#editFirstName').val(),
+                  'lastName': $('#editLastName').val(),
+                  'email': $('#editEmail').val(),
+                  'phoneNo': $('#editPhoneNo').val(),
+                  'userLevel': $('#editUserLevel').val(),
+                  'gender': $('#editGender').val(),
+                  'userName': $('#editUserName').val(),
+                  'store': $('#editStore').val()
+
+
+
+              },
+              success: function(data) {
+                hiddenError();
+                  if (data.rc!=0) {
+                      if (data.message) {
+                          $('.errorMessage').removeClass('hidden');
+                          $('.errorMessage').text(data.message);
+                      }
+                      if (data.errors.firstName) {
+                          $('.errorFirstName').removeClass('hidden');
+                          $('.errorFirstName').text(data.errors.firstName[0]);
+                      }
+                      if (data.errors.email) {
+                          $('.errorEmail').removeClass('hidden');
+                          $('.errorEmail').text(data.errors.email);
+                      }
+                      if (data.errors.phoneNo) {
+                          $('.errorPhoneNo').removeClass('hidden');
+                          $('.errorPhoneNo').text(data.errors.phoneNo);
+                      }
+                      if (data.errors.userLevel) {
+                          $('.errorUserLevel').removeClass('hidden');
+                          $('.errorUserLevel').text(data.errors.userLevel);
+                      }
+                      if (data.errors.gender) {
+                          $('.errorGender').removeClass('hidden');
+                          $('.errorGender').text(data.errors.gender);
+                      }
+                      if (data.errors.password) {
+                          $('.errorPassword').removeClass('hidden');
+                          $('.errorPassword').text(data.errors.password);
+                      }
+                  } else {
+                      $('#modal-add').modal('hide');
+                      toastr.success(data.message, 'Success Alert', {timeOut: 2000});
+                      RefreshTable('#users-table','{!! route('getListUserData') !!}');
+                      clearInput();
+                  }
+              },
+          });
+      });
       </script>
 
 @endsection

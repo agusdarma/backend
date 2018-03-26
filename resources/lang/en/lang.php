@@ -34,6 +34,7 @@
       'user.label.password' => 'Password',
       'user.label.store' => 'Store',
       'user.msg.success' => 'User was successfully added!',
+      'user.msg.success.edit' => 'User was successfully edited!',
 
 
       'user.view.title' => 'User Data View Form',

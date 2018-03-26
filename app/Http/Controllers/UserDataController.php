@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\MessageBag;
 use Validator;
 use Response;
+use Carbon;
 class UserDataController extends Controller
 {
   public function init(Request $request){
@@ -157,6 +158,70 @@ class UserDataController extends Controller
     from users u inner join user_level l on u.group_id = l.id
     where u.id = :id', ['id' => $id]);
     return Response::json($listUsers);
+  }
+
+  public function editProcess(Request $request){
+    Log::debug('UserDataController => editProcess()');
+    // validasi input
+    $validator = Validator::make($request->all(), [
+            'firstName' => 'required',
+            'email' => 'required|email',
+            'phoneNo' => 'required',
+            'userLevel' => 'required',
+            'gender' => 'required',
+
+    ]);
+    // Jika input gagal redirect ke login page
+    if ($validator->fails()) {
+           Log::warn('Error validasi input ');
+           $response = array('errors' => $validator->getMessageBag(),
+           'rc' => Constants::SYS_RC_VALIDATION_INPUT_ERROR());
+           return Response::json($response);
+    }
+    $id = $request->id;
+    $firstName = $request->firstName;
+    Log::info('First name Input '.$firstName);
+    Log::info('Edit ID Input '.$id);
+    $lastName = $request->lastName;
+    $email = $request->email;
+    $phoneNo= $request->phoneNo;
+    $userLevel= $request->userLevel;
+    $gender= $request->gender;
+    $userName= $request->userName;
+    $store= $request->store;
+    $app = app();
+    $loginDataJson = session(Constants::CONSTANTS_SESSION_LOGIN());
+    $loginData2 = $app->make('LoginData');
+    $loginData2 = json_decode($loginDataJson);
+    $createdBy = $loginData2->id;
+    $updatedBy = $loginData2->id;
+    $invalidCount = 0;
+    $updated_at = Carbon\Carbon::now(Constants::ASIA_TIMEZONE());
+    Log::info('Update at '.$updated_at);
+    $status = 'active';
+    DB::beginTransaction();
+
+    try {
+      Log::info('mulai edit '.$firstName);
+        DB::update('UPDATE users set first_name = :firstName, last_name = :lastName,email = :email,
+          phone_no = :phoneNo ,group_id = :userLevel,gender = :gender,username = :userName,
+          store = :store,updated_by = :updatedBy,updated_at = :updated_at where id = :id',
+        ['firstName' => $firstName, 'lastName' => $lastName , 'email' => $email , 'phoneNo' => $phoneNo
+        , 'userLevel' => $userLevel, 'gender' => $gender, 'userName' => $userName, 'store' => $store
+        ,'updatedBy' => $updatedBy,'id' => $id,'updated_at' => $updated_at]);
+        DB::commit();
+        // DB::rollback();
+        $response = array('level' => Constants::SYS_MSG_LEVEL_SUCCESS(),
+        'message' => Constants::SYS_MSG_USER_SUCCESS_EDITED(),
+        'rc' => '0');
+    } catch (\Exception $e) {
+        Log::info('error db '.$e->getMessage());
+        DB::rollback();
+        $response = array('message' => Constants::SYS_MSG_UNKNOWN_ERROR(),
+        'rc' => Constants::SYS_RC_UNKNOWN_ERROR(),
+        'errors' => '');
+    }
+    return Response::json($response);
   }
 
 }
