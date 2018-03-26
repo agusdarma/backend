@@ -45,3 +45,13 @@ Route::post('/UserData/AddAjax',[
    'middleware' => 'session',
    'uses' => 'UserDataController@addAjax',
 ]);
+// Route::get('/UserData/{id}', [
+//     'middleware' => 'session',
+//     'uses' => 'UserDataController@showEdit',
+//      function ($id) {
+//         return view('welcome');
+// }]);
+Route::get('/UserData/showEdit', [
+    'middleware' => 'session',
+    'uses' => 'UserDataController@showEdit',
+]);
