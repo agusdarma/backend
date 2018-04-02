@@ -23,6 +23,10 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
 }
+
+tfoot input {
+  width: 100%;
+}
 /* Layout */
 .wrapper {
   height: 100%;

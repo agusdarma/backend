@@ -31,6 +31,7 @@
                             <th>{{ __('lang.user.view.table.email') }}</th>
                             <th>{{ __('lang.user.view.table.phoneNo') }}</th>
                             <th>{{ __('lang.user.view.table.levelName') }}</th>
+                            <th>{{ __('lang.user.view.table.status') }}</th>
                             <th>{{ __('lang.user.view.table.action') }}</th>
                         </tr>
                     </thead>
@@ -41,6 +42,7 @@
                           <th>{{ __('lang.user.view.table.email') }}</th>
                           <th>{{ __('lang.user.view.table.phoneNo') }}</th>
                           <th>{{ __('lang.user.view.table.levelName') }}</th>
+                          <th>{{ __('lang.user.view.table.status') }}</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -183,6 +185,14 @@
                           <p class="errorEditGender text-center alert alert-danger hidden"></p>
                         </div>
                         <div class="form-group">
+                          <label for="userStatus">{{ __('lang.user.label.userStatus') }} *</label>
+                          <select id="editUserStatus" name="userStatus" class="form-control select2" style="width: 100%;">
+                            <option value="active">{{ __('lang.user.label.active') }}</option>
+                            <option value="inactive">{{ __('lang.user.label.inactive') }}</option>
+                          </select>
+                          <p class="errorEditUserStatus text-center alert alert-danger hidden"></p>
+                        </div>
+                        <div class="form-group">
                           <label for="userName">{{ __('lang.user.label.userName') }}</label>
                           <input type="text" name="userName" class="form-control" id="editUserName" placeholder="{{ __('lang.user.label.userName') }}">
                           <p class="errorEditUserName text-center alert alert-danger hidden"></p>
@@ -215,6 +225,7 @@
     $(function() {
 
         $('#users-table').DataTable({
+            scrollX: true,
             searching: true,
             processing: true,
             serverSide: true,
@@ -225,6 +236,7 @@
                 { data: 'email', name: 'email' },
                 { data: 'phone_no', name: 'phone_no' },
                 { data: 'level_name', name: 'level_name' },
+                { data: 'status', name: 'status' },
                 { data: 'action', name: 'action', orderable: false, searchable: false}
             ],
             initComplete: function () {
@@ -269,6 +281,7 @@
           $('.errorEditPhoneNo').addClass('hidden');
           $('.errorEditUserLevel').addClass('hidden');
           $('.errorEditGender').addClass('hidden');
+          $('.errorEditUserStatus').addClass('hidden');
           $('.errorEditPassword').addClass('hidden');
           $('.errorEditMessage').addClass('hidden');
           console.log('masuk sini4');
@@ -364,6 +377,7 @@
               $('#editPhoneNo').val(data[0].phone_no);
               $("#editUserLevel").val(data[0].level_id);
               $("#editGender").val(data[0].gender);
+              $("#editUserStatus").val(data[0].status);
               $('#editUserName').val(data[0].username);
               $('#editStore').val(data[0].store);
               $('#editModal').modal('show');
@@ -383,6 +397,7 @@
                   'phoneNo': $('#editPhoneNo').val(),
                   'userLevel': $('#editUserLevel').val(),
                   'gender': $('#editGender').val(),
+                  'status': $('#editUserStatus').val(),
                   'userName': $('#editUserName').val(),
                   'store': $('#editStore').val()
 
@@ -418,6 +433,10 @@
                       if (data.errors.gender) {
                           $('.errorEditGender').removeClass('hidden');
                           $('.errorEditGender').text(data.errors.gender);
+                      }
+                      if (data.errors.status) {
+                          $('.errorEditUserStatus').removeClass('hidden');
+                          $('.errorEditUserStatus').text(data.errors.status);
                       }
                       if (data.errors.password) {
                           $('.errorEditPassword').removeClass('hidden');

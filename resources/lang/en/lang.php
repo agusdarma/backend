@@ -33,9 +33,13 @@
       'user.label.userName' => 'User Name',
       'user.label.password' => 'Password',
       'user.label.store' => 'Store',
+      'user.label.userStatus' => 'Status',
+      'user.label.active' => 'Active',
+      'user.label.inactive' => 'Inactive',
       'user.msg.success' => 'User was successfully added!',
       'user.msg.success.edit' => 'User was successfully edited!',
 
+      'msg.unknown.error' => 'System Unknown Error',
 
       'user.view.title' => 'User Data View Form',
       'user.view.subtitle' => 'Simple POS',
@@ -46,6 +50,7 @@
       'user.view.table.email' => 'Email',
       'user.view.table.phoneNo' => 'Phone No',
       'user.view.table.levelName' => 'Level Name',
+      'user.view.table.status' => 'Status',
       'user.view.table.action' => 'Action',
 
 

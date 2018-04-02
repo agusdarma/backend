@@ -140,7 +140,7 @@ class UserDataController extends Controller
   }
 
   public static function getListUserData(){
-    $listUsers = DB::select('select u.id,u.first_name,u.email,u.phone_no,l.level_name
+    $listUsers = DB::select('select u.id,u.first_name,u.email,u.phone_no,l.level_name,u.status
     from users u inner join user_level l on u.group_id = l.id');
     return datatables($listUsers)
     ->addColumn('action', function ($listUsers) {
@@ -154,7 +154,7 @@ class UserDataController extends Controller
     $id = $request->id;
     Log::debug('id => '.$id);
     $listUsers = DB::select('select u.id,u.first_name,u.last_name,u.email,u.phone_no,l.level_name,u.gender,u.username
-    ,u.store,l.id as level_id
+    ,u.store,l.id as level_id,u.status as status
     from users u inner join user_level l on u.group_id = l.id
     where u.id = :id', ['id' => $id]);
     return Response::json($listUsers);
@@ -189,6 +189,8 @@ class UserDataController extends Controller
     $gender= $request->gender;
     $userName= $request->userName;
     $store= $request->store;
+    $status= $request->status;
+    Log::info('Status input '.$status);
     $app = app();
     $loginDataJson = session(Constants::CONSTANTS_SESSION_LOGIN());
     $loginData2 = $app->make('LoginData');
@@ -198,17 +200,16 @@ class UserDataController extends Controller
     $invalidCount = 0;
     $updated_at = Carbon\Carbon::now(Constants::ASIA_TIMEZONE());
     Log::info('Update at '.$updated_at);
-    $status = 'active';
     DB::beginTransaction();
 
     try {
       Log::info('mulai edit '.$firstName);
         DB::update('UPDATE users set first_name = :firstName, last_name = :lastName,email = :email,
           phone_no = :phoneNo ,group_id = :userLevel,gender = :gender,username = :userName,
-          store = :store,updated_by = :updatedBy,updated_at = :updated_at where id = :id',
+          store = :store,status = :status,updated_by = :updatedBy,updated_at = :updated_at where id = :id',
         ['firstName' => $firstName, 'lastName' => $lastName , 'email' => $email , 'phoneNo' => $phoneNo
         , 'userLevel' => $userLevel, 'gender' => $gender, 'userName' => $userName, 'store' => $store
-        ,'updatedBy' => $updatedBy,'id' => $id,'updated_at' => $updated_at]);
+        , 'status' => $status ,'updatedBy' => $updatedBy,'id' => $id,'updated_at' => $updated_at]);
         DB::commit();
         // DB::rollback();
         $response = array('level' => Constants::SYS_MSG_LEVEL_SUCCESS(),

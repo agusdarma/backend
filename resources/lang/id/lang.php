@@ -4,6 +4,7 @@
       'button.submit' => 'Submit',
       'button.add.new.user' => 'Tambah User Baru',
 
+
       'login.title' => 'Masuk | Simple POS',
       'login.subtitle' => 'Masuk Simple POS',
       'login.subtitle2' => 'Masuk untuk memulai sesi anda',
@@ -32,15 +33,32 @@
       'user.label.userName' => 'User Name',
       'user.label.password' => 'Password',
       'user.label.store' => 'Toko',
+      'user.label.userStatus' => 'Status',
+      'user.label.active' => 'Aktif',
+      'user.label.inactive' => 'Tidak Aktif',
       'user.msg.success' => 'User berhasil ditambah!',
       'user.msg.success.edit' => 'User berhasil diubah!',
 
       'msg.unknown.error' => 'System Unknown Error',
 
+      'user.view.title' => 'User Data View Form',
+      'user.view.subtitle' => 'Simple POS',
+      'user.breadcrumb.user.view' => 'User Data View',
+      'user.view.table.id' => 'Id',
+      'user.view.table.firstName' => 'Nama Depan',
+      'user.view.table.lastName' => 'Nama Belakang',
+      'user.view.table.email' => 'Email',
+      'user.view.table.phoneNo' => 'No Telepon',
+      'user.view.table.levelName' => 'Nama Level',
+      'user.view.table.status' => 'Status',
+      'user.view.table.action' => 'Action',
+
+
       'footer.copyright' => 'Copyright',
       'footer.copyright.year' => '2018',
       'footer.copyright.company' => 'Company',
       'footer.copyright.company.link' => '#',
+
 
       'rc.1' => 'Login Failed Wrong Email or Password.',
       'rc.2' => 'Login Failed Wrong Email or Password.',
