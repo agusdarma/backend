@@ -1,8 +1,10 @@
 <?php
    return [
+      'msg.unknown.error' => 'System Unknown Error',
       'form.required' => '* Wajib Diisi',
       'button.submit' => 'Submit',
       'button.add.new.user' => 'Tambah User Baru',
+      'button.add.new.userLevel' => 'Tambah User Level Baru',
 
 
       'login.title' => 'Masuk | Simple POS',
@@ -39,7 +41,7 @@
       'user.msg.success' => 'User berhasil ditambah!',
       'user.msg.success.edit' => 'User berhasil diubah!',
 
-      'msg.unknown.error' => 'System Unknown Error',
+
 
       'user.view.title' => 'User Data View Form',
       'user.view.subtitle' => 'Simple POS',
@@ -52,6 +54,16 @@
       'user.view.table.levelName' => 'Nama Level',
       'user.view.table.status' => 'Status',
       'user.view.table.action' => 'Action',
+
+      'userLevel.view.title' => 'User Level View Form',
+      'userLevel.view.subtitle' => 'Simple POS',
+      'userLevel.breadcrumb.userLevel.view' => 'User Level View',
+      'userLevel.label.levelName' => 'Nama User Level',
+      'userLevel.label.levelDesc' => 'Deskripsi User Level',
+      'userLevel.view.table.levelName' => 'Nama User Level',
+      'userLevel.view.table.id' => 'Id',
+      'userLevel.view.table.levelDesc' => 'Deskripsi User Level',
+      'userLevel.view.table.action' => 'Action',
 
 
       'footer.copyright' => 'Copyright',

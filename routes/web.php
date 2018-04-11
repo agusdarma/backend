@@ -15,6 +15,7 @@
 
 // Route::get('/home', 'HomeController@index')->name('home');
 
+// Login
 Route::get('/', function () {
     return view('login');
 });
@@ -24,32 +25,48 @@ Route::get('/MainMenu',[
    'middleware' => 'session',
    'uses' => 'MainMenuController@MainMenu',
 ]);
+
+// Logout
 Route::get('/Logout', 'LoginController@logout');
-Route::get('/UserData',[
-   'middleware' => 'session',
-   'uses' => 'UserDataController@init',
-]);
-Route::post('/UserData/Add',[
-   'middleware' => 'session',
-   'uses' => 'UserDataController@add',
-]);
+
+// User Data
 Route::get('/UserData/view',[
    'middleware' => 'session',
    'uses' => 'UserDataController@view',
 ]);
+
 Route::get('/UserData/view/data',[
    'middleware' => 'session',
    'uses' => 'UserDataController@getListUserData',
 ])->name('getListUserData');
+
 Route::post('/UserData/AddAjax',[
    'middleware' => 'session',
    'uses' => 'UserDataController@addAjax',
 ]);
+
 Route::get('/UserData/showEdit', [
     'middleware' => 'session',
     'uses' => 'UserDataController@showEdit',
 ]);
+
 Route::post('/UserData/editProcess', [
     'middleware' => 'session',
     'uses' => 'UserDataController@editProcess',
+]);
+
+// User Level
+Route::get('/UserLevel',[
+   'middleware' => 'session',
+   'uses' => 'UserLevelController@view',
+]);
+
+Route::get('/UserLevel/view/data',[
+   'middleware' => 'session',
+   'uses' => 'UserLevelController@getListUserLevelData',
+])->name('getListUserLevelData');
+
+Route::post('/UserLevel/AddAjax',[
+   'middleware' => 'session',
+   'uses' => 'UserLevelController@addAjax',
 ]);

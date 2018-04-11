@@ -1,8 +1,10 @@
 <?php
    return [
+      'msg.unknown.error' => 'System Unknown Error',
       'form.required' => '* Required',
       'button.submit' => 'Submit',
       'button.add.new.user' => 'Add New User',
+      'button.add.new.userLevel' => 'Add New User Level',
 
 
       'login.title' => 'Login | Simple POS',
@@ -39,7 +41,6 @@
       'user.msg.success' => 'User was successfully added!',
       'user.msg.success.edit' => 'User was successfully edited!',
 
-      'msg.unknown.error' => 'System Unknown Error',
 
       'user.view.title' => 'User Data View Form',
       'user.view.subtitle' => 'Simple POS',
@@ -52,6 +53,16 @@
       'user.view.table.levelName' => 'Level Name',
       'user.view.table.status' => 'Status',
       'user.view.table.action' => 'Action',
+
+      'userLevel.view.title' => 'User Level View Form',
+      'userLevel.view.subtitle' => 'Simple POS',
+      'userLevel.breadcrumb.userLevel.view' => 'User Level View',
+      'userLevel.label.levelName' => 'User Level Name',
+      'userLevel.label.levelDesc' => 'User Level Description',
+      'userLevel.view.table.levelName' => 'Level Name',
+      'userLevel.view.table.id' => 'Id',
+      'userLevel.view.table.levelDesc' => 'User Level Description',
+      'userLevel.view.table.action' => 'Action',
 
 
       'footer.copyright' => 'Copyright',
