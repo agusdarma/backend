@@ -47,7 +47,7 @@
     </section>
   </div>
   <div class="modal fade" id="modal-add">
-          <div class="modal-dialog">
+          <div class="modal-dialog-full">
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -70,6 +70,130 @@
                         <input type="text" name="levelDesc" class="form-control" id="levelDesc" placeholder="{{ __('lang.userLevel.label.levelDesc') }}">
                         <p class="errorLevelDesc text-center alert alert-danger hidden"></p>
                       </div>
+                      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">List Menu *</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="col-md-4">
+            <div class="box-body">
+              <table class="table table-striped">
+                <tr>
+                  <th>Security</th>
+                  <th style="width: 10px">Access</th>
+                </tr>
+                <tr>
+                  <td>User Level</td>
+                  <td>
+                      <input type="checkbox">
+                  </td>
+                </tr>
+                <tr>
+                  <td>User Data</td>
+                  <td>
+                      <input type="checkbox">
+                  </td>
+                </tr>
+                <tr>
+                  <td>Reset Password</td>
+                  <td>
+                      <input type="checkbox">
+                  </td>
+                </tr>
+              </table>
+            </div>
+            </div>
+            <div class="col-md-4">
+            <div class="box-body">
+              <table class="table table-striped">
+                <tr>
+                  <th>Customer Support</th>
+                  <th style="width: 10px">Access</th>
+                </tr>
+                <tr>
+                  <td>Product</td>
+                  <td>
+                      <input type="checkbox">
+                  </td>
+                </tr>
+                <tr>
+                  <td>User Data</td>
+                  <td>
+                      <input type="checkbox">
+                  </td>
+                </tr>
+                <tr>
+                  <td>Reset Password</td>
+                  <td>
+                      <input type="checkbox">
+                  </td>
+                </tr>
+              </table>
+            </div>
+            </div>
+            <div class="col-md-4">
+            <div class="box-body">
+              <table class="table table-striped">
+                <tr>
+                  <th>Marketing Support</th>
+                  <th style="width: 10px">Access</th>
+                </tr>
+                <tr>
+                  <td>Group Phone No</td>
+                  <td>
+                      <input type="checkbox">
+                  </td>
+                </tr>
+                <tr>
+                  <td>Send Sms</td>
+                  <td>
+                      <input type="checkbox">
+                  </td>
+                </tr>
+                <tr>
+                  <td>Reset Password</td>
+                  <td>
+                      <input type="checkbox">
+                  </td>
+                </tr>
+              </table>
+            </div>
+            </div>
+            <div class="col-md-4">
+            <div class="box-body">
+              <table class="table table-striped">
+                <tr>
+                  <th>Marketing Support</th>
+                  <th style="width: 10px">Access</th>
+                </tr>
+                <tr>
+                  <td>Group Phone No</td>
+                  <td>
+                      <input type="checkbox">
+                  </td>
+                </tr>
+                <tr>
+                  <td>Send Sms</td>
+                  <td>
+                      <input type="checkbox">
+                  </td>
+                </tr>
+                <tr>
+                  <td>Reset Password</td>
+                  <td>
+                      <input type="checkbox">
+                  </td>
+                </tr>
+              </table>
+            </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
                       <p class="help-block">{{ __('lang.form.required') }}</p>
                     </div>
                     <div class="modal-footer">
