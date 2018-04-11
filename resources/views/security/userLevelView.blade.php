@@ -77,118 +77,28 @@
               <h3 class="box-title">List Menu *</h3>
             </div>
             <!-- /.box-header -->
-            <div class="col-md-4">
-            <div class="box-body">
-              <table class="table table-striped">
-                <tr>
-                  <th>Security</th>
-                  <th style="width: 10px">Access</th>
-                </tr>
-                <tr>
-                  <td>User Level</td>
-                  <td>
-                      <input type="checkbox">
-                  </td>
-                </tr>
-                <tr>
-                  <td>User Data</td>
-                  <td>
-                      <input type="checkbox">
-                  </td>
-                </tr>
-                <tr>
-                  <td>Reset Password</td>
-                  <td>
-                      <input type="checkbox">
-                  </td>
-                </tr>
-              </table>
-            </div>
-            </div>
-            <div class="col-md-4">
-            <div class="box-body">
-              <table class="table table-striped">
-                <tr>
-                  <th>Customer Support</th>
-                  <th style="width: 10px">Access</th>
-                </tr>
-                <tr>
-                  <td>Product</td>
-                  <td>
-                      <input type="checkbox">
-                  </td>
-                </tr>
-                <tr>
-                  <td>User Data</td>
-                  <td>
-                      <input type="checkbox">
-                  </td>
-                </tr>
-                <tr>
-                  <td>Reset Password</td>
-                  <td>
-                      <input type="checkbox">
-                  </td>
-                </tr>
-              </table>
-            </div>
-            </div>
-            <div class="col-md-4">
-            <div class="box-body">
-              <table class="table table-striped">
-                <tr>
-                  <th>Marketing Support</th>
-                  <th style="width: 10px">Access</th>
-                </tr>
-                <tr>
-                  <td>Group Phone No</td>
-                  <td>
-                      <input type="checkbox">
-                  </td>
-                </tr>
-                <tr>
-                  <td>Send Sms</td>
-                  <td>
-                      <input type="checkbox">
-                  </td>
-                </tr>
-                <tr>
-                  <td>Reset Password</td>
-                  <td>
-                      <input type="checkbox">
-                  </td>
-                </tr>
-              </table>
-            </div>
-            </div>
-            <div class="col-md-4">
-            <div class="box-body">
-              <table class="table table-striped">
-                <tr>
-                  <th>Marketing Support</th>
-                  <th style="width: 10px">Access</th>
-                </tr>
-                <tr>
-                  <td>Group Phone No</td>
-                  <td>
-                      <input type="checkbox">
-                  </td>
-                </tr>
-                <tr>
-                  <td>Send Sms</td>
-                  <td>
-                      <input type="checkbox">
-                  </td>
-                </tr>
-                <tr>
-                  <td>Reset Password</td>
-                  <td>
-                      <input type="checkbox">
-                  </td>
-                </tr>
-              </table>
-            </div>
-            </div>
+            <?php $headerMenus = UserLevelController::listHeaderMenu(); ?>
+            @foreach($headerMenus as $headerMenu)
+              <div class="col-md-4">
+              <div class="box-body">
+                <table class="table table-striped">
+                  <tr>
+                    <th>{{ $headerMenu->menu_description }}</th>
+                    <th style="width: 10px">Access</th>
+                  </tr>
+                  <?php $detailMenus = UserLevelController::listDetailMenu($headerMenu->menu_id); ?>
+                    @foreach($detailMenus as $detailMenu)
+                        <tr>
+                          <td>{{ $detailMenu->menu_description }}</td>
+                          <td>
+                              <input type="checkbox" name="menuId[]" value="{{ $detailMenu->menu_id }}" id="menuId">
+                          </td>
+                        </tr>
+                    @endforeach
+                </table>
+                </div>
+                </div>
+            @endforeach
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
@@ -312,15 +222,23 @@
           });
         }
         $('.modal-footer').on('click', '.add', function() {
+
+
+
+          var menuIds = $('input:checked').map(function(){
+              return $(this).val();
+              }).get();
+
+// console.log(JSON.stringify(menuIds));
+
             $.ajax({
                 type: 'POST',
                 url: '{{ url( '/UserLevel/AddAjax' ) }}',
                 data: {
                     '_token': $('input[name=_token]').val(),
                     'levelName': $('#levelName').val(),
-                    'levelDesc': $('#levelDesc').val()
-
-
+                    'levelDesc': $('#levelDesc').val(),
+                    'menuIds': JSON.stringify(menuIds)
 
                 },
                 success: function(data) {

@@ -46,6 +46,9 @@ class UserLevelController extends Controller
     }
     $levelName = $request->levelName;
     $levelDesc = $request->levelDesc;
+    $menuIds = $request->menuIds;
+    // Log::debug('menuIds =>'.$menuIds);
+    $dataMenuId = json_decode($menuIds);
     $app = app();
     $loginDataJson = session(Constants::CONSTANTS_SESSION_LOGIN());
     $loginData2 = $app->make('LoginData');
@@ -61,7 +64,10 @@ class UserLevelController extends Controller
          'updatedBy' => $updatedBy]);
         $levelId = DB::getPdo()->lastInsertId();
         Log::debug('Level Id =>'.$levelId);
-
+        foreach ($dataMenuId as $id) {
+            Log::debug('menuId =>'.$id);
+            // insert ke menu id
+        }
 
         DB::commit();
         $response = array('level' => Constants::SYS_MSG_LEVEL_SUCCESS(),
@@ -75,6 +81,17 @@ class UserLevelController extends Controller
         'errors' => '');
     }
     return Response::json($response);
+  }
+
+  public static function listHeaderMenu(){
+    $listHeaderMenu = DB::select('select * from user_menu where menu_leaf = 0');
+    return $listHeaderMenu;
+  }
+
+  public static function listDetailMenu($headerId){
+    $listDetailMenu = DB::select('select * from user_menu where menu_leaf = 1 and parent_id = :headerId',
+    ['headerId' => $headerId]);
+    return $listDetailMenu;
   }
 
   public function showEdit(Request $request){
