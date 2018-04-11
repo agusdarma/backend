@@ -41,7 +41,6 @@
       'user.msg.success' => 'User was successfully added!',
       'user.msg.success.edit' => 'User was successfully edited!',
 
-
       'user.view.title' => 'User Data View Form',
       'user.view.subtitle' => 'Simple POS',
       'user.breadcrumb.user.view' => 'User Data View',
@@ -63,6 +62,8 @@
       'userLevel.view.table.id' => 'Id',
       'userLevel.view.table.levelDesc' => 'User Level Description',
       'userLevel.view.table.action' => 'Action',
+      'userLevel.msg.success' => 'User Level was successfully added!',
+      'userLevel.msg.success.edit' => 'User Level was successfully edited!',
 
 
       'footer.copyright' => 'Copyright',

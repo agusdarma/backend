@@ -55,6 +55,12 @@ class Constants
     public static function SYS_MSG_USER_SUCCESS_EDITED(){
         return __('lang.user.msg.success.edit');
     }
+    public static function SYS_MSG_USER_LEVEL_SUCCESS_ADDED(){
+        return __('lang.userLevel.msg.success');
+    }
+    public static function SYS_MSG_USER_LEVEL_SUCCESS_EDITED(){
+        return __('lang.userLevel.msg.success.edit');
+    }
     public static function SYS_RC_UNKNOWN_ERROR(){
         return 'rc.98';
     }

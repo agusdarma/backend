@@ -59,9 +59,13 @@ class UserLevelController extends Controller
         :levelDesc, :createdBy, :updatedBy)',
         ['levelName' => $levelName, 'levelDesc' => $levelDesc , 'createdBy' => $createdBy,
          'updatedBy' => $updatedBy]);
+        $levelId = DB::getPdo()->lastInsertId();
+        Log::debug('Level Id =>'.$levelId);
+
+
         DB::commit();
         $response = array('level' => Constants::SYS_MSG_LEVEL_SUCCESS(),
-        'message' => Constants::SYS_MSG_USER_SUCCESS_ADDED(),
+        'message' => Constants::SYS_MSG_USER_LEVEL_SUCCESS_ADDED(),
         'rc' => '0');
     } catch (\Exception $e) {
         Log::info('error db '.$e->getMessage());
@@ -137,7 +141,7 @@ class UserLevelController extends Controller
         DB::commit();
         // DB::rollback();
         $response = array('level' => Constants::SYS_MSG_LEVEL_SUCCESS(),
-        'message' => Constants::SYS_MSG_USER_SUCCESS_EDITED(),
+        'message' => Constants::SYS_MSG_USER_LEVEL_SUCCESS_EDITED(),
         'rc' => '0');
     } catch (\Exception $e) {
         Log::info('error db '.$e->getMessage());

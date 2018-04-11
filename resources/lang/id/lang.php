@@ -41,8 +41,6 @@
       'user.msg.success' => 'User berhasil ditambah!',
       'user.msg.success.edit' => 'User berhasil diubah!',
 
-
-
       'user.view.title' => 'User Data View Form',
       'user.view.subtitle' => 'Simple POS',
       'user.breadcrumb.user.view' => 'User Data View',
@@ -64,6 +62,8 @@
       'userLevel.view.table.id' => 'Id',
       'userLevel.view.table.levelDesc' => 'Deskripsi User Level',
       'userLevel.view.table.action' => 'Action',
+      'userLevel.msg.success' => 'User Level berhasil ditambah!',
+      'userLevel.msg.success.edit' => 'User Level berhasil diubah!',
 
 
       'footer.copyright' => 'Copyright',
