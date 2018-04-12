@@ -58,7 +58,7 @@
         <?php $results = MainMenuController::queryMainMenu(MainMenuController::userLevelId()); ?>
         @foreach ($results as $main)
         <li class="treeview">
-            <?php $listSubMenu = MainMenuController::querySubMenu($main->menu_id); ?>
+            <?php $listSubMenu = MainMenuController::querySubMenu($main->menu_id,MainMenuController::userLevelId()); ?>
                 @if (count($listSubMenu) > 0)
                     <a href="{{ url($main->menu_url) }}"><i class="{{$main->menu_icon}}"></i> <span>{{$main->menu_description}}</span>
                       <span class="pull-right-container">

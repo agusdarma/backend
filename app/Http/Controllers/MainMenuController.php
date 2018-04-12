@@ -29,10 +29,12 @@ class MainMenuController extends Controller
     return $results;
   }
 
-  public static function querySubMenu($mainId){
+  public static function querySubMenu($mainId,$levelId){
     $listSubMenu = DB::select('select um.* from user_menu um
     inner join user_level_menu ulm on um.menu_id = ulm.menu_id
-    where um.parent_id = :parentId and um.menu_leaf = 1 order by show_order asc', ['parentId' => $mainId]);
+    where um.parent_id = :parentId and um.menu_leaf = 1 and
+    ulm.level_id = :groupId
+    order by show_order asc', ['parentId' => $mainId, 'groupId' => $levelId]);
     Log::info('querySubMenu ');
     return $listSubMenu;
   }

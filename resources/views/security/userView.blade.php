@@ -87,7 +87,7 @@
                         <p class="errorPhoneNo text-center alert alert-danger hidden"></p>
                       </div>
                       <div class="form-group">
-                        <?php $levels = UserDataController::listUserLevel(MainMenuController::userLevelId()); ?>
+                        <?php $levels = UserDataController::listUserLevelAll(); ?>
                         <label for="userLevel">{{ __('lang.user.label.userLevel') }} *</label>
                         <select id="userLevel" name="userLevel" class="form-control select2" style="width: 100%;">
                           @foreach($levels as $level)
@@ -167,7 +167,7 @@
                           <p class="errorEditPhoneNo text-center alert alert-danger hidden"></p>
                         </div>
                         <div class="form-group">
-                          <?php $levels = UserDataController::listUserLevel(MainMenuController::userLevelId()); ?>
+                          <?php $levels = UserDataController::listUserLevelAll(); ?>
                           <label for="userLevel">{{ __('lang.user.label.userLevel') }} *</label>
                           <select id="editUserLevel" name="userLevel" class="form-control select2" style="width: 100%;">
                             @foreach($levels as $level)

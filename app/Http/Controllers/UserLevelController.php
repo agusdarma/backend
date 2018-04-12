@@ -36,19 +36,28 @@ class UserLevelController extends Controller
             'levelName' => 'required',
             'levelDesc' => 'required',
 
+
     ]);
-    // Jika input gagal redirect ke login page
+    
     if ($validator->fails()) {
            Log::warn('Error validasi input ');
            $response = array('errors' => $validator->getMessageBag(),
            'rc' => Constants::SYS_RC_VALIDATION_INPUT_ERROR());
+             Log::debug(Response::json($response));
            return Response::json($response);
     }
     $levelName = $request->levelName;
     $levelDesc = $request->levelDesc;
     $menuIds = $request->menuIds;
-    // Log::debug('menuIds =>'.$menuIds);
     $dataMenuId = json_decode($menuIds);
+    $elementCount  = count($dataMenuId);
+    if($elementCount == 0){
+      $response = array('errors' => array('menuIds' => Constants::SYS_MSG_MENU_REQUIRED()),
+      'rc' => Constants::SYS_RC_VALIDATION_INPUT_ERROR());
+      Log::debug(Response::json($response));
+      return Response::json($response);
+    }
+
     $app = app();
     $loginDataJson = session(Constants::CONSTANTS_SESSION_LOGIN());
     $loginData2 = $app->make('LoginData');
@@ -63,10 +72,9 @@ class UserLevelController extends Controller
         ['levelName' => $levelName, 'levelDesc' => $levelDesc , 'createdBy' => $createdBy,
          'updatedBy' => $updatedBy]);
         $levelId = DB::getPdo()->lastInsertId();
-        Log::debug('Level Id =>'.$levelId);
         foreach ($dataMenuId as $id) {
-            Log::debug('menuId =>'.$id);
-            // insert ke menu id
+            DB::insert('insert into user_level_menu (level_id, menu_id) values (:levelId,:menuId)',
+            ['levelId' => $levelId, 'menuId' => $id ]);
         }
 
         DB::commit();

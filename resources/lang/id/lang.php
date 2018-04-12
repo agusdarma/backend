@@ -77,6 +77,7 @@
       'rc.3' => 'Session Expired, Please Relogin.',
       'rc.4' => 'User tidak aktif.',
       'rc.5' => 'User terblokir.',
+      'rc.6' => 'Menu harus dipilih.',
       'rc.98' => 'Sistem Error'
    ];
 ?>

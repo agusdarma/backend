@@ -46,6 +46,12 @@ class Constants
     public static function SYS_MSG_USER_BLOCKED(){
         return __('lang.'.Constants::SYS_RC_USER_BLOCKED());
     }
+    public static function SYS_RC_MENU_REQUIRED(){
+        return 'rc.6';
+    }
+    public static function SYS_MSG_MENU_REQUIRED(){
+        return __('lang.'.Constants::SYS_RC_MENU_REQUIRED());
+    }
     public static function SYS_MSG_LEVEL_SUCCESS(){
         return 'success';
     }

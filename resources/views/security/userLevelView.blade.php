@@ -75,6 +75,7 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">List Menu *</h3>
+              <p class="errorMenuId text-center alert alert-danger hidden"></p>
             </div>
             <!-- /.box-header -->
             <?php $headerMenus = UserLevelController::listHeaderMenu(); ?>
@@ -87,14 +88,18 @@
                     <th style="width: 10px">Access</th>
                   </tr>
                   <?php $detailMenus = UserLevelController::listDetailMenu($headerMenu->menu_id); ?>
-                    @foreach($detailMenus as $detailMenu)
-                        <tr>
-                          <td>{{ $detailMenu->menu_description }}</td>
-                          <td>
-                              <input type="checkbox" name="menuId[]" value="{{ $detailMenu->menu_id }}" id="menuId">
-                          </td>
-                        </tr>
-                    @endforeach
+                  @foreach($detailMenus as $detailMenu)
+                      <tr>
+                        <td>{{ $detailMenu->menu_description }}</td>
+                        <td>
+                          @if ($detailMenu->always_include == 1)
+                            <input checked type="checkbox" name="menuId[]" value="{{ $detailMenu->menu_id }}" id="menuId">
+                          @else
+                            <input type="checkbox" name="menuId[]" value="{{ $detailMenu->menu_id }}" id="menuId">
+                          @endif
+                        </td>
+                      </tr>
+                  @endforeach
                 </table>
                 </div>
                 </div>
@@ -195,10 +200,13 @@
         function clearInput() {
           $('#levelName').val('');
           $('#levelDesc').val('');
+          $('#menuId').val('');
+
         }
         function hiddenError() {
           $('.errorLevelName').addClass('hidden');
           $('.errorLevelDesc').addClass('hidden');
+          $('.errorMenuId').addClass('hidden');
           $('.errorMessage').addClass('hidden');
 
         };
@@ -256,6 +264,11 @@
                             $('.errorLevelDesc').removeClass('hidden');
                             $('.errorLevelDesc').text(data.errors.levelDesc);
                         }
+                        if (data.errors.menuIds) {
+                            $('.errorMenuId').removeClass('hidden');
+                            $('.errorMenuId').text(data.errors.menuIds);
+                        }
+
                     } else {
                         $('#modal-add').modal('hide');
                         toastr.success(data.message, 'Success Alert', {timeOut: 2000});

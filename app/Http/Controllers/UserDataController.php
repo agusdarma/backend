@@ -24,6 +24,11 @@ class UserDataController extends Controller
     return $listUserLevel;
   }
 
+  public static function listUserLevelAll(){
+    $listUserLevel = DB::select('select * from user_level l ');
+    return $listUserLevel;
+  }
+
   // public function add(Request $request){
   //   Log::debug('UserDataController => add()');
   //   // validasi input
