@@ -38,7 +38,7 @@ class UserLevelController extends Controller
 
 
     ]);
-    
+
     if ($validator->fails()) {
            Log::warn('Error validasi input ');
            $response = array('errors' => $validator->getMessageBag(),
@@ -72,10 +72,21 @@ class UserLevelController extends Controller
         ['levelName' => $levelName, 'levelDesc' => $levelDesc , 'createdBy' => $createdBy,
          'updatedBy' => $updatedBy]);
         $levelId = DB::getPdo()->lastInsertId();
+        $listParentId = array();
+        // insert menu
         foreach ($dataMenuId as $id) {
             DB::insert('insert into user_level_menu (level_id, menu_id) values (:levelId,:menuId)',
             ['levelId' => $levelId, 'menuId' => $id ]);
+            // getParentId($id);
+            // Log::info('count '.count($listParentId));
+            $parentId = DB::select('select parent_id from user_menu where menu_id = :menuId',
+            ['menuId' => $id]);
+            $user = DB::table('user_menu')->where('menu_id', $id)->first();
+            Log::info($user->parent_id);
+            array_push($listParentId,$user->parent_id);
         }
+        Log::info(array_unique($listParentId));
+        
 
         DB::commit();
         $response = array('level' => Constants::SYS_MSG_LEVEL_SUCCESS(),
@@ -100,6 +111,13 @@ class UserLevelController extends Controller
     $listDetailMenu = DB::select('select * from user_menu where menu_leaf = 1 and parent_id = :headerId',
     ['headerId' => $headerId]);
     return $listDetailMenu;
+  }
+
+  public static function getParentId($menuId){
+    Log::info('count '.$menuId);
+    $listParentId = DB::select('select parent_id from user_menu where menu_id = :menuId',
+    ['menuId' => $menuId]);
+    return $listParentId;
   }
 
   public function showEdit(Request $request){
