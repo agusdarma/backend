@@ -50,9 +50,6 @@
    <div class="modal-dialog">
      <div class="modal-content">
        <div class="modal-body">
-         <!-- <div class="progress progress-popup">
-          <div class="progress-bar"></div>
-         </div> -->
          <div class="progress">
            <div class="indeterminate"></div>
          </div>
@@ -230,7 +227,7 @@
     <script src="{{asset('toastr/js/toastr.min.js')}}"></script>
     <script>
     $(function() {
-      // $(".progress").hide();
+
         $('#users-table').DataTable({
             scrollX: true,
             searching: true,
@@ -270,24 +267,12 @@
             this.checked = item.defaultChecked;
           });
 
-
         }
         $('#selectAllAdd').click(function() {
           var checked = $(this).prop('checked');
           $('#checkboxesAdd').find('input:checkbox').prop('checked', checked);
         });
-        function clearInputEdit() {
-          console.log('clearInputEdit');
-          $('#levelName').val('');
-          $('#levelDesc').val('');
-          $('#checkboxesEdit :checkbox').each(function(i,item){
-            this.checked = item.defaultChecked;
-          });
-          $('#selectAllEdit').each(function(i,item){
-            this.checked = item.defaultChecked;
-          });
 
-        }
         $('#selectAllEdit').click(function() {
           var checked = $(this).prop('checked');
           $('#checkboxesEdit').find('input:checkbox').prop('checked', checked);
@@ -365,18 +350,16 @@
       </script>
       <script type="text/javascript">
       function edit(levelId) {
-        // $('#progress').modal('show');
-        // $(".progress").show();
-        var $modal = $('.js-loading-bar'),
-            $bar = $modal.find('.progress-bar');
-
-        $modal.modal('show');
-        $bar.addClass('animate');
-
-        setTimeout(function() {
-          $bar.removeClass('animate');
-          $modal.modal('hide');
-        }, 10000);
+        // showProgressBar();
+        // progress bar
+        // var $modal = $('.js-loading-bar'),
+        //     $bar = $modal.find('.progress-bar');
+        // $modal.modal('show');
+        // $bar.addClass('animate');
+        // setTimeout(function() {
+        //   $bar.removeClass('animate');
+        //   $modal.modal('hide');
+        // }, 10000);
         $.ajax({
             type: 'GET',
             url: '{{ url( '/UserLevel/showEdit' ) }}',
@@ -384,9 +367,12 @@
               'id': levelId
             },
             success: function(data) {
-              // $(".progress").hide();
-              $bar.removeClass('animate');
-              $modal.modal('hide');
+              // progress bar
+              // $bar.removeClass('animate');
+              // $modal.modal('hide');
+              // hideProgressBar();
+              // $bar.removeClass('animate');
+              // $modal.modal('hide');
               // console.log(' success edit JS');
               hiddenErrorEdit();
               $('#editId').val(data[0].id);
@@ -404,6 +390,15 @@
         });
       }
       $('.modal-footer').on('click', '.edit', function() {
+        // // progress bar
+        // var $modal = $('.js-loading-bar'),
+        //     $bar = $modal.find('.progress-bar');
+        // $modal.modal('show');
+        // $bar.addClass('animate');
+        // setTimeout(function() {
+        //   $bar.removeClass('animate');
+        //   $modal.modal('hide');
+        // }, 10000);
         var menuIds = $('#checkboxesEdit input:checked').map(function(){
             return $(this).val();
             }).get();
@@ -419,6 +414,9 @@
 
               },
               success: function(data) {
+                // progress bar
+                // $bar.removeClass('animate');
+                // $modal.modal('hide');
                 hiddenErrorEdit();
 
                   if (data.rc!=0) {
@@ -444,7 +442,6 @@
                       $('#editModal').modal('hide');
                       toastr.success(data.message, 'Success Alert', {timeOut: 2000});
                       RefreshTable('#users-table','{!! route('getListUserLevelData') !!}');
-                      clearInputEdit();
                   }
               },
           });

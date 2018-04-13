@@ -104,7 +104,7 @@ class UserLevelController extends Controller
   }
 
   public function showEdit(Request $request){
-    sleep(1);
+    // sleep(20);
     Log::debug('UserLevelController => showEdit()');
     $id = $request->id;
     Log::debug('id => '.$id);
