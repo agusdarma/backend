@@ -46,6 +46,21 @@
       </div>
     </section>
   </div>
+  <div class="modal js-loading-bar">
+   <div class="modal-dialog">
+     <div class="modal-content">
+       <div class="modal-body">
+         <!-- <div class="progress progress-popup">
+          <div class="progress-bar"></div>
+         </div> -->
+         <div class="progress">
+           <div class="indeterminate"></div>
+         </div>
+       </div>
+     </div>
+   </div>
+  </div>
+
   <div class="modal fade" id="modal-add">
           <div class="modal-dialog-full">
             <div class="modal-content">
@@ -215,7 +230,7 @@
     <script src="{{asset('toastr/js/toastr.min.js')}}"></script>
     <script>
     $(function() {
-
+      // $(".progress").hide();
         $('#users-table').DataTable({
             scrollX: true,
             searching: true,
@@ -350,6 +365,18 @@
       </script>
       <script type="text/javascript">
       function edit(levelId) {
+        // $('#progress').modal('show');
+        // $(".progress").show();
+        var $modal = $('.js-loading-bar'),
+            $bar = $modal.find('.progress-bar');
+
+        $modal.modal('show');
+        $bar.addClass('animate');
+
+        setTimeout(function() {
+          $bar.removeClass('animate');
+          $modal.modal('hide');
+        }, 10000);
         $.ajax({
             type: 'GET',
             url: '{{ url( '/UserLevel/showEdit' ) }}',
@@ -357,6 +384,9 @@
               'id': levelId
             },
             success: function(data) {
+              // $(".progress").hide();
+              $bar.removeClass('animate');
+              $modal.modal('hide');
               // console.log(' success edit JS');
               hiddenErrorEdit();
               $('#editId').val(data[0].id);
