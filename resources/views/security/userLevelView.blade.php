@@ -79,6 +79,7 @@
             </div>
             <!-- /.box-header -->
             <?php $headerMenus = UserLevelController::listHeaderMenu(); ?>
+            <div id="checkboxes">
             @foreach($headerMenus as $headerMenu)
               <div class="col-md-4">
               <div class="box-body">
@@ -104,11 +105,15 @@
                 </div>
                 </div>
             @endforeach
+            </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
         </div>
       </div>
+
+        <input type="checkbox" id="selectAll"> Select All
+
                       <p class="help-block">{{ __('lang.form.required') }}</p>
                     </div>
                     <div class="modal-footer">
@@ -200,9 +205,15 @@
         function clearInput() {
           $('#levelName').val('');
           $('#levelDesc').val('');
-          $('#menuId').val('');
+          $(':checkbox').each(function(i,item){
+            this.checked = item.defaultChecked;
+          });
 
         }
+        $('#selectAll').click(function() {
+          var checked = $(this).prop('checked');
+          $('#checkboxes').find('input:checkbox').prop('checked', checked);
+        });
         function hiddenError() {
           $('.errorLevelName').addClass('hidden');
           $('.errorLevelDesc').addClass('hidden');
@@ -230,15 +241,10 @@
           });
         }
         $('.modal-footer').on('click', '.add', function() {
-
-
-
-          var menuIds = $('input:checked').map(function(){
+          var menuIds = $('#checkboxes input:checked').map(function(){
               return $(this).val();
               }).get();
-
-// console.log(JSON.stringify(menuIds));
-
+              
             $.ajax({
                 type: 'POST',
                 url: '{{ url( '/UserLevel/AddAjax' ) }}',

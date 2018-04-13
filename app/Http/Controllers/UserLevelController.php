@@ -36,7 +36,6 @@ class UserLevelController extends Controller
             'levelName' => 'required',
             'levelDesc' => 'required',
 
-
     ]);
 
     if ($validator->fails()) {
@@ -51,6 +50,8 @@ class UserLevelController extends Controller
     $menuIds = $request->menuIds;
     $dataMenuId = json_decode($menuIds);
     $elementCount  = count($dataMenuId);
+    // Log::debug('$elementCount => '.$elementCount);
+    // Log::debug('$menuIds => '.$menuIds);
     if($elementCount == 0){
       $response = array('errors' => array('menuIds' => Constants::SYS_MSG_MENU_REQUIRED()),
       'rc' => Constants::SYS_RC_VALIDATION_INPUT_ERROR());
@@ -75,19 +76,19 @@ class UserLevelController extends Controller
         $listParentId = array();
         // insert menu
         foreach ($dataMenuId as $id) {
+          Log::debug('insert menu => '.$id);
             DB::insert('insert into user_level_menu (level_id, menu_id) values (:levelId,:menuId)',
             ['levelId' => $levelId, 'menuId' => $id ]);
-            // getParentId($id);
-            // Log::info('count '.count($listParentId));
-            $parentId = DB::select('select parent_id from user_menu where menu_id = :menuId',
-            ['menuId' => $id]);
-            $user = DB::table('user_menu')->where('menu_id', $id)->first();
-            Log::info($user->parent_id);
-            array_push($listParentId,$user->parent_id);
+            $userMenu = DB::table('user_menu')->where('menu_id', $id)->first();
+            array_push($listParentId,$userMenu->parent_id);
         }
-        Log::info(array_unique($listParentId));
-        
 
+        // insert menu header
+        foreach (array_unique($listParentId) as $id) {
+          Log::debug('insert menu header => '.$id);
+            DB::insert('insert into user_level_menu (level_id, menu_id) values (:levelId,:menuId)',
+            ['levelId' => $levelId, 'menuId' => $id ]);
+        }
         DB::commit();
         $response = array('level' => Constants::SYS_MSG_LEVEL_SUCCESS(),
         'message' => Constants::SYS_MSG_USER_LEVEL_SUCCESS_ADDED(),
@@ -114,7 +115,7 @@ class UserLevelController extends Controller
   }
 
   public static function getParentId($menuId){
-    Log::info('count '.$menuId);
+    // Log::info('count '.$menuId);
     $listParentId = DB::select('select parent_id from user_menu where menu_id = :menuId',
     ['menuId' => $menuId]);
     return $listParentId;
