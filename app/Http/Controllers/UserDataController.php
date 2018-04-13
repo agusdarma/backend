@@ -146,7 +146,7 @@ class UserDataController extends Controller
 
   public static function getListUserData(){
     $listUsers = DB::select('select u.id,u.first_name,u.email,u.phone_no,l.level_name,u.status
-    from users u inner join user_level l on u.group_id = l.id');
+    from users u left join user_level l on u.group_id = l.id');
     return datatables($listUsers)
     ->addColumn('action', function ($listUsers) {
         return '<a href="#" onclick="edit('.$listUsers->id.')" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
@@ -160,7 +160,7 @@ class UserDataController extends Controller
     Log::debug('id => '.$id);
     $listUsers = DB::select('select u.id,u.first_name,u.last_name,u.email,u.phone_no,l.level_name,u.gender,u.username
     ,u.store,l.id as level_id,u.status as status
-    from users u inner join user_level l on u.group_id = l.id
+    from users u left join user_level l on u.group_id = l.id
     where u.id = :id', ['id' => $id]);
     return Response::json($listUsers);
   }
