@@ -79,7 +79,7 @@
             </div>
             <!-- /.box-header -->
             <?php $headerMenus = UserLevelController::listHeaderMenu(); ?>
-            <div id="checkboxes">
+            <div id="checkboxesAdd">
             @foreach($headerMenus as $headerMenu)
               <div class="col-md-4">
               <div class="box-body">
@@ -112,7 +112,7 @@
         </div>
       </div>
 
-        <input type="checkbox" id="selectAll"> Select All
+        <input type="checkbox" id="selectAllAdd"> Select All
 
                       <p class="help-block">{{ __('lang.form.required') }}</p>
                     </div>
@@ -160,7 +160,7 @@
               </div>
               <!-- /.box-header -->
               <?php $headerMenus = UserLevelController::listHeaderMenu(); ?>
-              <div id="checkboxes">
+              <div id="checkboxesEdit">
               @foreach($headerMenus as $headerMenu)
                 <div class="col-md-4">
                 <div class="box-body">
@@ -193,7 +193,7 @@
           </div>
         </div>
 
-          <input type="checkbox" id="selectAll"> Select All
+          <input type="checkbox" id="selectAllEdit"> Select All
                         <p class="help-block">{{ __('lang.form.required') }}</p>
                       </div>
                     </form>
@@ -245,17 +245,37 @@
 
     </script>
     <script type="text/javascript">
-        function clearInput() {
+        function clearInputAdd() {
           $('#levelName').val('');
           $('#levelDesc').val('');
-          $(':checkbox').each(function(i,item){
+          $('#checkboxesAdd :checkbox').each(function(i,item){
+            this.checked = item.defaultChecked;
+          });
+          $('#selectAllAdd').each(function(i,item){
+            this.checked = item.defaultChecked;
+          });
+
+
+        }
+        $('#selectAllAdd').click(function() {
+          var checked = $(this).prop('checked');
+          $('#checkboxesAdd').find('input:checkbox').prop('checked', checked);
+        });
+        function clearInputEdit() {
+          console.log('clearInputEdit');
+          $('#levelName').val('');
+          $('#levelDesc').val('');
+          $('#checkboxesEdit :checkbox').each(function(i,item){
+            this.checked = item.defaultChecked;
+          });
+          $('#selectAllEdit').each(function(i,item){
             this.checked = item.defaultChecked;
           });
 
         }
-        $('#selectAll').click(function() {
+        $('#selectAllEdit').click(function() {
           var checked = $(this).prop('checked');
-          $('#checkboxes').find('input:checkbox').prop('checked', checked);
+          $('#checkboxesEdit').find('input:checkbox').prop('checked', checked);
         });
         function hiddenError() {
           $('.errorLevelName').addClass('hidden');
@@ -284,7 +304,7 @@
           });
         }
         $('.modal-footer').on('click', '.add', function() {
-          var menuIds = $('#checkboxes input:checked').map(function(){
+          var menuIds = $('#checkboxesAdd input:checked').map(function(){
               return $(this).val();
               }).get();
 
@@ -322,7 +342,7 @@
                         $('#modal-add').modal('hide');
                         toastr.success(data.message, 'Success Alert', {timeOut: 2000});
                         RefreshTable('#users-table','{!! route('getListUserLevelData') !!}');
-                        clearInput();
+                        clearInputAdd();
                     }
                 },
             });
@@ -330,8 +350,6 @@
       </script>
       <script type="text/javascript">
       function edit(levelId) {
-        // console.log('edit JS');
-        // console.log(levelId);
         $.ajax({
             type: 'GET',
             url: '{{ url( '/UserLevel/showEdit' ) }}',
@@ -339,19 +357,26 @@
               'id': levelId
             },
             success: function(data) {
+              // console.log(' success edit JS');
               hiddenErrorEdit();
               $('#editId').val(data[0].id);
               $('#editLevelName').val(data[0].level_name);
               $('#editLevelDesc').val(data[0].level_desc);
+              $('#checkboxesEdit').find('input:checkbox').removeAttr('checked');
               for (var i = 0; i < data.length; i++) {
                   // console.log(data[i].menu_id);
-                  $(":checkbox[value="+data[i].menu_id+"]").attr("checked","true");
+                  $("#checkboxesEdit :checkbox[value="+data[i].menu_id+"]").attr("checked","true");
               }
+              // console.log(' success2 edit JS');
               $('#editModal').modal('show');
+
             },
         });
       }
       $('.modal-footer').on('click', '.edit', function() {
+        var menuIds = $('#checkboxesEdit input:checked').map(function(){
+            return $(this).val();
+            }).get();
           $.ajax({
               type: 'POST',
               url: '{{ url( '/UserLevel/editProcess' ) }}',
@@ -359,7 +384,8 @@
                   '_token': $('input[name=_token]').val(),
                   'id': $('#editId').val(),
                   'levelName': $('#editLevelName').val(),
-                  'levelDesc': $('#editLevelDesc').val()
+                  'levelDesc': $('#editLevelDesc').val(),
+                  'menuIds': JSON.stringify(menuIds)
 
               },
               success: function(data) {
@@ -379,12 +405,16 @@
                           $('.errorEditLevelDesc').removeClass('hidden');
                           $('.errorEditLevelDesc').text(data.errors.levelDesc);
                       }
+                      if (data.errors.menuIds) {
+                          $('.errorMenuId').removeClass('hidden');
+                          $('.errorMenuId').text(data.errors.menuIds);
+                      }
 
                   } else {
                       $('#editModal').modal('hide');
                       toastr.success(data.message, 'Success Alert', {timeOut: 2000});
                       RefreshTable('#users-table','{!! route('getListUserLevelData') !!}');
-                      // clearInput();
+                      clearInputEdit();
                   }
               },
           });

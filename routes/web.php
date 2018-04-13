@@ -75,3 +75,8 @@ Route::get('/UserLevel/showEdit', [
     'middleware' => 'session',
     'uses' => 'UserLevelController@showEdit',
 ]);
+
+Route::post('/UserLevel/editProcess', [
+    'middleware' => 'session',
+    'uses' => 'UserLevelController@editProcess',
+]);
