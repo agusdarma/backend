@@ -129,7 +129,7 @@
 
         <!-- Modal form to edit a form -->
     <div id="editModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog-full">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -151,6 +151,49 @@
                           <input type="text" name="levelDesc" class="form-control" id="editLevelDesc" placeholder="{{ __('lang.userLevel.label.levelDesc') }}">
                           <p class="errorEditLevelDesc text-center alert alert-danger hidden"></p>
                         </div>
+                        <div class="row">
+          <div class="col-xs-12">
+            <div class="box">
+              <div class="box-header">
+                <h3 class="box-title">List Menu *</h3>
+                <p class="errorMenuId text-center alert alert-danger hidden"></p>
+              </div>
+              <!-- /.box-header -->
+              <?php $headerMenus = UserLevelController::listHeaderMenu(); ?>
+              <div id="checkboxes">
+              @foreach($headerMenus as $headerMenu)
+                <div class="col-md-4">
+                <div class="box-body">
+                  <table class="table table-striped">
+                    <tr>
+                      <th>{{ $headerMenu->menu_description }}</th>
+                      <th style="width: 10px">Access</th>
+                    </tr>
+                    <?php $detailMenus = UserLevelController::listDetailMenu($headerMenu->menu_id); ?>
+                    @foreach($detailMenus as $detailMenu)
+                        <tr>
+                          <td>{{ $detailMenu->menu_description }}</td>
+                          <td>
+                            @if ($detailMenu->always_include == 1)
+                              <input checked type="checkbox" name="menuId[]" value="{{ $detailMenu->menu_id }}" id="menuId">
+                            @else
+                              <input type="checkbox" name="menuId[]" value="{{ $detailMenu->menu_id }}" id="menuId">
+                            @endif
+                          </td>
+                        </tr>
+                    @endforeach
+                  </table>
+                  </div>
+                  </div>
+              @endforeach
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+          </div>
+        </div>
+
+          <input type="checkbox" id="selectAll"> Select All
                         <p class="help-block">{{ __('lang.form.required') }}</p>
                       </div>
                     </form>
@@ -244,7 +287,7 @@
           var menuIds = $('#checkboxes input:checked').map(function(){
               return $(this).val();
               }).get();
-              
+
             $.ajax({
                 type: 'POST',
                 url: '{{ url( '/UserLevel/AddAjax' ) }}',
@@ -287,6 +330,8 @@
       </script>
       <script type="text/javascript">
       function edit(levelId) {
+        // console.log('edit JS');
+        // console.log(levelId);
         $.ajax({
             type: 'GET',
             url: '{{ url( '/UserLevel/showEdit' ) }}',
@@ -298,6 +343,10 @@
               $('#editId').val(data[0].id);
               $('#editLevelName').val(data[0].level_name);
               $('#editLevelDesc').val(data[0].level_desc);
+              for (var i = 0; i < data.length; i++) {
+                  // console.log(data[i].menu_id);
+                  $(":checkbox[value="+data[i].menu_id+"]").attr("checked","true");
+              }
               $('#editModal').modal('show');
             },
         });

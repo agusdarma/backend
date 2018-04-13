@@ -103,6 +103,18 @@ class UserLevelController extends Controller
     return Response::json($response);
   }
 
+  public function showEdit(Request $request){
+    Log::debug('UserLevelController => showEdit()');
+    $id = $request->id;
+    Log::debug('id => '.$id);
+    $listUserLevels = DB::select('select l.id,l.level_name,l.level_desc, um.menu_id
+    from user_level l
+		inner join user_level_menu ulm on ulm.level_id = l.id
+		inner join user_menu um on um.menu_id = ulm.menu_id
+    where l.id = :id and um.menu_leaf = 1', ['id' => $id]);
+    return Response::json($listUserLevels);
+  }
+
   public static function listHeaderMenu(){
     $listHeaderMenu = DB::select('select * from user_menu where menu_leaf = 0');
     return $listHeaderMenu;
@@ -121,16 +133,7 @@ class UserLevelController extends Controller
     return $listParentId;
   }
 
-  public function showEdit(Request $request){
-    Log::debug('UserLevelController => showEdit()');
-    $id = $request->id;
-    Log::debug('id => '.$id);
-    $listUserLevels = DB::select('select u.id,u.first_name,u.last_name,u.email,u.phone_no,l.level_name,u.gender,u.username
-    ,u.store,l.id as level_id,u.status as status
-    from users u inner join user_level l on u.group_id = l.id
-    where u.id = :id', ['id' => $id]);
-    return Response::json($listUserLevels);
-  }
+
 
   public function editProcess(Request $request){
     Log::debug('UserLevelController => editProcess()');

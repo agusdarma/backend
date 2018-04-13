@@ -70,3 +70,8 @@ Route::post('/UserLevel/AddAjax',[
    'middleware' => 'session',
    'uses' => 'UserLevelController@addAjax',
 ]);
+
+Route::get('/UserLevel/showEdit', [
+    'middleware' => 'session',
+    'uses' => 'UserLevelController@showEdit',
+]);
