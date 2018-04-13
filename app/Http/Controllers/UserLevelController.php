@@ -208,12 +208,5 @@ class UserLevelController extends Controller
     return $listDetailMenu;
   }
 
-  public static function getParentId($menuId){
-    // Log::info('count '.$menuId);
-    $listParentId = DB::select('select parent_id from user_menu where menu_id = :menuId',
-    ['menuId' => $menuId]);
-    return $listParentId;
-  }
-
 
 }
