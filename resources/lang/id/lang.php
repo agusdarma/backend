@@ -65,6 +65,16 @@
       'userLevel.msg.success' => 'User Level berhasil ditambah!',
       'userLevel.msg.success.edit' => 'User Level berhasil diubah!',
 
+      'changePassword.title' => 'Change Password Form',
+      'changePassword.subtitle' => 'Simple POS',
+      'changePassword.breadcrumb.home' => 'Home',
+      'changePassword.breadcrumb.security' => 'Security',
+      'changePassword.breadcrumb.changePassword' => 'Change Password',
+      'changePassword.label.oldPassword' => 'Password Lama',
+      'changePassword.label.newPassword' => 'Password Baru',
+      'changePassword.label.confirmPassword' => 'Konfirmasi Password Baru',
+      'changePassword.msg.success' => 'Password berhasil diubah!',
+
 
       'footer.copyright' => 'Copyright',
       'footer.copyright.year' => '2018',
@@ -78,6 +88,7 @@
       'rc.4' => 'User tidak aktif.',
       'rc.5' => 'User terblokir.',
       'rc.6' => 'Menu harus dipilih.',
+      'rc.7' => 'User tidak ditemukan.',
       'rc.98' => 'Sistem Error'
    ];
 ?>

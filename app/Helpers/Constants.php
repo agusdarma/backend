@@ -52,6 +52,12 @@ class Constants
     public static function SYS_MSG_MENU_REQUIRED(){
         return __('lang.'.Constants::SYS_RC_MENU_REQUIRED());
     }
+    public static function SYS_RC_USER_NOT_FOUND(){
+        return 'rc.7';
+    }
+    public static function SYS_MSG_USER_NOT_FOUND(){
+        return __('lang.'.Constants::SYS_RC_USER_NOT_FOUND());
+    }
     public static function SYS_MSG_LEVEL_SUCCESS(){
         return 'success';
     }
@@ -63,6 +69,9 @@ class Constants
     }
     public static function SYS_MSG_USER_LEVEL_SUCCESS_ADDED(){
         return __('lang.userLevel.msg.success');
+    }
+    public static function SYS_MSG_CHANGE_PASSWORD_SUCCESS_CHANGED(){
+        return __('lang.changePassword.msg.success');
     }
     public static function SYS_MSG_USER_LEVEL_SUCCESS_EDITED(){
         return __('lang.userLevel.msg.success.edit');

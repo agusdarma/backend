@@ -80,3 +80,13 @@ Route::post('/UserLevel/editProcess', [
     'middleware' => 'session',
     'uses' => 'UserLevelController@editProcess',
 ]);
+
+// Change Password
+Route::get('/ChangePassword',[
+   'middleware' => 'session',
+   'uses' => 'ChangePasswordController@view',
+]);
+Route::post('/ChangePassword/change',[
+   'middleware' => 'session',
+   'uses' => 'ChangePasswordController@change',
+]);

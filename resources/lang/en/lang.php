@@ -65,6 +65,18 @@
       'userLevel.msg.success' => 'User Level was successfully added!',
       'userLevel.msg.success.edit' => 'User Level was successfully edited!',
 
+      'changePassword.title' => 'Change Password Form',
+      'changePassword.subtitle' => 'Simple POS',
+      'changePassword.breadcrumb.home' => 'Home',
+      'changePassword.breadcrumb.security' => 'Security',
+      'changePassword.breadcrumb.changePassword' => 'Change Password',
+      'changePassword.label.oldPassword' => 'Old Password',
+      'changePassword.label.newPassword' => 'New Password',
+      'changePassword.label.confirmPassword' => 'Confirm Password',
+      'changePassword.msg.success' => 'Password was successfully changed!',
+
+
+
 
       'footer.copyright' => 'Copyright',
       'footer.copyright.year' => '2018',
@@ -78,6 +90,7 @@
       'rc.4' => 'User inactive.',
       'rc.5' => 'User blocked.',
       'rc.6' => 'Menu field is required.',
+      'rc.7' => 'User Not Found.',
       'rc.98' => 'System Unknown Error'
    ];
 ?>
