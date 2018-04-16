@@ -58,17 +58,25 @@ class ChangePasswordController extends Controller
     $updatedBy = $loginData2->id;
     // cari user dari db
     $user = DB::table('users')->where('id', $loginData2->id)->first();
-    Log::debug($user);
-    if($user->isEmpty()){
+    if(collect($user)->isEmpty()){
       $response = array('errors' => array('message' => Constants::SYS_MSG_USER_NOT_FOUND()),
       'rc' => Constants::SYS_RC_USER_NOT_FOUND());
+      Log::debug(Response::json($response));
+      return Response::json($response);
+    }
+    // cek password lama dengan inputan //
+    $oldPasswordDb = $user->password;
+    Log::debug($oldPassword);
+    Log::debug(Crypt::decryptString($oldPasswordDb));
+    if(Crypt::decryptString($oldPasswordDb)<>$oldPassword){
+      $response = array('errors' => array('message' => Constants::SYS_MSG_INVALID_OLD_PASSWORD()),
+      'rc' => Constants::SYS_RC_INVALID_OLD_PASSWORD());
       Log::debug(Response::json($response));
       return Response::json($response);
     }
 
 
     DB::beginTransaction();
-
     try {
 
 

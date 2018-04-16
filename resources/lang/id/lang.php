@@ -89,6 +89,7 @@
       'rc.5' => 'User terblokir.',
       'rc.6' => 'Menu harus dipilih.',
       'rc.7' => 'User tidak ditemukan.',
+      'rc.8' => 'Password lama salah.',
       'rc.98' => 'Sistem Error'
    ];
 ?>

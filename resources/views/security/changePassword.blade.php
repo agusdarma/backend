@@ -21,6 +21,7 @@
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">{{ __('lang.changePassword.title') }}</h3>
+              <p class="errorMessage text-center alert alert-danger hidden"></p>
             </div>
             <form >
               <input type="hidden" name="_token" value="{{ csrf_token() }}" >
@@ -89,10 +90,10 @@
             },
             success: function(data) {
               hiddenError();
-                if (data.rc!=0) {
-                    if (data.message) {
+                if (data.rc!=0) {                  
+                    if (data.errors.message) {
                         $('.errorMessage').removeClass('hidden');
-                        $('.errorMessage').text(data.message);
+                        $('.errorMessage').text(data.errors.message);
                     }
                     if (data.errors.oldPassword) {
                         $('.errorOldPassword').removeClass('hidden');

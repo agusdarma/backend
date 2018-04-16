@@ -58,6 +58,12 @@ class Constants
     public static function SYS_MSG_USER_NOT_FOUND(){
         return __('lang.'.Constants::SYS_RC_USER_NOT_FOUND());
     }
+    public static function SYS_RC_INVALID_OLD_PASSWORD(){
+        return 'rc.8';
+    }
+    public static function SYS_MSG_INVALID_OLD_PASSWORD(){
+        return __('lang.'.Constants::SYS_RC_INVALID_OLD_PASSWORD());
+    }
     public static function SYS_MSG_LEVEL_SUCCESS(){
         return 'success';
     }

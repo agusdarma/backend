@@ -91,6 +91,7 @@
       'rc.5' => 'User blocked.',
       'rc.6' => 'Menu field is required.',
       'rc.7' => 'User Not Found.',
+      'rc.8' => 'Invalid Old Password.',
       'rc.98' => 'System Unknown Error'
    ];
 ?>
