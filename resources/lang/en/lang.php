@@ -81,17 +81,20 @@
       'footer.copyright' => 'Copyright',
       'footer.copyright.year' => '2018',
       'footer.copyright.company' => 'Company',
-      'footer.copyright.company.link' => '#',
+      'footer.copyright.company.link' => '/MainMenu',
 
 
-      'rc.1' => 'Login Failed Wrong Email or Password.',
-      'rc.2' => 'Login Failed Wrong Email or Password.',
-      'rc.3' => 'Session Expired, Please Relogin.',
+      'rc.1' => 'Login failed wrong email or password.',
+      'rc.2' => 'Login failed wrong email or password.',
+      'rc.3' => 'Session expired, please relogin.',
       'rc.4' => 'User inactive.',
       'rc.5' => 'User blocked.',
       'rc.6' => 'Menu field is required.',
-      'rc.7' => 'User Not Found.',
-      'rc.8' => 'Invalid Old Password.',
-      'rc.98' => 'System Unknown Error'
+      'rc.7' => 'User not found.',
+      'rc.8' => 'Invalid old password.',
+      'rc.9' => 'New password and confirm password not match.',
+      'rc.10' => 'Minimum password length :minLength character.',
+      'rc.11' => 'Invalid password format.',
+      'rc.98' => 'System unknown error'
    ];
 ?>

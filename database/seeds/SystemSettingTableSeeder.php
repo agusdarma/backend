@@ -18,5 +18,11 @@ class SystemSettingTableSeeder extends Seeder
          'setting_value' => '3',
          'updated_by' => '1',
        ]);
+       DB::table('system_setting')->insert([
+        'setting_desc' => 'Define required minimum character when creating password',
+        'setting_name' => 'MIN LENGTH PASSWORD',
+        'setting_value' => '8',
+        'updated_by' => '1',
+      ]);
     }
 }

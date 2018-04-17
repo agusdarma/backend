@@ -66,22 +66,52 @@ class ChangePasswordController extends Controller
     }
     // cek password lama dengan inputan //
     $oldPasswordDb = $user->password;
-    Log::debug($oldPassword);
-    Log::debug(Crypt::decryptString($oldPasswordDb));
+    // Log::debug($oldPassword);
+    // Log::debug(Crypt::decryptString($oldPasswordDb));
     if(Crypt::decryptString($oldPasswordDb)<>$oldPassword){
       $response = array('errors' => array('message' => Constants::SYS_MSG_INVALID_OLD_PASSWORD()),
       'rc' => Constants::SYS_RC_INVALID_OLD_PASSWORD());
       Log::debug(Response::json($response));
       return Response::json($response);
     }
+    // get min length $password
+    $ResultDB = DB::select('select * from system_setting where id = :id', ['id' => Constants::MIN_LENGTH_PASSWORD()]);
+    $minPasswordLength = $ResultDB[0]->setting_value;
 
+    // cek new password harus sama dengan confirm password
+    if($newPassword<>$confirmPassword){
+      $response = array('errors' => array('message' => Constants::SYS_MSG_INVALID_NEW_PASSWORD_CONFIRM_PASSWORD()),
+      'rc' => Constants::SYS_RC_INVALID_NEW_PASSWORD_CONFIRM_PASSWORD());
+      Log::debug(Response::json($response));
+      return Response::json($response);
+    }
+
+    // panjang password harus sesuai dengan panjang di settingan db
+    if(strlen($newPassword) < $minPasswordLength){
+      $response = array('errors' =>
+      array('message' => Constants::SYS_MSG_INVALID_MIN_PASSWORD_LENGTH($minPasswordLength)),
+      'rc' => Constants::SYS_RC_INVALID_MIN_PASSWORD_LENGTH());
+      Log::debug(Response::json($response));
+      return Response::json($response);
+    }
+
+    // password harus alphanumeric dan special character
+    $hasil = preg_match('/^.*(?=.{'.$minPasswordLength.',})(?=.*\\d)(?=.*[a-zA-Z])(?=.*[^A-Za-z0-9]).*$/',$newPassword);
+    // Log::debug("hasil : ".$hasil);
+    if($hasil == 0){
+      $response = array('errors' =>
+      array('message' => Constants::SYS_MSG_INVALID_PASSWORD_FORMAT()),
+      'rc' => Constants::SYS_RC_INVALID_PASSWORD_FORMAT());
+      Log::debug(Response::json($response));
+      return Response::json($response);
+    }
 
     DB::beginTransaction();
     try {
-
-
-
-
+        $results = DB::update('update users set password = :password, updated_at = CURRENT_TIMESTAMP
+        , updated_by = :updatedBy
+        where id = :id', ['password' => Crypt::encryptString($newPassword)
+        ,'id' => $user->id,'updatedBy' => $updatedBy]);
         DB::commit();
         $response = array('level' => Constants::SYS_MSG_LEVEL_SUCCESS(),
         'message' => Constants::SYS_MSG_CHANGE_PASSWORD_SUCCESS_CHANGED(),

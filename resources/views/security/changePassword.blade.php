@@ -28,19 +28,19 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="oldPassword">{{ __('lang.changePassword.label.oldPassword') }} *</label>
-                  <input type="text" name="oldPassword" class="form-control" id="oldPassword"
+                  <input type="password" name="oldPassword" class="form-control" id="oldPassword"
                   placeholder="{{ __('lang.changePassword.label.oldPassword') }}">
                   <p class="errorOldPassword text-center alert alert-danger hidden"></p>
                 </div>
                 <div class="form-group">
                   <label for="newPassword">{{ __('lang.changePassword.label.newPassword') }} *</label>
-                  <input type="text" name="newPassword" class="form-control" id="newPassword"
+                  <input type="password" name="newPassword" class="form-control" id="newPassword"
                   placeholder="{{ __('lang.changePassword.label.newPassword') }}">
                   <p class="errorNewPassword text-center alert alert-danger hidden"></p>
                 </div>
                 <div class="form-group">
                   <label for="confirmPassword">{{ __('lang.changePassword.label.confirmPassword') }} *</label>
-                  <input type="text" name="confirmPassword" class="form-control" id="confirmPassword"
+                  <input type="password" name="confirmPassword" class="form-control" id="confirmPassword"
                   placeholder="{{ __('lang.changePassword.label.confirmPassword') }}">
                   <p class="errorConfirmPassword text-center alert alert-danger hidden"></p>
                 </div>
@@ -90,7 +90,7 @@
             },
             success: function(data) {
               hiddenError();
-                if (data.rc!=0) {                  
+                if (data.rc!=0) {
                     if (data.errors.message) {
                         $('.errorMessage').removeClass('hidden');
                         $('.errorMessage').text(data.errors.message);

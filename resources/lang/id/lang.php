@@ -79,17 +79,20 @@
       'footer.copyright' => 'Copyright',
       'footer.copyright.year' => '2018',
       'footer.copyright.company' => 'Company',
-      'footer.copyright.company.link' => '#',
+      'footer.copyright.company.link' => '/MainMenu',
 
 
-      'rc.1' => 'Login Failed Wrong Email or Password.',
-      'rc.2' => 'Login Failed Wrong Email or Password.',
-      'rc.3' => 'Session Expired, Please Relogin.',
+      'rc.1' => 'Login gagal, salah email atau password.',
+      'rc.2' => 'Login gagal, salah email atau password.',
+      'rc.3' => 'Session habis, silahkan login kembali.',
       'rc.4' => 'User tidak aktif.',
       'rc.5' => 'User terblokir.',
       'rc.6' => 'Menu harus dipilih.',
       'rc.7' => 'User tidak ditemukan.',
       'rc.8' => 'Password lama salah.',
-      'rc.98' => 'Sistem Error'
+      'rc.9' => 'Password baru dan konfirmasi password salah.',
+      'rc.10' => 'Panjang password minimal :minLength karakter.',
+      'rc.11' => 'Format password salah.',
+      'rc.98' => 'Sistem error'
    ];
 ?>
