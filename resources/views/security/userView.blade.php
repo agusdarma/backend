@@ -291,7 +291,7 @@
           {
             table = $(tableId).dataTable();
             oSettings = table.fnSettings();
-            table.fnClearTable(this);            
+            table.fnClearTable(this);
             oSettings.aiDisplay = oSettings.aiDisplayMaster.slice();
             table.fnDraw();
           });

@@ -1,15 +1,17 @@
 @extends('layouts.master')
+<?php use App\Http\Controllers\ResetPasswordController; ?>
+<?php use App\Http\Controllers\MainMenuController; ?>
 @section('content')
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        {{ __('lang.changePassword.title') }}
-        <small>{{ __('lang.changePassword.subtitle') }}</small>
+        {{ __('lang.resetPassword.title') }}
+        <small>{{ __('lang.resetPassword.subtitle') }}</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> {{ __('lang.changePassword.breadcrumb.home') }}</a></li>
-        <li><a href="#">{{ __('lang.changePassword.breadcrumb.security') }}</a></li>
-        <li class="active">{{ __('lang.changePassword.breadcrumb.changePassword') }}</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> {{ __('lang.resetPassword.breadcrumb.home') }}</a></li>
+        <li><a href="#">{{ __('lang.resetPassword.breadcrumb.security') }}</a></li>
+        <li class="active">{{ __('lang.resetPassword.breadcrumb.resetPassword') }}</li>
       </ol>
     </section>
 
@@ -18,28 +20,32 @@
         <div class="col-md-6">
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">{{ __('lang.changePassword.title') }}</h3>
+              <h3 class="box-title">{{ __('lang.resetPassword.title') }}</h3>
               <p class="errorMessage text-center alert alert-danger hidden"></p>
             </div>
             <form >
               <input type="hidden" name="_token" value="{{ csrf_token() }}" >
               <div class="box-body">
                 <div class="form-group">
-                  <label for="oldPassword">{{ __('lang.changePassword.label.oldPassword') }} *</label>
-                  <input type="password" name="oldPassword" class="form-control" id="oldPassword"
-                  placeholder="{{ __('lang.changePassword.label.oldPassword') }}">
-                  <p class="errorOldPassword text-center alert alert-danger hidden"></p>
+                  <?php $listUser = ResetPasswordController::listUser(); ?>
+                  <label for="user">{{ __('lang.resetPassword.label.user') }} *</label>
+                  <select id="user" name="user" class="form-control select2" style="width: 100%;">
+                    @foreach($listUser as $user)
+                      <option value="{{ $user->id }}">{{ $user->first_name }}</option>
+                    @endforeach
+                  </select>
+                  <p class="errorUser text-center alert alert-danger hidden"></p>
                 </div>
                 <div class="form-group">
-                  <label for="newPassword">{{ __('lang.changePassword.label.newPassword') }} *</label>
+                  <label for="newPassword">{{ __('lang.resetPassword.label.newPassword') }} *</label>
                   <input type="password" name="newPassword" class="form-control" id="newPassword"
-                  placeholder="{{ __('lang.changePassword.label.newPassword') }}">
+                  placeholder="{{ __('lang.resetPassword.label.newPassword') }}">
                   <p class="errorNewPassword text-center alert alert-danger hidden"></p>
                 </div>
                 <div class="form-group">
-                  <label for="confirmPassword">{{ __('lang.changePassword.label.confirmPassword') }} *</label>
+                  <label for="confirmPassword">{{ __('lang.resetPassword.label.confirmPassword') }} *</label>
                   <input type="password" name="confirmPassword" class="form-control" id="confirmPassword"
-                  placeholder="{{ __('lang.changePassword.label.confirmPassword') }}">
+                  placeholder="{{ __('lang.resetPassword.label.confirmPassword') }}">
                   <p class="errorConfirmPassword text-center alert alert-danger hidden"></p>
                 </div>
                 <p class="help-block">{{ __('lang.form.required') }}</p>
@@ -60,14 +66,14 @@
 <script src="{{asset('toastr/js/toastr.min.js')}}"></script>
 <script type="text/javascript">
     function clearInputAdd() {
-      $('#oldPassword').val('');
+      $('#user').val('');
       $('#newPassword').val('');
       $('#confirmPassword').val('');
 
     }
 
     function hiddenError() {
-      $('.errorOldPassword').addClass('hidden');
+      $('.errorUser').addClass('hidden');
       $('.errorNewPassword').addClass('hidden');
       $('.errorConfirmPassword').addClass('hidden');
       $('.errorMessage').addClass('hidden');
@@ -78,10 +84,10 @@
         // window.alert('agus');
         $.ajax({
             type: 'POST',
-            url: '{{ url( '/ChangePassword/change' ) }}',
+            url: '{{ url( '/ResetPassword/change' ) }}',
             data: {
                 '_token': $('input[name=_token]').val(),
-                'oldPassword': $('#oldPassword').val(),
+                'user': $('#user').val(),
                 'newPassword': $('#newPassword').val(),
                 'confirmPassword': $('#confirmPassword').val()
 
@@ -93,9 +99,9 @@
                         $('.errorMessage').removeClass('hidden');
                         $('.errorMessage').text(data.errors.message);
                     }
-                    if (data.errors.oldPassword) {
-                        $('.errorOldPassword').removeClass('hidden');
-                        $('.errorOldPassword').text(data.errors.oldPassword[0]);
+                    if (data.errors.user) {
+                        $('.errorUser').removeClass('hidden');
+                        $('.errorUser').text(data.errors.user);
                     }
                     if (data.errors.newPassword) {
                         $('.errorNewPassword').removeClass('hidden');

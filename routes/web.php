@@ -90,3 +90,13 @@ Route::post('/ChangePassword/change',[
    'middleware' => 'session',
    'uses' => 'ChangePasswordController@change',
 ]);
+
+// Reset Password
+Route::get('/ResetPassword',[
+   'middleware' => 'session',
+   'uses' => 'ResetPasswordController@view',
+]);
+Route::post('/ResetPassword/change',[
+   'middleware' => 'session',
+   'uses' => 'ResetPasswordController@change',
+]);

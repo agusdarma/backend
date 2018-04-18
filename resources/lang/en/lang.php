@@ -76,6 +76,19 @@
       'changePassword.msg.success' => 'Password was successfully changed!',
 
 
+      'resetPassword.title' => 'Reset Password Form',
+      'resetPassword.subtitle' => 'Simple POS',
+      'resetPassword.breadcrumb.home' => 'Home',
+      'resetPassword.breadcrumb.security' => 'Security',
+      'resetPassword.breadcrumb.resetPassword' => 'Reset Password',
+      'resetPassword.label.newPassword' => 'New Password',
+      'resetPassword.label.confirmPassword' => 'Confirm Password',
+      'resetPassword.label.user' => 'List User',
+      'resetPassword.msg.success' => 'Reset Password was successfully!',
+
+
+
+
 
 
       'footer.copyright' => 'Copyright',

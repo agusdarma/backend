@@ -11,19 +11,25 @@ use Illuminate\Support\MessageBag;
 use Validator;
 use Response;
 use Carbon;
-class ChangePasswordController extends Controller
+class ResetPasswordController extends Controller
 {
 
   public function view(Request $request){
-    Log::debug('ChangePasswordController => view()');
-    return view('security/ChangePassword');
+    Log::debug('ResetPasswordController => view()');
+    return view('security/ResetPassword');
+  }
+
+  public static function listUser(){
+    $listUser = DB::select('select * from users l where l.status = :status
+    ', ['status' => Constants::CONSTANTS_ACTIVE()]);
+    return $listUser;
   }
 
   public function change(Request $request){
-    Log::debug('ChangePasswordController => change()');
+    Log::debug('ResetPasswordController => change()');
     // validasi input
     $validator = Validator::make($request->all(), [
-            'oldPassword' => 'required',
+            'user' => 'required',
             'newPassword' => 'required',
             'confirmPassword' => 'required',
 
@@ -36,9 +42,12 @@ class ChangePasswordController extends Controller
              Log::debug(Response::json($response));
            return Response::json($response);
     }
-    $oldPassword = $request->oldPassword;
+    $user = $request->user;
     $newPassword = $request->newPassword;
     $confirmPassword = $request->confirmPassword;
+    // Log::debug($user);
+    // Log::debug($newPassword);
+    // Log::debug($confirmPassword);
 
     $app = app();
     $loginDataJson = session(Constants::CONSTANTS_SESSION_LOGIN());
@@ -46,24 +55,8 @@ class ChangePasswordController extends Controller
     $loginData2 = json_decode($loginDataJson);
     $createdBy = $loginData2->id;
     $updatedBy = $loginData2->id;
-    // cari user dari db
-    $user = DB::table('users')->where('id', $loginData2->id)->first();
-    if(collect($user)->isEmpty()){
-      $response = array('errors' => array('message' => Constants::SYS_MSG_USER_NOT_FOUND()),
-      'rc' => Constants::SYS_RC_USER_NOT_FOUND());
-      Log::debug(Response::json($response));
-      return Response::json($response);
-    }
-    // cek password lama dengan inputan //
-    $oldPasswordDb = $user->password;
-    // Log::debug($oldPassword);
-    // Log::debug(Crypt::decryptString($oldPasswordDb));
-    if(Crypt::decryptString($oldPasswordDb)<>$oldPassword){
-      $response = array('errors' => array('message' => Constants::SYS_MSG_INVALID_OLD_PASSWORD()),
-      'rc' => Constants::SYS_RC_INVALID_OLD_PASSWORD());
-      Log::debug(Response::json($response));
-      return Response::json($response);
-    }
+
+
     // get min length $password
     $ResultDB = DB::select('select * from system_setting where id = :id', ['id' => Constants::MIN_LENGTH_PASSWORD()]);
     $minPasswordLength = $ResultDB[0]->setting_value;
@@ -101,10 +94,12 @@ class ChangePasswordController extends Controller
         $results = DB::update('update users set password = :password, updated_at = CURRENT_TIMESTAMP
         , updated_by = :updatedBy
         where id = :id', ['password' => Crypt::encryptString($newPassword)
-        ,'id' => $user->id,'updatedBy' => $updatedBy]);
+        ,'id' => $user,'updatedBy' => $updatedBy]);
+        Log::debug('user yg mau diubah.'.$user);
         DB::commit();
+        // DB::rollback();
         $response = array('level' => Constants::SYS_MSG_LEVEL_SUCCESS(),
-        'message' => Constants::SYS_MSG_CHANGE_PASSWORD_SUCCESS_CHANGED(),
+        'message' => Constants::SYS_MSG_RESET_PASSWORD_SUCCESS_CHANGED(),
         'rc' => '0');
     } catch (\Exception $e) {
         Log::info('error db '.$e->getMessage());

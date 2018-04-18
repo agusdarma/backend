@@ -76,6 +76,17 @@
       'changePassword.msg.success' => 'Password berhasil diubah!',
 
 
+      'resetPassword.title' => 'Reset Password Form',
+      'resetPassword.subtitle' => 'Simple POS',
+      'resetPassword.breadcrumb.home' => 'Home',
+      'resetPassword.breadcrumb.security' => 'Security',
+      'resetPassword.breadcrumb.resetPassword' => 'Reset Password',
+      'resetPassword.label.newPassword' => 'Password baru',
+      'resetPassword.label.confirmPassword' => 'Konfirmasi password baru',
+      'resetPassword.label.user' => 'Daftar Pengguna',
+      'resetPassword.msg.success' => 'Password berhasil diubah!',
+
+
       'footer.copyright' => 'Copyright',
       'footer.copyright.year' => '2018',
       'footer.copyright.company' => 'Company',
