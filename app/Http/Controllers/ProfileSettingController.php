@@ -19,8 +19,8 @@ class ProfileSettingController extends Controller
     return view('security/profileSettingView');
   }
 
-  public function ajaxImageUploadPost(Request $request){
-    Log::debug('ajaxImageUploadPost => upload()');
+  public function upload(Request $request){
+    Log::debug('ProfileSettingController => upload()');
     $validator = Validator::make($request->all(), [
       'newImage' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ]);

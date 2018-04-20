@@ -52,46 +52,54 @@
 <script src="{{asset('toastr/js/toastr.min.js')}}"></script>
 <script type="text/javascript">
     function clearInputAdd() {
-      $('#oldImage').val('');
+      $('#errorNewImage').val('');
 
     }
 
     function hiddenError() {
-      $('.errorOldImage').addClass('hidden');
+      $('.errorNewImage').addClass('hidden');
       $('.errorMessage').addClass('hidden');
 
     };
 
     $('.box-footer').on('click', '.add', function() {
-        // window.alert('agus');
-        var form = document.forms.namedItem("upload_form"); // high importance!, here you need change "yourformname" with the name of your form
-        var formdata = new FormData(form); // high importance!
-        // console.log('agus darma kusuma');
+        hiddenError();
+        var form = document.forms.namedItem("upload_form");
+        var formdata = new FormData(form);
           $.ajax({
               async: true,
               type: "POST",
-              dataType: "json", // or html if you want...
-              contentType: false, // high importance!
-              url: '{{ url( '/ProfileSetting/upload' ) }}', // you need change it.
-              data: formdata, // high importance!
-              processData: false, // high importance!
+              dataType: "json",
+              contentType: false,
+              url: '{{ url( '/ProfileSetting/upload' ) }}',
+              data: formdata,
+              processData: false,
               success: function(data) {
-                console.log('2222');
                 hiddenError();
                   if (data.rc!=0) {
-                    console.log('444');
                       if (data.message) {
-                          $('.errorEditMessage').removeClass('hidden');
-                          $('.errorEditMessage').text(data.message);
+                          $('.errorMessage').removeClass('hidden');
+                          $('.errorMessage').text(data.message);
                       }
                       if (data.errors.newImage) {
                           $('.errorNewImage').removeClass('hidden');
                           $('.errorNewImage').text(data.errors.newImage[0]);
                       }
                   } else {
-                      // console.log('33333');
                       $('#editModal').modal('hide');
                       toastr.success(data.message, 'Success Alert', {timeOut: 2000});
+                       window.location.reload();
+                  }
+              },
+              error: function(request, status, err) {
+                  if (status == "timeout") {
+                      // console.log("timeout");
+                      $('.errorMessage').removeClass('hidden');
+                      $('.errorMessage').text('Request timeout, please reload page.');
+                  } else {
+                      // console.log("error: " + request + status + err);
+                      $('.errorMessage').removeClass('hidden');
+                      $('.errorMessage').text("error: " + request + status + err);
                   }
               },
               timeout: 10000

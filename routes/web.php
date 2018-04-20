@@ -129,5 +129,5 @@ Route::get('/ProfileSetting',[
 
 Route::post('/ProfileSetting/upload', [
     'middleware' => 'session',
-    'uses' => 'ProfileSettingController@ajaxImageUploadPost',
+    'uses' => 'ProfileSettingController@upload',
 ]);
