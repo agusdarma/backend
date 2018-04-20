@@ -1,5 +1,6 @@
 <?php
    return [
+      'msg.ajax.timeout' => 'Request timeout, please reload page.',
       'msg.unknown.error' => 'System Unknown Error',
       'form.required' => '* Required',
       'button.submit' => 'Submit',

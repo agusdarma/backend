@@ -228,7 +228,7 @@
                 { data: 'level_name', name: 'level_name' },
                 { data: 'status', name: 'status' },
                 { data: 'action', name: 'action', orderable: false, searchable: false}
-            ],          
+            ],
        });
     });
 
@@ -275,6 +275,7 @@
           });
         }
         $('.modal-footer').on('click', '.add', function() {
+          hiddenError();
             $.ajax({
                 type: 'POST',
                 url: '{{ url( '/UserData/AddAjax' ) }}',
@@ -331,6 +332,16 @@
                         clearInput();
                     }
                 },
+                error: function(request, status, err) {
+                    if (status == "timeout") {
+                        $('.errorMessage').removeClass('hidden');
+                        $('.errorMessage').text('{{ __('lang.msg.ajax.timeout') }}');
+                    } else {
+                        $('.errorMessage').removeClass('hidden');
+                        $('.errorMessage').text("error: " + request + status + err);
+                    }
+                },
+                timeout: 10000
             });
         });
       </script>
@@ -359,6 +370,7 @@
         });
       }
       $('.modal-footer').on('click', '.edit', function() {
+        hiddenErrorEdit();
           $.ajax({
               type: 'POST',
               url: '{{ url( '/UserData/editProcess' ) }}',
@@ -425,6 +437,16 @@
                       // clearInput();
                   }
               },
+              error: function(request, status, err) {
+                  if (status == "timeout") {
+                      $('.errorEditMessage').removeClass('hidden');
+                      $('.errorEditMessage').text('{{ __('lang.msg.ajax.timeout') }}');
+                  } else {
+                      $('.errorEditMessage').removeClass('hidden');
+                      $('.errorEditMessage').text("error: " + request + status + err);
+                  }
+              },
+              timeout: 10000
           });
       });
       </script>

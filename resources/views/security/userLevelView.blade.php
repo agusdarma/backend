@@ -31,7 +31,7 @@
                             <th>{{ __('lang.userLevel.view.table.levelDesc') }}</th>
                             <th>{{ __('lang.userLevel.view.table.action') }}</th>
                         </tr>
-                    </thead>                    
+                    </thead>
                 </table>
           </div>
 
@@ -281,6 +281,7 @@
           });
         }
         $('.modal-footer').on('click', '.add', function() {
+          hiddenError();
           var menuIds = $('#checkboxesAdd input:checked').map(function(){
               return $(this).val();
               }).get();
@@ -322,6 +323,16 @@
                         clearInputAdd();
                     }
                 },
+                error: function(request, status, err) {
+                    if (status == "timeout") {
+                        $('.errorMessage').removeClass('hidden');
+                        $('.errorMessage').text('{{ __('lang.msg.ajax.timeout') }}');
+                    } else {
+                        $('.errorMessage').removeClass('hidden');
+                        $('.errorMessage').text("error: " + request + status + err);
+                    }
+                },
+                timeout: 10000
             });
         });
       </script>
@@ -367,6 +378,7 @@
         });
       }
       $('.modal-footer').on('click', '.edit', function() {
+        hiddenErrorEdit();
         // // progress bar
         // var $modal = $('.js-loading-bar'),
         //     $bar = $modal.find('.progress-bar');
@@ -421,6 +433,16 @@
                       RefreshTable('#users-table','{!! route('getListUserLevelData') !!}');
                   }
               },
+              error: function(request, status, err) {
+                  if (status == "timeout") {
+                      $('.errorEditMessage').removeClass('hidden');
+                      $('.errorEditMessage').text('{{ __('lang.msg.ajax.timeout') }}');
+                  } else {
+                      $('.errorEditMessage').removeClass('hidden');
+                      $('.errorEditMessage').text("error: " + request + status + err);
+                  }
+              },
+              timeout: 10000
           });
       });
       </script>

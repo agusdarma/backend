@@ -81,7 +81,7 @@
     };
 
     $('.box-footer').on('click', '.add', function() {
-        // window.alert('agus');
+        hiddenError();
         $.ajax({
             type: 'POST',
             url: '{{ url( '/ResetPassword/change' ) }}',
@@ -118,6 +118,16 @@
                     clearInputAdd();
                 }
             },
+            error: function(request, status, err) {
+                if (status == "timeout") {
+                    $('.errorMessage').removeClass('hidden');
+                    $('.errorMessage').text('{{ __('lang.msg.ajax.timeout') }}');
+                } else {
+                    $('.errorMessage').removeClass('hidden');
+                    $('.errorMessage').text("error: " + request + status + err);
+                }
+            },
+            timeout: 10000
         });
     });
   </script>

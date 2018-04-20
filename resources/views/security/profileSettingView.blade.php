@@ -95,7 +95,7 @@
                   if (status == "timeout") {
                       // console.log("timeout");
                       $('.errorMessage').removeClass('hidden');
-                      $('.errorMessage').text('Request timeout, please reload page.');
+                      $('.errorMessage').text('{{ __('lang.msg.ajax.timeout') }}');
                   } else {
                       // console.log("error: " + request + status + err);
                       $('.errorMessage').removeClass('hidden');

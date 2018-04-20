@@ -148,6 +148,7 @@
         });
       }
       $('.modal-footer').on('click', '.edit', function() {
+        hiddenErrorEdit();
           $.ajax({
               type: 'POST',
               url: '{{ url( '/SysSetting/editProcess' ) }}',
@@ -185,6 +186,16 @@
                       RefreshTable('#users-table','{!! route('getListSystemSettingData') !!}');
                   }
               },
+              error: function(request, status, err) {
+                  if (status == "timeout") {
+                      $('.errorEditMessage').removeClass('hidden');
+                      $('.errorEditMessage').text('{{ __('lang.msg.ajax.timeout') }}');
+                  } else {
+                      $('.errorEditMessage').removeClass('hidden');
+                      $('.errorEditMessage').text("error: " + request + status + err);
+                  }
+              },
+              timeout: 10000
           });
       });
       </script>
