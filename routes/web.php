@@ -120,3 +120,14 @@ Route::post('/SysSetting/editProcess', [
     'middleware' => 'session',
     'uses' => 'SystemSettingController@editProcess',
 ]);
+
+// Profile Setting
+Route::get('/ProfileSetting',[
+   'middleware' => 'session',
+   'uses' => 'ProfileSettingController@view',
+]);
+
+Route::post('/ProfileSetting/upload', [
+    'middleware' => 'session',
+    'uses' => 'ProfileSettingController@ajaxImageUploadPost',
+]);

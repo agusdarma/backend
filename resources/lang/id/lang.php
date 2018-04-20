@@ -89,7 +89,7 @@
       'systemSetting.view.title' => 'System Setting View Form',
       'systemSetting.view.subtitle' => 'Simple POS',
       'systemSetting.breadcrumb.home' => 'Home',
-      'systemSetting.breadcrumb.security' => 'Security',
+      'systemSetting.breadcrumb.security' => 'Settings',
       'systemSetting.breadcrumb.systemSetting.view' => 'System Setting',
       'systemSetting.view.table.id' => 'Id',
       'systemSetting.view.table.settingDesc' => 'Deskripsi Setting',
@@ -99,6 +99,15 @@
       'systemSetting.view.table.updatedAt' => 'Waktu Diubah',
       'systemSetting.view.table.action' => 'Action',
       'systemSetting.msg.success.edit' => 'System Setting berhasil diubah!',
+
+      'profileSetting.title' => 'Profile Setting View Form',
+      'profileSetting.subtitle' => 'Simple POS',
+      'profileSetting.breadcrumb.home' => 'Home',
+      'profileSetting.breadcrumb.security' => 'Settings',
+      'profileSetting.breadcrumb.profileSetting' => 'Profile Setting',
+      'profileSetting.label.oldImage' => 'Image lama',
+      'profileSetting.label.newImage' => 'Image baru',
+      'profileSetting.msg.success.edit' => 'Profile Setting was successfully edited',
 
 
       'footer.copyright' => 'Copyright',

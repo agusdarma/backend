@@ -125,6 +125,9 @@ class Constants
     public static function SYS_MSG_SYSTEM_SETTING_SUCCESS_EDITED(){
         return __('lang.systemSetting.msg.success.edit');
     }
+    public static function SYS_MSG_PROFILE_SETTING_SUCCESS_EDITED(){
+        return __('lang.profileSetting.msg.success.edit');
+    }
     public static function SYS_RC_UNKNOWN_ERROR(){
         return 'rc.98';
     }

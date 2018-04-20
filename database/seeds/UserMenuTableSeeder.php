@@ -103,6 +103,19 @@ class UserMenuTableSeeder extends Seeder
        'menu_group' => 'Settings',
        'always_include' => '0',
      ]);
+     DB::table('user_menu')->insert([
+      'menu_id' => '202',
+      'parent_id' => '2',
+      'menu_root_id' => '2',
+      'menu_level' => '2',
+      'show_order' => '2',
+      'menu_leaf' => '1',
+      'menu_description' => 'Profile Setting',
+      'menu_url' => 'ProfileSetting',
+      'menu_icon' => 'fa fa-cogs',
+      'menu_group' => 'Settings',
+      'always_include' => '0',
+    ]);
 
     }
 }
