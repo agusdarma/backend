@@ -86,7 +86,19 @@
       'resetPassword.label.user' => 'List User',
       'resetPassword.msg.success' => 'Reset Password was successfully!',
 
-
+      'systemSetting.view.title' => 'System Setting View Form',
+      'systemSetting.view.subtitle' => 'Simple POS',
+      'systemSetting.breadcrumb.home' => 'Home',
+      'systemSetting.breadcrumb.security' => 'Security',
+      'systemSetting.breadcrumb.systemSetting.view' => 'System Setting',
+      'systemSetting.view.table.id' => 'Id',
+      'systemSetting.view.table.settingDesc' => 'Setting Description',
+      'systemSetting.view.table.settingName' => 'Setting Name',
+      'systemSetting.view.table.settingValue' => 'Value',
+      'systemSetting.view.table.updatedBy' => 'Updated By',
+      'systemSetting.view.table.updatedAt' => 'Updated At',
+      'systemSetting.view.table.action' => 'Action',
+      'systemSetting.msg.success.edit' => 'System Setting was successfully edited!',
 
 
 

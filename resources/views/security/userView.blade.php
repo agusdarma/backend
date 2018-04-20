@@ -35,16 +35,6 @@
                             <th>{{ __('lang.user.view.table.action') }}</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                          <th>{{ __('lang.user.view.table.id') }}</th>
-                          <th>{{ __('lang.user.view.table.firstName') }}</th>
-                          <th>{{ __('lang.user.view.table.email') }}</th>
-                          <th>{{ __('lang.user.view.table.phoneNo') }}</th>
-                          <th>{{ __('lang.user.view.table.levelName') }}</th>
-                          <th>{{ __('lang.user.view.table.status') }}</th>
-                        </tr>
-                    </tfoot>
                 </table>
           </div>
 
@@ -238,19 +228,7 @@
                 { data: 'level_name', name: 'level_name' },
                 { data: 'status', name: 'status' },
                 { data: 'action', name: 'action', orderable: false, searchable: false}
-            ],
-            initComplete: function () {
-            this.api().columns().every(function () {
-                var column = this;
-                var input = document.createElement('input');
-                $(input).appendTo($(column.footer()).empty())
-                .on('change', function () {
-                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
-
-                    column.search(val ? val : '', true, false).draw();
-                });
-            });
-          }
+            ],          
        });
     });
 

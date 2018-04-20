@@ -31,14 +31,7 @@
                             <th>{{ __('lang.userLevel.view.table.levelDesc') }}</th>
                             <th>{{ __('lang.userLevel.view.table.action') }}</th>
                         </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                          <th>{{ __('lang.userLevel.view.table.id') }}</th>
-                          <th>{{ __('lang.userLevel.view.table.levelName') }}</th>
-                          <th>{{ __('lang.userLevel.view.table.levelDesc') }}</th>
-                        </tr>
-                    </tfoot>
+                    </thead>                    
                 </table>
           </div>
 
@@ -240,18 +233,6 @@
                 { data: 'level_desc', name: 'level_desc' },
                 { data: 'action', name: 'action', orderable: false, searchable: false}
             ],
-            initComplete: function () {
-            this.api().columns().every(function () {
-                var column = this;
-                var input = document.createElement('input');
-                $(input).appendTo($(column.footer()).empty())
-                .on('change', function () {
-                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
-
-                    column.search(val ? val : '', true, false).draw();
-                });
-            });
-          }
        });
     });
 
@@ -294,7 +275,7 @@
           {
             table = $(tableId).dataTable();
             oSettings = table.fnSettings();
-            table.fnClearTable(this);            
+            table.fnClearTable(this);
             oSettings.aiDisplay = oSettings.aiDisplayMaster.slice();
             table.fnDraw();
           });

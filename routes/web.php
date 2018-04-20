@@ -100,3 +100,23 @@ Route::post('/ResetPassword/change',[
    'middleware' => 'session',
    'uses' => 'ResetPasswordController@change',
 ]);
+
+// System Setting
+Route::get('/SysSetting',[
+   'middleware' => 'session',
+   'uses' => 'SystemSettingController@view',
+]);
+Route::get('/SysSetting/view/data',[
+   'middleware' => 'session',
+   'uses' => 'SystemSettingController@getListSystemSettingData',
+])->name('getListSystemSettingData');
+
+Route::get('/SysSetting/showEdit', [
+    'middleware' => 'session',
+    'uses' => 'SystemSettingController@showEdit',
+]);
+
+Route::post('/SysSetting/editProcess', [
+    'middleware' => 'session',
+    'uses' => 'SystemSettingController@editProcess',
+]);

@@ -86,6 +86,20 @@
       'resetPassword.label.user' => 'Daftar Pengguna',
       'resetPassword.msg.success' => 'Password berhasil diubah!',
 
+      'systemSetting.view.title' => 'System Setting View Form',
+      'systemSetting.view.subtitle' => 'Simple POS',
+      'systemSetting.breadcrumb.home' => 'Home',
+      'systemSetting.breadcrumb.security' => 'Security',
+      'systemSetting.breadcrumb.systemSetting.view' => 'System Setting',
+      'systemSetting.view.table.id' => 'Id',
+      'systemSetting.view.table.settingDesc' => 'Deskripsi Setting',
+      'systemSetting.view.table.settingName' => 'Nama Setting',
+      'systemSetting.view.table.settingValue' => 'Nilai',
+      'systemSetting.view.table.updatedBy' => 'Diubah Oleh',
+      'systemSetting.view.table.updatedAt' => 'Waktu Diubah',
+      'systemSetting.view.table.action' => 'Action',
+      'systemSetting.msg.success.edit' => 'System Setting berhasil diubah!',
+
 
       'footer.copyright' => 'Copyright',
       'footer.copyright.year' => '2018',
