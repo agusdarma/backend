@@ -24,5 +24,11 @@ class SystemSettingTableSeeder extends Seeder
         'setting_value' => '8',
         'updated_by' => '1',
       ]);
+	  DB::table('system_setting')->insert([
+          'setting_desc' => 'Setting Contact us Active or Not',
+          'setting_name' => 'FEATURE_CONTACT_US',
+          'setting_value' => '1',
+          'updated_by' => '1',
+        ]);
     }
 }
