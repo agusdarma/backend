@@ -16,7 +16,7 @@ class ProfileSettingController extends Controller
 
   public function view(Request $request){
     Log::debug('ProfileSettingController => view()');
-    return view('security/profileSettingView');
+    return view('settings/profileSettingView');
   }
 
   public function upload(Request $request){

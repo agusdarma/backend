@@ -116,6 +116,32 @@ class UserMenuTableSeeder extends Seeder
       'menu_group' => 'Settings',
       'always_include' => '0',
     ]);
+      DB::table('user_menu')->insert([
+       'menu_id' => '3',
+       'parent_id' => '3',
+       'menu_root_id' => '3',
+       'menu_level' => '1',
+       'show_order' => '3',
+       'menu_leaf' => '0',
+       'menu_description' => 'SablonBalon',
+       'menu_url' => '',
+       'menu_icon' => 'fa fa-cubes',
+       'menu_group' => 'SablonBalon',
+       'always_include' => '0',
+     ]);
+       DB::table('user_menu')->insert([
+        'menu_id' => '301',
+        'parent_id' => '3',
+        'menu_root_id' => '3',
+        'menu_level' => '2',
+        'show_order' => '1',
+        'menu_leaf' => '1',
+        'menu_description' => 'Contact Us',
+        'menu_url' => 'ContactUs',
+        'menu_icon' => 'fa fa-comment',
+        'menu_group' => 'SablonBalon',
+        'always_include' => '0',
+      ]);
 
     }
 }

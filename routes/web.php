@@ -131,3 +131,10 @@ Route::post('/ProfileSetting/upload', [
     'middleware' => 'session',
     'uses' => 'ProfileSettingController@upload',
 ]);
+
+
+// SablonBalon - contact us
+Route::get('/ContactUs',[
+   'middleware' => 'session',
+   'uses' => 'SablonBalon\ContactUsController@view',
+]);

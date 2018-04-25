@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\SablonBalon;
+use App\Http\Controllers\Controller;
 use Constants;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -11,12 +12,12 @@ use Illuminate\Support\MessageBag;
 use Validator;
 use Response;
 use Carbon;
-class SystemSettingController extends Controller
+class ContactUsController extends Controller
 {
 
   public function view(Request $request){
-    Log::debug('SystemSettingController => view()');
-    return view('settings/systemSettingView');
+    Log::debug('ContactUsController => view()');
+    return view('sablonbalon/contactUsView');
   }
 
   public static function getListSystemSettingData(){
@@ -30,7 +31,7 @@ class SystemSettingController extends Controller
   }
 
   public function showEdit(Request $request){
-    Log::debug('SystemSettingController => showEdit()');
+    Log::debug('ContactUsController => showEdit()');
     $id = $request->id;
     Log::debug('id => '.$id);
     $listSystemSettings = DB::select('select ss.id,ss.setting_desc,ss.setting_name,ss.setting_value
@@ -39,7 +40,7 @@ class SystemSettingController extends Controller
   }
 
   public function editProcess(Request $request){
-    Log::debug('SystemSettingController => editProcess()');
+    Log::debug('ContactUsController => editProcess()');
     // validasi input
     $validator = Validator::make($request->all(), [
             'settingValue' => 'required',
