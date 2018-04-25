@@ -79,8 +79,8 @@
                         </div>
                         <div class="form-group">
                           <label for="settingValue">{{ __('lang.sablonbalon.contactUs.view.table.message') }}</label>
-                          <input disabled="true" type="text" name="settingValue" class="form-control" id="editSettingValue"
-                          placeholder="{{ __('lang.sablonbalon.contactUs.view.table.message') }}">
+                          <textarea class="form-control" disabled="true" id="editSettingValue"
+                          placeholder="{{ __('lang.sablonbalon.contactUs.view.table.message') }}" name="settingValue" ></textarea>
                           <p class="errorEditSettingValue text-center alert alert-danger hidden"></p>
                         </div>
                       </div>
