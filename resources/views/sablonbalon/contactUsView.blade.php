@@ -40,7 +40,7 @@
   </div>
 
         <!-- Modal form to edit a form -->
-    <div id="editModal" class="modal fade" role="dialog">
+    <div id="viewModal" class="modal fade" role="dialog">
         <div class="modal-dialog-full">
             <div class="modal-content">
                 <div class="modal-header">
@@ -83,15 +83,9 @@
                           placeholder="{{ __('lang.sablonbalon.contactUs.view.table.message') }}">
                           <p class="errorEditSettingValue text-center alert alert-danger hidden"></p>
                         </div>
-
-
-                        <p class="help-block">{{ __('lang.form.required') }}</p>
                       </div>
                     </form>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary edit" >
-                            <span class='glyphicon glyphicon-check'></span> Edit
-                        </button>
                         <button type="button" class="btn btn-warning" data-dismiss="modal">
                             <span class='glyphicon glyphicon-remove'></span> Close
                         </button>
@@ -144,7 +138,7 @@
               $('#editSettingDesc').val(data[0].setting_desc);
               $('#editSettingName').val(data[0].setting_name);
               $('#editSettingValue').val(data[0].setting_value);
-              $('#editModal').modal('show');
+              $('#viewModal').modal('show');
 
             },
         });
@@ -193,7 +187,7 @@
                       }
 
                   } else {
-                      $('#editModal').modal('hide');
+                      $('#viewModal').modal('hide');
                       toastr.success(data.message, 'Success Alert', {timeOut: 2000});
                       RefreshTable('#users-table','{!! route('getListSystemSettingData') !!}');
                   }
