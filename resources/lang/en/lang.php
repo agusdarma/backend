@@ -112,6 +112,18 @@
       'profileSetting.msg.success.edit' => 'Profile Setting was successfully edited',
 
 
+      'sablonbalon.contactUs.view.title' => 'Contact Us View Form',
+      'sablonbalon.contactUs.view.subtitle' => 'SablonBalon.com - Contact Us',
+      'sablonbalon.contactUs.breadcrumb.home' => 'Home',
+      'sablonbalon.contactUs.breadcrumb.sablonbalon' => 'SablonBalon',
+      'sablonbalon.contactUs.breadcrumb.contactUs.view' => 'Contact Us',
+      'sablonbalon.contactUs.view.table.id' => 'Id',
+      'sablonbalon.contactUs.view.table.name' => 'Name',
+      'sablonbalon.contactUs.view.table.email' => 'Email',
+      'sablonbalon.contactUs.view.table.message' => 'Message',
+      'sablonbalon.contactUs.view.table.phoneNo' => 'Phone No',
+      'sablonbalon.contactUs.view.table.subject' => 'Subject',
+      'sablonbalon.contactUs.view.table.action' => 'Action',
 
 
 

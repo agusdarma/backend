@@ -5,13 +5,13 @@
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        {{ __('lang.systemSetting.view.title') }}
-        <small>{{ __('lang.systemSetting.view.subtitle') }}</small>
+        {{ __('lang.sablonbalon.contactUs.view.title') }}
+        <small>{{ __('lang.sablonbalon.contactUs.view.subtitle') }}</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> {{ __('lang.systemSetting.breadcrumb.home') }}</a></li>
-        <li><a href="#">{{ __('lang.systemSetting.breadcrumb.security') }}</a></li>
-        <li class="active">{{ __('lang.systemSetting.breadcrumb.systemSetting.view') }}</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> {{ __('lang.sablonbalon.contactUs.breadcrumb.home') }}</a></li>
+        <li><a href="#">{{ __('lang.sablonbalon.contactUs.breadcrumb.sablonbalon') }}</a></li>
+        <li class="active">{{ __('lang.sablonbalon.contactUs.breadcrumb.contactUs.view') }}</li>
       </ol>
     </section>
     <section class="content">
@@ -19,18 +19,16 @@
         <div class="col-md-6">
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">{{ __('lang.systemSetting.view.title') }}</h3>
+              <h3 class="box-title">{{ __('lang.sablonbalon.contactUs.view.title') }}</h3>
             </div>
                 <table class="table table-bordered" id="users-table">
                     <thead>
                         <tr>
-                            <th>{{ __('lang.systemSetting.view.table.id') }}</th>
-                            <th>{{ __('lang.systemSetting.view.table.settingDesc') }}</th>
-                            <th>{{ __('lang.systemSetting.view.table.settingName') }}</th>
-                            <th>{{ __('lang.systemSetting.view.table.settingValue') }}</th>
-                            <th>{{ __('lang.systemSetting.view.table.updatedBy') }}</th>
-                            <th>{{ __('lang.systemSetting.view.table.updatedAt') }}</th>
-                            <th>{{ __('lang.systemSetting.view.table.action') }}</th>
+                            <th>{{ __('lang.sablonbalon.contactUs.view.table.id') }}</th>
+                            <th>{{ __('lang.sablonbalon.contactUs.view.table.name') }}</th>
+                            <th>{{ __('lang.sablonbalon.contactUs.view.table.email') }}</th>
+                            <th>{{ __('lang.sablonbalon.contactUs.view.table.message') }}</th>
+                            <th>{{ __('lang.sablonbalon.contactUs.view.table.action') }}</th>
                         </tr>
                     </thead>
                 </table>
@@ -56,20 +54,36 @@
                       <div class="box-body">
                         <div class="form-group">
                           <p class="errorEditMessage text-center alert alert-danger hidden"></p>
-                          <label for="settingDesc">{{ __('lang.systemSetting.view.table.settingDesc') }} *</label>
-                          <input disabled="true" type="text" name="settingDesc" class="form-control" id="editSettingDesc" placeholder="{{ __('lang.systemSetting.view.table.settingDesc') }}">
+                          <label for="settingDesc">{{ __('lang.sablonbalon.contactUs.view.table.name') }} </label>
+                          <input disabled="true" type="text" name="settingDesc" class="form-control" id="editSettingDesc"
+                          placeholder="{{ __('lang.sablonbalon.contactUs.view.table.name') }}">
                           <p class="errorEditSettingDesc text-center alert alert-danger hidden"></p>
                         </div>
                         <div class="form-group">
-                          <label for="settingName">{{ __('lang.systemSetting.view.table.settingName') }} *</label>
-                          <input disabled="true" type="text" name="settingName" class="form-control" id="editSettingName" placeholder="{{ __('lang.systemSetting.view.table.settingName') }}">
+                          <label for="settingName">{{ __('lang.sablonbalon.contactUs.view.table.email') }} </label>
+                          <input disabled="true" type="text" name="settingName" class="form-control" id="editSettingName"
+                          placeholder="{{ __('lang.sablonbalon.contactUs.view.table.email') }}">
                           <p class="errorEditSettingName text-center alert alert-danger hidden"></p>
                         </div>
                         <div class="form-group">
-                          <label for="settingValue">{{ __('lang.systemSetting.view.table.settingValue') }} *</label>
-                          <input type="text" name="settingValue" class="form-control" id="editSettingValue" placeholder="{{ __('lang.systemSetting.view.table.settingValue') }}">
+                          <label for="settingValue">{{ __('lang.sablonbalon.contactUs.view.table.phoneNo') }} </label>
+                          <input disabled="true" type="text" name="settingValue" class="form-control" id="editSettingValue"
+                          placeholder="{{ __('lang.sablonbalon.contactUs.view.table.phoneNo') }}">
                           <p class="errorEditSettingValue text-center alert alert-danger hidden"></p>
                         </div>
+                        <div class="form-group">
+                          <label for="settingValue">{{ __('lang.sablonbalon.contactUs.view.table.subject') }}</label>
+                          <input disabled="true" type="text" name="settingValue" class="form-control" id="editSettingValue"
+                          placeholder="{{ __('lang.sablonbalon.contactUs.view.table.subject') }}">
+                          <p class="errorEditSettingValue text-center alert alert-danger hidden"></p>
+                        </div>
+                        <div class="form-group">
+                          <label for="settingValue">{{ __('lang.sablonbalon.contactUs.view.table.message') }}</label>
+                          <input disabled="true" type="text" name="settingValue" class="form-control" id="editSettingValue"
+                          placeholder="{{ __('lang.sablonbalon.contactUs.view.table.message') }}">
+                          <p class="errorEditSettingValue text-center alert alert-danger hidden"></p>
+                        </div>
+
 
                         <p class="help-block">{{ __('lang.form.required') }}</p>
                       </div>
@@ -104,8 +118,6 @@
                 { data: 'setting_desc', name: 'setting_desc' },
                 { data: 'setting_name', name: 'setting_name' },
                 { data: 'setting_value', name: 'setting_value' },
-                { data: 'first_name', name: 'first_name' },
-                { data: 'updated_at', name: 'updated_at' },
                 { data: 'action', name: 'action', orderable: false, searchable: false}
             ],
        });
