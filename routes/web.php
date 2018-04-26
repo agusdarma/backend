@@ -138,3 +138,13 @@ Route::get('/ContactUs',[
    'middleware' => 'session',
    'uses' => 'SablonBalon\ContactUsController@view',
 ]);
+
+Route::get('/ContactUs/view/data',[
+   'middleware' => 'session',
+   'uses' => 'SablonBalon\ContactUsController@getListContactUsData',
+])->name('getListContactUsData');
+
+Route::get('/ContactUs/showView', [
+    'middleware' => 'session',
+    'uses' => 'SablonBalon\ContactUsController@showView',
+]);

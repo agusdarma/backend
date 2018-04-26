@@ -20,23 +20,23 @@ class ContactUsController extends Controller
     return view('sablonbalon/contactUsView');
   }
 
-  public static function getListSystemSettingData(){
-    $listSystemSettings = DB::select('select ss.id,ss.setting_desc,ss.setting_name,ss.setting_value,u.first_name,ss.updated_at
-    from system_setting ss inner join users u on u.id = ss.updated_by');
-    return datatables($listSystemSettings)
-    ->addColumn('action', function ($listSystemSettings) {
-        return '<a href="#" onclick="edit('.$listSystemSettings->id.')" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+  public static function getListContactUsData(){
+    $listContactUs = DB::select('select c.id,c.`name`,c.email,c.message
+    from contact c order by c.created_on desc');
+    return datatables($listContactUs)
+    ->addColumn('action', function ($listContactUs) {
+        return '<a href="#" onclick="view('.$listContactUs->id.')" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> View</a>';
     })
     ->toJson();
   }
 
-  public function showEdit(Request $request){
-    Log::debug('ContactUsController => showEdit()');
+  public function showView(Request $request){
+    Log::debug('ContactUsController => showView()');
     $id = $request->id;
     Log::debug('id => '.$id);
-    $listSystemSettings = DB::select('select ss.id,ss.setting_desc,ss.setting_name,ss.setting_value
-    from system_setting ss where ss.id = :id', ['id' => $id]);
-    return Response::json($listSystemSettings);
+    $listContactUs = DB::select('select c.id,c.`name`,c.email,c.message,c.phone_no as phoneNo, c.subject
+    from contact c where c.id = :id', ['id' => $id]);
+    return Response::json($listContactUs);
   }
 
   public function editProcess(Request $request){

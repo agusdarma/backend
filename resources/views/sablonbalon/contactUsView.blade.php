@@ -21,7 +21,7 @@
             <div class="box-header with-border">
               <h3 class="box-title">{{ __('lang.sablonbalon.contactUs.view.title') }}</h3>
             </div>
-                <table class="table table-bordered" id="users-table">
+                <table class="table table-bordered" id="contact-table">
                     <thead>
                         <tr>
                             <th>{{ __('lang.sablonbalon.contactUs.view.table.id') }}</th>
@@ -54,34 +54,34 @@
                       <div class="box-body">
                         <div class="form-group">
                           <p class="errorEditMessage text-center alert alert-danger hidden"></p>
-                          <label for="settingDesc">{{ __('lang.sablonbalon.contactUs.view.table.name') }} </label>
-                          <input disabled="true" type="text" name="settingDesc" class="form-control" id="editSettingDesc"
+                          <label for="name">{{ __('lang.sablonbalon.contactUs.view.table.name') }} </label>
+                          <input disabled="true" type="text" name="name" class="form-control" id="editName"
                           placeholder="{{ __('lang.sablonbalon.contactUs.view.table.name') }}">
-                          <p class="errorEditSettingDesc text-center alert alert-danger hidden"></p>
+                          <p class="errorEditName text-center alert alert-danger hidden"></p>
                         </div>
                         <div class="form-group">
-                          <label for="settingName">{{ __('lang.sablonbalon.contactUs.view.table.email') }} </label>
-                          <input disabled="true" type="text" name="settingName" class="form-control" id="editSettingName"
+                          <label for="email">{{ __('lang.sablonbalon.contactUs.view.table.email') }} </label>
+                          <input disabled="true" type="text" name="email" class="form-control" id="editEmail"
                           placeholder="{{ __('lang.sablonbalon.contactUs.view.table.email') }}">
-                          <p class="errorEditSettingName text-center alert alert-danger hidden"></p>
+                          <p class="errorEditEmail text-center alert alert-danger hidden"></p>
                         </div>
                         <div class="form-group">
-                          <label for="settingValue">{{ __('lang.sablonbalon.contactUs.view.table.phoneNo') }} </label>
-                          <input disabled="true" type="text" name="settingValue" class="form-control" id="editSettingValue"
+                          <label for="phoneNo">{{ __('lang.sablonbalon.contactUs.view.table.phoneNo') }} </label>
+                          <input disabled="true" type="text" name="phoneNo" class="form-control" id="editPhoneNo"
                           placeholder="{{ __('lang.sablonbalon.contactUs.view.table.phoneNo') }}">
-                          <p class="errorEditSettingValue text-center alert alert-danger hidden"></p>
+                          <p class="errorEditPhoneNo text-center alert alert-danger hidden"></p>
                         </div>
                         <div class="form-group">
-                          <label for="settingValue">{{ __('lang.sablonbalon.contactUs.view.table.subject') }}</label>
-                          <input disabled="true" type="text" name="settingValue" class="form-control" id="editSettingValue"
+                          <label for="subject">{{ __('lang.sablonbalon.contactUs.view.table.subject') }}</label>
+                          <input disabled="true" type="text" name="subject" class="form-control" id="editSubject"
                           placeholder="{{ __('lang.sablonbalon.contactUs.view.table.subject') }}">
-                          <p class="errorEditSettingValue text-center alert alert-danger hidden"></p>
+                          <p class="errorEditSubject text-center alert alert-danger hidden"></p>
                         </div>
                         <div class="form-group">
-                          <label for="settingValue">{{ __('lang.sablonbalon.contactUs.view.table.message') }}</label>
-                          <textarea class="form-control" disabled="true" id="editSettingValue"
-                          placeholder="{{ __('lang.sablonbalon.contactUs.view.table.message') }}" name="settingValue" ></textarea>
-                          <p class="errorEditSettingValue text-center alert alert-danger hidden"></p>
+                          <label for="message">{{ __('lang.sablonbalon.contactUs.view.table.message') }}</label>
+                          <textarea class="form-control" disabled="true" id="editMessage"
+                          placeholder="{{ __('lang.sablonbalon.contactUs.view.table.message') }}" name="message" ></textarea>
+                          <p class="errorEditMessage text-center alert alert-danger hidden"></p>
                         </div>
                       </div>
                     </form>
@@ -101,17 +101,17 @@
     <script>
     $(function() {
 
-        $('#users-table').DataTable({
+        $('#contact-table').DataTable({
             scrollX: true,
             searching: true,
             processing: true,
             serverSide: true,
-            ajax: '{!! route('getListSystemSettingData') !!}',
+            ajax: '{!! route('getListContactUsData') !!}',
             columns: [
                 { data: 'id', name: 'id' },
-                { data: 'setting_desc', name: 'setting_desc' },
-                { data: 'setting_name', name: 'setting_name' },
-                { data: 'setting_value', name: 'setting_value' },
+                { data: 'name', name: 'name' },
+                { data: 'email', name: 'email' },
+                { data: 'message', name: 'message' },
                 { data: 'action', name: 'action', orderable: false, searchable: false}
             ],
        });
@@ -119,91 +119,93 @@
 
     </script>
       <script type="text/javascript">
-      function hiddenErrorEdit() {
-        $('.errorEditSettingDesc').addClass('hidden');
-        $('.errorEditSettingName').addClass('hidden');
-        $('.errorEditSettingValue').addClass('hidden');
-        $('.errorEditMessage').addClass('hidden');
-      };
-      function edit(levelId) {
+      // function hiddenErrorEdit() {
+      //   $('.errorEditSettingDesc').addClass('hidden');
+      //   $('.errorEditSettingName').addClass('hidden');
+      //   $('.errorEditSettingValue').addClass('hidden');
+      //   $('.errorEditMessage').addClass('hidden');
+      // };
+      function view(contactId) {
         $.ajax({
             type: 'GET',
-            url: '{{ url( '/SysSetting/showEdit' ) }}',
+            url: '{{ url( '/ContactUs/showView' ) }}',
             data: {
-              'id': levelId
+              'id': contactId
             },
             success: function(data) {
-              hiddenErrorEdit();
+              // hiddenErrorEdit();
               $('#editId').val(data[0].id);
-              $('#editSettingDesc').val(data[0].setting_desc);
-              $('#editSettingName').val(data[0].setting_name);
-              $('#editSettingValue').val(data[0].setting_value);
+              $('#editName').val(data[0].name);
+              $('#editEmail').val(data[0].email);
+              $('#editPhoneNo').val(data[0].phoneNo);
+              $('#editSubject').val(data[0].subject);
+              $('#editMessage').val(data[0].message);
               $('#viewModal').modal('show');
 
             },
         });
       }
-      function RefreshTable(tableId, urlData){
-        $.getJSON(urlData, null, function( json )
-        {
-          table = $(tableId).dataTable();
-          oSettings = table.fnSettings();
-          table.fnClearTable(this);
-          oSettings.aiDisplay = oSettings.aiDisplayMaster.slice();
-          table.fnDraw();
-        });
-      }
-      $('.modal-footer').on('click', '.edit', function() {
-        hiddenErrorEdit();
-          $.ajax({
-              type: 'POST',
-              url: '{{ url( '/SysSetting/editProcess' ) }}',
-              data: {
-                  '_token': $('input[name=_token]').val(),
-                  'id': $('#editId').val(),
-                  'settingValue': $('#editSettingValue').val()
-
-              },
-              success: function(data) {
-                hiddenErrorEdit();
-
-                  if (data.rc!=0) {
-
-                      if (data.message) {
-                          $('.errorEditMessage').removeClass('hidden');
-                          $('.errorEditMessage').text(data.message);
-                      }
-                      if (data.errors.settingDesc) {
-                          $('.errorEditSettingDesc').removeClass('hidden');
-                          $('.errorEditSettingDesc').text(data.errors.settingDesc[0]);
-                      }
-                      if (data.errors.settingName) {
-                          $('.errorEditSettingName').removeClass('hidden');
-                          $('.errorEditSettingName').text(data.errors.settingName);
-                      }
-                      if (data.errors.settingValue) {
-                          $('.errorEditSettingValue').removeClass('hidden');
-                          $('.errorEditSettingValue').text(data.errors.settingValue);
-                      }
-
-                  } else {
-                      $('#viewModal').modal('hide');
-                      toastr.success(data.message, 'Success Alert', {timeOut: 2000});
-                      RefreshTable('#users-table','{!! route('getListSystemSettingData') !!}');
-                  }
-              },
-              error: function(request, status, err) {
-                  if (status == "timeout") {
-                      $('.errorEditMessage').removeClass('hidden');
-                      $('.errorEditMessage').text('{{ __('lang.msg.ajax.timeout') }}');
-                  } else {
-                      $('.errorEditMessage').removeClass('hidden');
-                      $('.errorEditMessage').text("error: " + request + status + err);
-                  }
-              },
-              timeout: 10000
-          });
-      });
+      // function RefreshTable(tableId, urlData){
+      //   $.getJSON(urlData, null, function( json )
+      //   {
+      //     table = $(tableId).dataTable();
+      //     oSettings = table.fnSettings();
+      //     table.fnClearTable(this);
+      //     oSettings.aiDisplay = oSettings.aiDisplayMaster.slice();
+      //     table.fnDraw();
+      //   });
+      // }
+      // $('.modal-footer').on('click', '.edit', function() {
+      //   hiddenErrorEdit();
+      //     $.ajax({
+      //         type: 'POST',
+      //         url: '{{ url( '/SysSetting/editProcess' ) }}',
+      //         data: {
+      //             '_token': $('input[name=_token]').val(),
+      //             'id': $('#editId').val(),
+      //             'settingValue': $('#editSettingValue').val()
+      //
+      //         },
+      //         success: function(data) {
+      //           hiddenErrorEdit();
+      //
+      //             if (data.rc!=0) {
+      //
+      //                 if (data.message) {
+      //                     $('.errorEditMessage').removeClass('hidden');
+      //                     $('.errorEditMessage').text(data.message);
+      //                 }
+      //                 if (data.errors.settingDesc) {
+      //                     $('.errorEditSettingDesc').removeClass('hidden');
+      //                     $('.errorEditSettingDesc').text(data.errors.settingDesc[0]);
+      //                 }
+      //                 if (data.errors.settingName) {
+      //                     $('.errorEditSettingName').removeClass('hidden');
+      //                     $('.errorEditSettingName').text(data.errors.settingName);
+      //                 }
+      //                 if (data.errors.settingValue) {
+      //                     $('.errorEditSettingValue').removeClass('hidden');
+      //                     $('.errorEditSettingValue').text(data.errors.settingValue);
+      //                 }
+      //
+      //             } else {
+      //                 $('#viewModal').modal('hide');
+      //                 toastr.success(data.message, 'Success Alert', {timeOut: 2000});
+      //                 RefreshTable('#contact-table','{!! route('getListSystemSettingData') !!}');
+      //             }
+      //         },
+      //         error: function(request, status, err) {
+      //             if (status == "timeout") {
+      //                 $('.errorEditMessage').removeClass('hidden');
+      //                 $('.errorEditMessage').text('{{ __('lang.msg.ajax.timeout') }}');
+      //             } else {
+      //                 $('.errorEditMessage').removeClass('hidden');
+      //                 $('.errorEditMessage').text("error: " + request + status + err);
+      //             }
+      //         },
+      //         timeout: 10000
+      //     });
+      // });
       </script>
 
 @endsection
