@@ -154,3 +154,18 @@ Route::get('/LblSetting',[
    'middleware' => 'session',
    'uses' => 'SablonBalon\LabelSettingController@view',
 ]);
+
+Route::get('/LblSetting/view/data',[
+   'middleware' => 'session',
+   'uses' => 'SablonBalon\LabelSettingController@getListLabelSettingData',
+])->name('getListLabelSettingData');
+
+Route::get('/LblSetting/editView', [
+    'middleware' => 'session',
+    'uses' => 'SablonBalon\LabelSettingController@editView',
+]);
+
+Route::post('/LblSetting/editProcess', [
+    'middleware' => 'session',
+    'uses' => 'SablonBalon\LabelSettingController@editProcess',
+]);

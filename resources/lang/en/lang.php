@@ -130,6 +130,13 @@
       'sablonbalon.labelSetting.breadcrumb.home' => 'Home',
       'sablonbalon.labelSetting.breadcrumb.sablonbalon' => 'SablonBalon',
       'sablonbalon.labelSetting.breadcrumb.labelSetting.view' => 'Label Setting',
+      'sablonbalon.labelSetting.view.table.id' => 'Id',
+      'sablonbalon.labelSetting.view.table.labelName' => 'Label Name',
+      'sablonbalon.labelSetting.view.table.labelValue' => 'Label Value',
+      'sablonbalon.labelSetting.view.table.updatedOn' => 'Updated On',
+      'sablonbalon.labelSetting.view.table.action' => 'Action',
+      'sablonbalon.labelSetting.msg.success.edit' => 'Label Setting was successfully edited',
+
 
 
       'footer.copyright' => 'Copyright',
