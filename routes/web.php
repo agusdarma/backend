@@ -148,3 +148,9 @@ Route::get('/ContactUs/showView', [
     'middleware' => 'session',
     'uses' => 'SablonBalon\ContactUsController@showView',
 ]);
+
+// SablonBalon - label settings
+Route::get('/LblSetting',[
+   'middleware' => 'session',
+   'uses' => 'SablonBalon\LabelSettingController@view',
+]);

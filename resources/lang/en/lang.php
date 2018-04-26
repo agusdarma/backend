@@ -125,7 +125,11 @@
       'sablonbalon.contactUs.view.table.subject' => 'Subject',
       'sablonbalon.contactUs.view.table.action' => 'Action',
 
-
+      'sablonbalon.labelSetting.view.title' => 'Label Setting View Form',
+      'sablonbalon.labelSetting.view.subtitle' => 'SablonBalon.com - Label Setting',
+      'sablonbalon.labelSetting.breadcrumb.home' => 'Home',
+      'sablonbalon.labelSetting.breadcrumb.sablonbalon' => 'SablonBalon',
+      'sablonbalon.labelSetting.breadcrumb.labelSetting.view' => 'Label Setting',
 
 
       'footer.copyright' => 'Copyright',
