@@ -1,6 +1,4 @@
 @extends('layouts.master')
-<?php use App\Http\Controllers\UserLevelController; ?>
-<?php use App\Http\Controllers\MainMenuController; ?>
 @section('content')
   <div class="content-wrapper">
     <section class="content-header">
@@ -97,7 +95,6 @@
 @endsection
 @section('jsSelect2')
     <script src="{{asset('dataTables-1.10.7/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('toastr/js/toastr.min.js')}}"></script>
     <script>
     $(function() {
 
@@ -119,12 +116,6 @@
 
     </script>
       <script type="text/javascript">
-      // function hiddenErrorEdit() {
-      //   $('.errorEditSettingDesc').addClass('hidden');
-      //   $('.errorEditSettingName').addClass('hidden');
-      //   $('.errorEditSettingValue').addClass('hidden');
-      //   $('.errorEditMessage').addClass('hidden');
-      // };
       function view(contactId) {
         $.ajax({
             type: 'GET',
@@ -145,71 +136,9 @@
             },
         });
       }
-      // function RefreshTable(tableId, urlData){
-      //   $.getJSON(urlData, null, function( json )
-      //   {
-      //     table = $(tableId).dataTable();
-      //     oSettings = table.fnSettings();
-      //     table.fnClearTable(this);
-      //     oSettings.aiDisplay = oSettings.aiDisplayMaster.slice();
-      //     table.fnDraw();
-      //   });
-      // }
-      // $('.modal-footer').on('click', '.edit', function() {
-      //   hiddenErrorEdit();
-      //     $.ajax({
-      //         type: 'POST',
-      //         url: '{{ url( '/SysSetting/editProcess' ) }}',
-      //         data: {
-      //             '_token': $('input[name=_token]').val(),
-      //             'id': $('#editId').val(),
-      //             'settingValue': $('#editSettingValue').val()
-      //
-      //         },
-      //         success: function(data) {
-      //           hiddenErrorEdit();
-      //
-      //             if (data.rc!=0) {
-      //
-      //                 if (data.message) {
-      //                     $('.errorEditMessage').removeClass('hidden');
-      //                     $('.errorEditMessage').text(data.message);
-      //                 }
-      //                 if (data.errors.settingDesc) {
-      //                     $('.errorEditSettingDesc').removeClass('hidden');
-      //                     $('.errorEditSettingDesc').text(data.errors.settingDesc[0]);
-      //                 }
-      //                 if (data.errors.settingName) {
-      //                     $('.errorEditSettingName').removeClass('hidden');
-      //                     $('.errorEditSettingName').text(data.errors.settingName);
-      //                 }
-      //                 if (data.errors.settingValue) {
-      //                     $('.errorEditSettingValue').removeClass('hidden');
-      //                     $('.errorEditSettingValue').text(data.errors.settingValue);
-      //                 }
-      //
-      //             } else {
-      //                 $('#viewModal').modal('hide');
-      //                 toastr.success(data.message, 'Success Alert', {timeOut: 2000});
-      //                 RefreshTable('#contact-table','{!! route('getListSystemSettingData') !!}');
-      //             }
-      //         },
-      //         error: function(request, status, err) {
-      //             if (status == "timeout") {
-      //                 $('.errorEditMessage').removeClass('hidden');
-      //                 $('.errorEditMessage').text('{{ __('lang.msg.ajax.timeout') }}');
-      //             } else {
-      //                 $('.errorEditMessage').removeClass('hidden');
-      //                 $('.errorEditMessage').text("error: " + request + status + err);
-      //             }
-      //         },
-      //         timeout: 10000
-      //     });
-      // });
       </script>
 
 @endsection
 @section('cssSelect2')
     <link rel="stylesheet" href="{{asset('dataTables-1.10.7/css/jquery.dataTables.min.css')}}">
-    <link rel="stylesheet" href="{{asset('toastr/css/toastr.min.css')}}">
 @endsection
